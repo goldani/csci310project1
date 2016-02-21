@@ -1,6 +1,6 @@
 # csci310project1
 
-## Team members
+## Team members ##
 * Rena Chen - CEO
 * Garrett Oldani
 * Zhongyang Gao
