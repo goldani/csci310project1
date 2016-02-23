@@ -1,4 +1,4 @@
-# csci310project1
+# StockOverflow
 
 ## Team members ##
 * Rena Chen - CEO
