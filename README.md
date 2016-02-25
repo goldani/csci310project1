@@ -1,7 +1,8 @@
 # StockOverflow
 
 ## Team members ##
-* Rena Chen - CEO
+## Team 12      ##
+* Rena Chen
 * Garrett Oldani
 * Zhongyang Gao
 * Edgar Lugo
