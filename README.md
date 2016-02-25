@@ -1,6 +1,5 @@
 # StockOverflow
 
-## Team members ##
 ## Team 12      ##
 * Rena Chen
 * Garrett Oldani
