@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title="StockOverflow">
+	<title="StockOverflow"></title>
 </head>
 
 <body>
