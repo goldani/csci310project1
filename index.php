@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>Login | StockOverflow</title>
-    <script src="Chart.js"></script>
+    <script src="node_modules/chart.js"></script>
 </head>
 <body>
     <h1>Login for StockOverflow</h1>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
 	<?php
 		require 'vendor/autoload.php';
         	use Parse\ParseClient;
