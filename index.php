@@ -6,7 +6,6 @@
 </head>
 <body>
     <h1>Login for StockOverflow</h1>
-    <canvas id="myChart" width="400" height="400"></canvas>
 
 	<?php
 		require 'vendor/autoload.php';
