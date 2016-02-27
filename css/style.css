@@ -1,3 +1,79 @@
 /* -- [Base Styles] --*/
+*{
+	box-sizing: border-box;
+	margin: 0;
+}
+body{
+	height: 100%;
+}
+.header{
+	padding: 1em;
+}
+.overall-wrapper{
+	min-height: 100%;
+	position: relative;
+}
+.content{
+	background-color: #222;
+	padding: 1em;
+}
+
+.widget-box{
+	background-color: #fff;
+	padding: 1em;
+	border-radius: 10px;
+}
+/* Login styles */
+.login-content{
+	padding: 5em 1em;
+}
+.login-field{
+	width: 98%;
+}
+.login-box{
+	padding-top: 2em;
+	margin: auto;
+	max-width: 400px;
+}
+.forget-password-field{
+	display: none;
+}
+.button-wrapper{
+	padding: 1em 0;
+	text-align: center;
+}
+.button{
+	background-color: #666;
+	color: #fff;
+	border-radius: 10px;
+	height: 2.5em;
+	width: 12em;
+	cursor: pointer;
+}
+.button:hover{
+	background-color: #ccc;
+}
+.button:active{
+	background-color: #ccc;
+}
+/* Footer */
+footer{
+	background-color: #000;
+	color: #fff;
+	padding: 1em;
+	text-align: center;
+	width: 100%;
+}
 
 /* -- [Media Query 1] --*/
+@media only screen and (min-width: 25em){
+	.login-content{
+		padding: 9.5em 2em;
+	}
+	.button-wrapper{
+		text-align: left;
+	}
+	.button{
+		width: 10em;
+	}
+}

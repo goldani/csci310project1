@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Login | StockOverflow</title>
-    <script src="js/Chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Login for StockOverflow</h1>
+    <div class="overall-wrapper">
+	    <div class="header">
+	   		<h1>StockOverflow</h1>
+	    </div>
+
+	    <div class="content login-content">
+	    	<div class="widget-box login-box">
+	    		<form>
+		    		<p>Username</p>
+			    	<input id="login-username" class="login-field" type="text">
+			    	<p>Password</p>
+			    	<input id="login-password" class="login-field" type="text">
+
+			    	<div class="button-wrapper">
+			    		<input id="login-submit" class="button submit-button" type="submit" value="Login">
+			    		<button id="forgot-password" class="button">Forgot Password</button>
+			    	</div>
+			    	<div class="forget-password-field">
+			    		<p>Please enter your email</p>
+			    		<input id="input-email" class="login-field" type="text" value="someone@somewhere.com">
+			    	</div>
+			    </form>
+	    	</div>
+	    </div>
+
+	    <footer>
+	    <p><small>This is the work of college students.</small></p>
+	    <br>
+	    <br>
+	    <p><small>For more information, contact Professor Halfond</small></p>
+	    </footer>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<?php
 		require 'vendor/autoload.php';
@@ -21,5 +67,8 @@
                 $stock->setArray('closingPrices', [23, 25, 32, 33, 40, 23]);
         	$stock->save();
 	?>
+
+	<!-- Load javascript here -->
+	<script src="js/Chart.js"></script>
 </body>
 </html>
