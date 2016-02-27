@@ -12,11 +12,11 @@
 
 	    <div class="content login-content">
 	    	<div class="widget-box login-box">
-	    		<form>
+	    		<form action="login.php" method="post">
 		    		<p>Username</p>
-			    	<input id="login-username" class="login-field" type="text">
+			    	<input id="login-username" class="login-field" type="text" name="login-username">
 			    	<p>Password</p>
-			    	<input id="login-password" class="login-field" type="text">
+			    	<input id="login-password" class="login-field" type="text" name="login-password">
 
 			    	<div class="button-wrapper">
 			    		<input id="login-submit" class="button submit-button" type="submit" value="Login">
@@ -34,7 +34,7 @@
 	    <p><small>This is the work of college students.</small></p>
 	    <br>
 	    <br>
-	    <p><small>For more information, contact Professor Halfond</small></p>
+	    <p><small>For more information, contact Professor Halfond.</small></p>
 	    </footer>
     </div>
 
@@ -52,7 +52,7 @@
 
 
 
-
+    <!--
 	<?php
 		require 'vendor/autoload.php';
         	use Parse\ParseClient;
@@ -67,6 +67,7 @@
                 $stock->setArray('closingPrices', [23, 25, 32, 33, 40, 23]);
         	$stock->save();
 	?>
+	-->
 
 	<!-- Load javascript here -->
 	<script src="js/Chart.js"></script>
