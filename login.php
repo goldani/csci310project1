@@ -12,12 +12,17 @@
 
 	use Parse\ParseUser;
 	use Parse\ParseException;
-	try {
-		$user = ParseUser::logIn($username, $password);
-		echo $username . " has logged in.";
-		//go to home
-	} catch(ParseException $ex) {
-		echo "Wrong credentials! ";
-		//use red letters under password field!
+	if (empty($username) || empty($password)) {
+		echo "Enter both username and password";
+		// use red text above username field
+	} else {
+		try {
+			$user = ParseUser::logIn($username, $password);
+			echo $username . " has logged in.";
+			//go to home
+		} catch(ParseException $ex) {
+			echo "Wrong credentials! ";
+			//use red letters under password field!
+		}
 	}
 ?>
