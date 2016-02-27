@@ -7,7 +7,7 @@ body{
 	height: 100%;
 }
 .header{
-	padding: 1em;
+	padding: .5em;
 }
 .overall-wrapper{
 	min-height: 100%;
@@ -63,6 +63,10 @@ footer{
 	padding: 1em;
 	text-align: center;
 	width: 100%;
+}
+
+a {
+    color:white;
 }
 
 /* -- [Media Query 1] --*/
