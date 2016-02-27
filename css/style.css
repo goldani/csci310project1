@@ -29,10 +29,9 @@ body{
 	height: 30px;
 }
 #search-button{
-	height: 28px;
+	height: 30px;
 	width: 50px;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+	
 	position: relative;
 }
 /* Login styles */
