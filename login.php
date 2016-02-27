@@ -11,13 +11,13 @@
 	$password = $_POST["login-password"];
 
 	use Parse\ParseUser;
-
+	use Parse\ParseException;
 	try {
 		$user = ParseUser::logIn($username, $password);
 		echo $username . " has logged in.";
+		//go to home
 	} catch(ParseException $ex) {
-		echo "   ";
+		echo "Wrong credentials! ";
+		//use red letters under password field!
 	}
-
-	echo "inside";
 ?>
