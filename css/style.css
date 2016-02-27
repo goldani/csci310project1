@@ -65,6 +65,9 @@ p{
 .login-content{
 	padding: 5em 1em;
 }
+#main-content{
+    display:none;
+}
 .login-field{
 	background-color:#1A1A1D;
 	color:#FFFFFF;
