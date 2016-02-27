@@ -3,26 +3,53 @@
 	box-sizing: border-box;
 	margin: 0;
 }
-body{
+body, html{
 	height: 100%;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:#FFFFFF;
+	size:32px;
+
+    margin: 0;
+    padding: 0;
+    height:100%;
+    max-width:100%;
+    max-height:100%;
+    overflow:hidden;
+    background-color: #1A1A1D;
 }
+
+p{
+	font-size:16px;
+	font-weight:300;
+}
+
 .header{
-	padding: .5em;
+	background-color:#FFFFFF;
+	padding-left:5px;
+	padding-top:5px;
+	padding:g.5em;
+	overflow: hidden;
+    width=20%;
+    height=auto;
 }
+
 .overall-wrapper{
 	min-height: 100%;
 	position: relative;
 }
 .content{
-	background-color: #222;
 	padding: 1em;
 }
 
 .widget-box{
-	background-color: #fff;
+	/*background-color: #fff;*/
+	background-color: #1A1A1D;
 	padding: 1em;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	margin: 1em;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
 }
 /* Buttons */
 #search-box{
@@ -39,12 +66,21 @@ body{
 	padding: 5em 1em;
 }
 .login-field{
+	background-color:#1A1A1D;
+	color:#FFFFFF;
+	font-size:20px;
+	font-weight:300;
+	border-style:none;
 	width: 98%;
+	padding-bottom:10px;
 }
 .login-box{
 	padding-top: 2em;
 	margin: auto;
 	max-width: 400px;
+}
+input:focus{
+	outline:none;
 }
 .forget-password-field{
 	display: none;
@@ -54,9 +90,10 @@ body{
 	text-align: center;
 }
 .button{
-	background-color: #666;
-	color: #fff;
-	border-radius: 7px;
+	background-color: #F0F0F0;
+	color: #777;
+	font-size: 16px;
+	font-weight:300;
 	height: 2.5em;
 	width: 12em;
 	cursor: pointer;
@@ -70,7 +107,9 @@ body{
 }
 /* Footer */
 footer{
-	background-color: #000;
+	background-color: #222;
+	border-style:solid;
+	border-color:#000;
 	color: #fff;
 	padding: 1em;
 	text-align: center;
