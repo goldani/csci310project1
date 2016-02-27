@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Login | StockOverflow</title>
+    <title>Login | StockOverflow</title>
+    <script src="node_modules/chart.js"></script>
 </head>
 <body>
-        <h1>Login for StockOverflow</h1>
+    <h1>Login for StockOverflow</h1>
+
 	<?php
 		require 'vendor/autoload.php';
         	use Parse\ParseClient;
