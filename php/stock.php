@@ -1,22 +1,19 @@
 <?php
+	class Stock {
+		private $tickerSymbol;
+		private $companyName;
+		private $currentPrice;
+		private $closingPrices;
 
-Class Stock {
+		public function __construct ($tickerSymbol, $companyName, $currentPrice, $closingPrices) {
+			$this->$tickerSymbol = $tickerSymbol;
+			$this->$companyName = $companyName;
+			$this->$currentPrice =  $currentPrice;
+			$this->$closingPrices = $closingPrices;
+		}
 
-	private $tickerSymbol;
-	private $companyName;
-	private $currentPrice;
-
-	public function __construct ($tickerSymbol_, $companyName_, $currentPrice_){
-		$this->$tickerSymbol = $tickerSymbol_;
-		$this->$companyName = $companyName_;
-		$this->$currentPrice =  $currentPrice_;
+		public function computePercentChange() {
+			
+		}
 	}
-
-	public function computePercentChange(){
-
-	}
-
-	public function computePredictedPrice(){
-		
-	}
-}
+?>
