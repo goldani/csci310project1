@@ -65,6 +65,10 @@ footer{
 	width: 100%;
 }
 
+a {
+    color:white;
+}
+
 /* -- [Media Query 1] --*/
 @media only screen and (min-width: 25em){
 	.login-content{
