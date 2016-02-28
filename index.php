@@ -1,3 +1,9 @@
+<?php
+    require 'vendor/autoload.php';
+    use Parse\ParseClient;
+    date_default_timezone_set('America/New_York');
+    ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');   
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,20 +14,13 @@
 </head>
 <body>
     <?php
-        require 'vendor/autoload.php';
-        use Parse\ParseClient;
         use Parse\ParseUser;
         use Parse\ParseException;
-
-        ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');        	
-        date_default_timezone_set('America/New_York');
         
         $currentUser = ParseUser::getCurrentUser();
         if ($currentUser) {
-            echo 'currentUser';
             echo '<script type="text/javascript">var logged_in=true;</script>';
         } else {
-            echo 'no currentUser';
             echo '<script type="text/javascript">var logged_in=false;</script>';
             $username = $_POST["login-username"];
             $password = $_POST["login-password"];
@@ -78,7 +77,7 @@
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
-            <a href=""><img src="img/so-logo.png" width=20% height=auto></a>
+            <a href="/"><img src="img/so-logo.png" width=20% height=auto></a>
             <a href="logout.php" id="logout">Logout</a>
 	    </div>
 

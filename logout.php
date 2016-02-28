@@ -1,7 +1,5 @@
 <?php
-	session_start();
+	use Parse\ParseUser;
 	ParseUser::logOut();
-	session_destroy();
 	header('Location: /');
-	exit;
 ?>
