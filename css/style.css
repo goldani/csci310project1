@@ -41,6 +41,19 @@ p{
 	padding: 1em;
 }
 
+.column-left{
+    float:left;
+    width:33%;
+}
+.column-center{
+    display:inline-block;
+    width:33%;
+}
+.column-right{
+    float:right;
+    width:33%;
+}
+
 .widget-box{
 	/*background-color: #fff;*/
 	background-color: #1A1A1D;
@@ -76,6 +89,22 @@ p{
 	border-style:none;
 	width: 98%;
 }
+.buySell-field{
+	background-color:#1A1A1D;
+	color:#FFFFFF;
+	font-size:14px;
+	font-weight:300;
+	border-style:none;
+	width: 98%;
+}
+#searchInput{
+	background-color:#1A1A1D;
+	color:#FFFFFF;
+	font-size:20px;
+	font-weight:300;
+	border-style:none;
+	width: 98%;
+}
 #login-username{
     padding-bottom:10px;
 }
@@ -96,6 +125,16 @@ input:focus{
 .button-wrapper{
 	padding: 1em 0;
 	text-align: center;
+}
+.button-buySell{
+	background-color: #F0F0F0;
+	color: #777;
+	font-size: 14px;
+	font-weight:300;
+	height: 1.5em;
+	width: 10em;
+	cursor: pointer;
+	border: none;
 }
 .button{
 	background-color: #F0F0F0;

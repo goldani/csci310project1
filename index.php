@@ -6,7 +6,7 @@ if(session_status() == PHP_SESSION_NONE) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login | StockOverflow</title>
+    <title>StockOverflow</title>
     <!-- bottom icon not working -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
@@ -64,12 +64,49 @@ if(session_status() == PHP_SESSION_NONE) {
 	    	</div>
         </div>
         <div class="content main-content" id="main-content">
-            <div class="searchBar">
-                <p>Search bar</p>
+            <div class="column-left">
+                <div class="portfolio">
+					<h3>Portfolio</h3>
+					<ul>
+						<li>FB</li>
+						<li>GOOG</li>
+						<li>AAPL</li>
+					</ul>
+                </div>
+				<br>
+                <div class="buySell">
+                    <form action="" method="post">
+						<input id="buySell-stockTicker" class="buySell-field" type="text" name="buySell-stockTicker" placeholder="Stock Ticker" required autofocus><br>
+						<input id="buySell-companyName" class="buySell-field" type="text" name="buySell-companyName" placeholder="Company Name" required><br>
+						<input id="buySell-quantity" class="buySell-field" type="number" name="buySell-quantity" placeholder="Quantity" required><br>
+						<div class="button-wrapper">
+							<button type="submit" id="buyStock" class="button-buySell">Buy</button>
+							<button type="submit" id="sellStock" class="button-buySell">Sell</button>
+						</div>
+                    </form>
+                </div>
             </div>
-            <div class="graph">
+            <div class="column-center">
+                <div class="searchBar">
+                    <form action="" method="post">
+                        <input id="searchInput" class="searchBar" type="text" name="searchInput" placeholder="Search by stock ticker symbol...">
+                    </form>
+                </div>
+                <div class="graph">
+					<canvas id="myChart" width="400" height="400"></canvas>
+                </div>
+                <div class="infoBox">
+
+                </div>
             </div>
-            <div class="portfolio">
+            <div class="column-right">
+                <div class="watchlist">
+					<h3>Watchlist</h3>
+					<ul>
+						<li>TSLA</li>
+						<li>TWTR</li>
+					</ul>
+                </div>
             </div>
         </div>
         <!--
