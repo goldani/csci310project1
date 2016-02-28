@@ -10,13 +10,13 @@
     }
     $currentUser = ParseUser::getCurrentUser();
     if ($currentUser) {
-        header('Location: /mainpage.html');
+        header('Location: /mainpage');
     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>StockOverflow</title>
+    <title>Login | StockOverflow</title>
     <!-- tab bar icon not working -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
