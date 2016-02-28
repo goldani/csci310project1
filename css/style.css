@@ -6,7 +6,7 @@
 body, html{
 	height: 100%;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color:#F0F0F0;
+	/*color:#F0F0F0;*/
 	size:32px;
 
     margin: 0;
@@ -14,7 +14,7 @@ body, html{
     height:100%;
     max-width:100%;
     max-height:100%;
-    overflow:hidden;
+    /*overflow:hidden;*/
     background-color: #1A1A1D;
 }
 
@@ -22,12 +22,15 @@ p{
 	font-size:16px;
 	font-weight:300;
 }
+th, td {
+	padding: 5px; 
+}
 
 .header{
 	background-color:#F0F0F0;
 	padding-left:5px;
 	padding-top:5px;
-	padding:g.5em;
+	padding:.5em;
 	overflow: hidden;
     width=20%;
     height=auto;
@@ -41,22 +44,11 @@ p{
 	padding: 1em;
 }
 
-.column-left{
-    float:left;
-    width:33%;
-}
-.column-center{
-    display:inline-block;
-    width:33%;
-}
-.column-right{
-    float:right;
-    width:33%;
-}
+
 
 .widget-box{
-	/*background-color: #fff;*/
-	background-color: #1A1A1D;
+	background-color: #F0F0F0;
+	/*background-color: #1A1A1D;*/
 	padding: 1em;
 	/*border-radius: 10px;*/
 	margin: 1em;
@@ -67,41 +59,47 @@ p{
 /* Buttons */
 #search-box{
 	height: 30px;
-}
-#search-button{
-	height: 30px;
-	width: 50px;
-	
-	position: relative;
+	width: 98%;
+	background-color:#F0F0F0;
+	color:#000;
+	font-size:16px;
+	font-weight:300;
+	border-style:none;
 }
 
-#buySell-stockTicker{
-    text-transform:uppercase;
+#CSV-section{
+    width:auto;
+    text-align:center;
 }
+
 /* Login styles */
 .login-content{
 	padding: 5em 1em;
 }
-#main-content{
-    display:none;
+.login-box{
+	background-color: #1A1A1D;
 }
 .login-field{
-	background-color:#1A1A1D;
-	color:#F0F0F0;
+	background-color: #1A1A1D;
+	color: #F0F0F0;
+	/*color: #1A1A1D;*/
 	font-size:20px;
 	font-weight:300;
 	border-style:none;
 	width: 98%;
 }
 .buySell-field{
-	background-color:#1A1A1D;
-	color:#FFFFFF;
+	background-color:#F0F0F0;
+	color:#000;
 	font-size:16px;
 	font-weight:300;
 	border-style:none;
 	width: 98%;
 }
-#buySell-quantity{
+#tickerInput{
+    text-transform:uppercase;
+}
+#qty{
     width:30%;
 }
 #searchInput{
@@ -129,19 +127,10 @@ input:focus{
 .forget-password-field{
 	display: none;
 }
+/* Buttons */
 .button-wrapper{
 	padding: 1em 0;
 	text-align: center;
-}
-.button-buySell{
-	background-color: #F0F0F0;
-	color: #777;
-	font-size: 16px;
-	font-weight:300;
-	height: 2.5em;
-	width: 12em;
-	cursor: pointer;
-	border: none;
 }
 .button{
 	background-color: #F0F0F0;
@@ -153,17 +142,26 @@ input:focus{
 	cursor: pointer;
 	border: none;
 }
-.button-buySell:active{
-	background-color: #ccc;
-}
-.button-buySell:hover{
-	background-color: #ccc;
+.button-buySell{
+	background-color: #F0F0F0;
+	color: #777;
+	font-size: 16px;
+	font-weight:300;
+	height: 2.5em;
+	width: 12em;
+	cursor: pointer;
+	border: none;
+    text-align:left;
 }
 .button:hover{
 	background-color: #ccc;
 }
 .button:active{
 	background-color: #ccc;
+}
+.graph-button{
+	font-size: 10px;
+	margin-bottom: .5em;
 }
 /* Footer */
 footer{
@@ -194,10 +192,59 @@ a {
 	.login-content{
 		padding: 9.5em 2em;
 	}
+
+
+	/* buttons */
 	.button-wrapper{
 		text-align: left;
 	}
 	.button{
 		width: 10em;
 	}
+	.graph-button{
+		width: 6em;
+	}
+}
+
+@media only screen and (min-width: 50em){
+	.left-float-wrapper{
+		float: left;
+		width: 66%;
+	}
+	#right-area{
+		float: right;
+		width: 33%;
+	}
+	#center-area{
+		float: right;
+		width: 50%;
+	}
+	#left-area{
+		float: left;
+		width: 50%;
+	}
+	#user-section{
+		float: right;
+        margin:auto;
+	}
+	#user-section p, button{
+		display: inline-block;
+	}
+	h1{
+		float: left;
+	}
+
+	/* clear float */
+	.clearfix:before,
+	.clearfix:after{
+		content:" ";
+		display: table;
+	}
+	.clearfix:after{
+		clear:both;
+	}
+	.clearfix{
+		*zoom:1;
+	}
+
 }
