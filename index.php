@@ -57,8 +57,24 @@
                 }
             }
         }
+<<<<<<< HEAD
         */
         /*
+=======
+		if(isset($_POST['buyStock'])){
+			$ticker = $_POST["buySell-stockTicker"];
+			$companyName = $_POST["buySell-companyName"];
+			$quantity = $_POST["buySell-quantity"];
+			$_SESSION['user']->buyStock($ticker, $companyName, $quantity);
+		}
+		else if(isset($_POST['sellStock'])){
+			$ticker = $_POST["buySell-stockTicker"];
+			$companyName = $_POST["buySell-companyName"];
+			$quantity = $_POST["buySell-quantity"];
+			$_SESSION['user']->sellStock($ticker, $companyName, $quantity);
+		} 
+
+>>>>>>> e954b9a06432e0022d32f6fbb9882640fa649090
 		# timeout functionality. currently set to 10 seconds for testing
 		if(isset($_SESSION['loggedin']) && time() - $_SESSION['timestamp'] > 10){
 			unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
@@ -72,7 +88,8 @@
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
-			<a href=""><img src="img/so-logo.png" width=20% height=auto></a>
+            <a href=""><img src="img/so-logo.png" width=20% height=auto></a>
+            <a href="logout.php" id="logout">Logout</a>
 	    </div>
 
 	    <div class="content login-content" id="login-content">
