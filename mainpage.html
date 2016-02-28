@@ -8,29 +8,15 @@
     <div class="overall-wrapper">
 	    <div class="header">
 	   		<h1>StockOverflow</h1>
-	   		<div class="user-section">
+	   		<div id="user-section">
 	   			<button class="button">User Manual</button>
-	   			<p>$10,000</p>
+	   			<p id="balance">$10,000</p>
 	   			<button class="button">Logout</button>
 	   		</div>
 	    </div>
 
-	    <div class="content">
-	    	<div id="left-area">
-	    		<div id="portfolio-section" class="widget-box">
-	    			
-	    		</div>
-
-	    		<div id="buy-sell-section" class="widget-box">
-	    			<input id="ticker" type="text">
-	    			<input id="comp-name" type="text">
-	    			<input id="qty" type="text">
-
- 
-	    		</div>
-
-	    	</div>
-
+	    <div class="content clearfix">
+	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
 	    			<input id="search-box" type="text" placeholder="Search stocks...">
@@ -38,33 +24,77 @@
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
-	    			<canvas></canvas>
+	    			<canvas id="canvas" height="200px" width="200px"></canvas>
 	    			<div class="button-wrapper">
-	    				
+	    				<button id="1d" class="button graph-button">1 day</button>
+	    				<button id="5d" class="button graph-button">5 days</button>
+	    				<button id="1d" class="button graph-button">1 month</button>
+	    				<button id="3m" class="button graph-button">3 months</button>
+	    				<button id="6m" class="button graph-button">6 months</button>
+	    				<button id="1y" class="button graph-button">1 year</button>
+	    				<button id="all" class="button graph-button">All</button>
 	    			</div>
 	    		</div>
 
 	    		<div id="information-section" class="widget-box">
-	    			<p>
+	    			<p>Stock information section
 	    				
 	    			</p>
 	    		</div>
 
 	    	</div>
 
+	    	<div id="left-area">
+	    		<button class="button">Import CSV</button>
+	    		<div id="portfolio-section" class="widget-box">
+	    			<table>
+		    			<tr>
+		    				<th>Ticker</th>
+		    				<th>Name</th>
+		    				<th>Price</th>
+		    			</tr>
+		    			<tr>
+		    				<td>FB</td>
+		    				<td>Facebook</td>
+		    				<td>$price</td>
+		    			</tr>
+		    			<tr>
+		    				<td>GOOG</td>
+		    				<td>Google</td>
+		    				<td>$price</td>
+		    			</tr>
+	    			</table>
+
+	    			
+	    		</div>
+
+	    		<div id="buy-sell-section" class="widget-box">
+	    			<input id="ticker" type="text">
+	    			<input id="comp-name" type="text">
+	    			<input id="qty" type="text">
+	    			<div class="button-wrapper">
+	    				<input type="submit" name="buy"  alt="Buy" value="Buy" class="button">
+	    				<input type="submit" name="sell" alt="Sell" value="Sell" class="button">
+	    			</div>
+ 
+	    		</div>
+
+	    	</div>
+	    </div> <!--left float wrapper end -->
 	    	<div id="right-area">
-	    		<div class="widget-box">
-	    		
-	    				
-	    		
+	    		<div id="time-date" class="widget-box">
+	    			<p>Time</p>
+	    		</div>
+
+	    		<div id="graph-key" class="widget-box">
+	    			<p>Key</p>
+	    		</div>
+
+	    		<div id="watchlist" class="widget-box">
+	    			<p>Watchlist</p>
 	    		</div>
 	    	</div>
 
-
-
-	    	
-
-	    	
 	    </div>
 
 	    <footer>
@@ -77,16 +107,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
 	<!-- Load javascript here -->
-	<script src="js/Chart.js"></script>
+	<script src="js/Chart.js/Chart.min.js"></script>
+	<script src="js/stock-graph.js"></script>
+
 </body>
 </html>
