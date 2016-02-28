@@ -15,23 +15,37 @@ Class User {
 		#get starting balance from Parse database
 		$query = new ParseQuery("User");
 		$query->equalTo("username", $username);
-		$results = $query->first();
-		#echo "Successfully retrieved " . count($results) . " balances.";
-		#there should be only one balance for each user
-		$this->balance = $results->get("balance");
-		$this->stocks = populateStocks($results->get("stocks"));
+		try{
+			$currUser = $query->first();
+			$this->$balance = $currUser->get("balance");
+			$stocksID = $currUser->get("stocks");
+			if (isset($stocksID)) {
+				$this->$stocks = populateStocks($stocksID);
+			}
+			$this->$amounts = $currUser->get("shares");
+		} catch (ParseException $ex) {
+			echo "error popolating stocks array with a spscific objectID";
+		}
 	}
 
 	public function buyStock ($ticker, $quantity){
 
+
+		#TODO:check current time to see if market is open
+		# either do it in frontend or backend
+
+		#Get quote from Yahoo API with $ticker and na option(Company name and Current price)
 		$result = getQuote($ticker, "na");
 
-		$currPrice = $result[1];
-
-		if( ($balance - $currPrice*$quantity) > 0 ) {
-			addStock($ticker, $quantiry);
+		#Make sure the stock exists
+		if ($result[0] != "N/A") {
+			$currPrice = $result[1];
+			if( ($balance - $currPrice*$quantity) > 0 ) {
+				addStock($ticker, $quantiry);
+			}
+		} else {
+			echo "Wrong ticker name!";
 		}
-
 	}
 
 	public function sellStock($ticker, $quantity){
@@ -67,6 +81,10 @@ Class User {
 				echo "error popolating stocks array with a spscific objectID";
 			}
 		}
+		return $stocks;
+	}
+
+	private function addStock($ticker, $quantity) {
 
 	}
 
