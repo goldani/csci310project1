@@ -36,6 +36,11 @@ th, td {
     height=auto;
 }
 
+#logout:link{
+    float:right;
+	text-decoration:none;
+}
+
 .overall-wrapper{
 	min-height: 100%;
 	position: relative;
