@@ -95,6 +95,7 @@ th, td {
 	font-weight:300;
 	border-style:none;
 	width: 98%;
+	padding-bottom:1em;
 }
 #tickerInput{
     text-transform:uppercase;
@@ -141,6 +142,7 @@ input:focus{
 	width: 12em;
 	cursor: pointer;
 	border: none;
+	text-align:center;
 }
 .button-buySell{
 	background-color: #F0F0F0;
@@ -152,6 +154,12 @@ input:focus{
 	cursor: pointer;
 	border: none;
     text-align:left;
+}
+.button-buySell:active{
+	background-color: #ccc;
+}
+.button-buySell:hover{
+	background-color: #ccc;
 }
 .button:hover{
 	background-color: #ccc;
@@ -200,6 +208,8 @@ a {
 	}
 	.button{
 		width: 10em;
+		/*text-align:left;*/
+		padding-left:0px;
 	}
 	.graph-button{
 		width: 6em;
