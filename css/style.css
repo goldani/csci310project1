@@ -102,7 +102,7 @@ p{
 	width: 98%;
 }
 #buySell-quantity{
-    width:50%;
+    width:30%;
 }
 #searchInput{
 	background-color:#1A1A1D;
@@ -136,7 +136,7 @@ input:focus{
 .button-buySell{
 	background-color: #F0F0F0;
 	color: #777;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight:300;
 	height: 2.5em;
 	width: 12em;

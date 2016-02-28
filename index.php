@@ -1,5 +1,5 @@
 <?php
-if(session_status() == PHP_SESSION_NONE) {
+if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 ?>
@@ -21,7 +21,7 @@ if(session_status() == PHP_SESSION_NONE) {
         use Parse\ParseException;
         if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
             echo '<script type="text/javascript">var logged_in=true;</script>';
-        } 
+        }
         else{
             echo '<script type="text/javascript">var logged_in=false;</script>';
             // should encrypt through 256-bit one-way hash down the road
@@ -40,6 +40,15 @@ if(session_status() == PHP_SESSION_NONE) {
                 }
             }
         }
+		# timeout functionality. currently set to 10 seconds for testing
+		if(isset($_SESSION['loggedin']) && time() - $_SESSION['timestamp'] > 10){
+			unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
+			$_SESSION['loggedin'] = false;
+			echo '<script type="text/javascript">var logged_in=false;</script>';
+		} 
+		else {
+			$_SESSION['timestamp'] = time();
+		}
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
@@ -76,7 +85,7 @@ if(session_status() == PHP_SESSION_NONE) {
 				<br>
                 <div class="buySell">
                     <form action="buySell.php" method="post">
-						<input id="buySell-stockTicker" class="buySell-field" type="text" name="buySell-stockTicker" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
+						<input id="buySell-stockTicker" class="buySell-field" type="text" name="buySell-stockTicker" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
 						<input id="buySell-companyName" class="buySell-field" type="text" name="buySell-companyName" placeholder="Company Name" required><br>
 						<input id="buySell-quantity" class="buySell-field" type="number" min="1" name="buySell-quantity" placeholder="Quantity" required><br>
 						<div class="button-wrapper">
@@ -126,6 +135,12 @@ if(session_status() == PHP_SESSION_NONE) {
             loginContent.style.display = "none";
             mainContent.style.display = "block";
         }
+		else{
+            var loginContent = document.getElementById("login-content");
+            var mainContent = document.getElementById("main-content");
+            loginContent.style.display = "block";
+            mainContent.style.display = "none";
+		}
     </script>
 </body>
 </html>
