@@ -19,7 +19,7 @@
             $user = ParseUser::logIn($username, $password);
             header('Location: /mainpage');
         } catch(ParseException $ex) {
-            header('/');
+            header('Location: /');
         }
     }	
 ?>
