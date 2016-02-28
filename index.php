@@ -25,44 +25,19 @@
             $password = $_POST["login-password"];
             try {
                 $user = ParseUser::logIn($username, $password);
-                $_SESSION['loggedin'] = true;
-                $_SESSION['user'] = $user->getObjectID();
-                $_SESSION['username'] = $username;
                 echo '<script type="text/javascript">var logged_in=true;</script>';
             } catch(ParseException $ex) {
                 //use red letters under password field!
             }
         }
 
-        /*
-        if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-            echo '<script type="text/javascript">var logged_in=true;</script>';
-        }
-        else{
-            echo '<script type="text/javascript">var logged_in=false;</script>';
-            // should encrypt through 256-bit one-way hash down the road
-            if(isset($_POST["login-username"]) && isset($_POST["login-password"])){
-                $username = $_POST["login-username"];
-                $password = $_POST["login-password"];
-                try {
-                    $user = ParseUser::logIn($username, $password);
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['user'] = $user->getObjectID();
-                    $_SESSION['username'] = $username;
-                    echo '<script type="text/javascript">var logged_in=true;</script>';
-                } catch(ParseException $ex) {
-                    echo "Wrong credentials! ";
-                    //use red letters under password field!
-                }
-            }
-        }
-		if(isset($_POST['buyStock'])){
+/*
+		if(isset($_POST['buyStock'])) {
 			$ticker = $_POST["buySell-stockTicker"];
 			$companyName = $_POST["buySell-companyName"];
 			$quantity = $_POST["buySell-quantity"];
 			$_SESSION['user']->buyStock($ticker, $companyName, $quantity);
-		}
-		else if(isset($_POST['sellStock'])){
+		} else if(isset($_POST['sellStock'])) {
 			$ticker = $_POST["buySell-stockTicker"];
 			$companyName = $_POST["buySell-companyName"];
 			$quantity = $_POST["buySell-quantity"];
@@ -78,7 +53,7 @@
 		else {
 			$_SESSION['timestamp'] = time();
 		}
-        */
+*/
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
