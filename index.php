@@ -18,8 +18,10 @@
         
         $currentUser = ParseUser::getCurrentUser();
         if ($currentUser) {
+            echo 'currentUser';
             echo '<script type="text/javascript">var logged_in=true;</script>';
         } else {
+            echo 'no currentUser';
             echo '<script type="text/javascript">var logged_in=false;</script>';
             $username = $_POST["login-username"];
             $password = $_POST["login-password"];
@@ -27,13 +29,12 @@
                 $user = ParseUser::logIn($username, $password);
                 echo '<script type="text/javascript">var logged_in=true;</script>';
             } catch(ParseException $ex) {
-                //use red letters under password field!
+                
             }
         }
 
 /*
 		if(isset($_POST['buyStock'])) {
-=======
             if(isset($_POST["login-username"]) && isset($_POST["login-password"])){
                 $username = $_POST["login-username"];
                 $password = $_POST["login-password"];
@@ -50,17 +51,13 @@
             }
         }
 		if(isset($_POST['buyStock'])){
->>>>>>> 121780a3bb3054a2701edbb91ed0db66a242e71b
 			$ticker = $_POST["buySell-stockTicker"];
 			$quantity = $_POST["buySell-quantity"];
-<<<<<<< HEAD
 			$_SESSION['user']->buyStock($ticker, $companyName, $quantity);
 		} else if(isset($_POST['sellStock'])) {
-=======
 			$currentUser->buyStock($ticker, $quantity);
 		}
 		else if(isset($_POST['sellStock'])){
->>>>>>> 121780a3bb3054a2701edbb91ed0db66a242e71b
 			$ticker = $_POST["buySell-stockTicker"];
 			$quantity = $_POST["buySell-quantity"];
 			$currentUser->sellStock($ticker, $quantity);
@@ -76,13 +73,8 @@
 		} 
 		else {
 			$_SESSION['timestamp'] = time();
-<<<<<<< HEAD
 		}
 */
-=======
-        }
-         */
->>>>>>> 121780a3bb3054a2701edbb91ed0db66a242e71b
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
