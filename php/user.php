@@ -21,7 +21,11 @@ Class User {
 		$this->balance = $results[0];
 	}
 
-	public function buyStock (){
+	public function buyStock ($ticker, $companyName, $quantity){
+        #check currentBalance is sufficient
+		#look up stock and confirm it is valid
+		#if valid retrieve current price
+		#check current time to see if market is open
 		if(!isset($stocks)){
 			//create the array with the new stock info
 			echo 'Stock bought';
@@ -29,7 +33,9 @@ Class User {
 
 	}
 
-	public function sellStock(){
+	public function sellStock($ticker, $companyName, $quantity){
+		#look up stock and confirm it is valid
+		#check current time to see if market is open
 
 		if(!isset($stocks)){
 			//no stocks to sell

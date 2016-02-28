@@ -179,7 +179,16 @@ footer{
 a {
     color:white;
 }
-
+#logout:link{
+    float:right;
+	color:#212325;
+	text-decoration:none;
+}
+#logout:hover{
+    float:right;
+	color:#212325;
+	text-decoration:none;
+}
 /* -- [Media Query 1] --*/
 @media only screen and (min-width: 25em){
 	.login-content{
