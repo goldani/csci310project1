@@ -6,7 +6,7 @@
 body, html{
 	height: 100%;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color:#FFFFFF;
+	color:#F0F0F0;
 	size:32px;
 
     margin: 0;
@@ -24,7 +24,7 @@ p{
 }
 
 .header{
-	background-color:#FFFFFF;
+	background-color:#F0F0F0;
 	padding-left:5px;
 	padding-top:5px;
 	padding:g.5em;
@@ -87,7 +87,7 @@ p{
 }
 .login-field{
 	background-color:#1A1A1D;
-	color:#FFFFFF;
+	color:#F0F0F0;
 	font-size:20px;
 	font-weight:300;
 	border-style:none;
