@@ -74,6 +74,10 @@ p{
 	
 	position: relative;
 }
+
+#buySell-stockTicker{
+    text-transform:uppercase;
+}
 /* Login styles */
 .login-content{
 	padding: 5em 1em;

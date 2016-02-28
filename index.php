@@ -75,13 +75,13 @@ if(session_status() == PHP_SESSION_NONE) {
                 </div>
 				<br>
                 <div class="buySell">
-                    <form action="" method="post">
+                    <form action="buySell.php" method="post">
 						<input id="buySell-stockTicker" class="buySell-field" type="text" name="buySell-stockTicker" placeholder="Stock Ticker" required autofocus><br>
 						<input id="buySell-companyName" class="buySell-field" type="text" name="buySell-companyName" placeholder="Company Name" required><br>
-						<input id="buySell-quantity" class="buySell-field" type="number" name="buySell-quantity" placeholder="Quantity" required><br>
+						<input id="buySell-quantity" class="buySell-field" type="number" min="1" name="buySell-quantity" placeholder="Quantity" required><br>
 						<div class="button-wrapper">
-							<button type="submit" id="buyStock" class="button-buySell">Buy</button>
-							<button type="submit" id="sellStock" class="button-buySell">Sell</button>
+							<button type="submit" id="buyStock" name="buyStock" class="button-buySell">Buy</button>
+							<button type="submit" id="sellStock" name="sellStock" class="button-buySell">Sell</button>
 						</div>
                     </form>
                 </div>
