@@ -57,10 +57,6 @@
                 }
             }
         }
-<<<<<<< HEAD
-        */
-        /*
-=======
 		if(isset($_POST['buyStock'])){
 			$ticker = $_POST["buySell-stockTicker"];
 			$companyName = $_POST["buySell-companyName"];
@@ -74,7 +70,6 @@
 			$_SESSION['user']->sellStock($ticker, $companyName, $quantity);
 		} 
 
->>>>>>> e954b9a06432e0022d32f6fbb9882640fa649090
 		# timeout functionality. currently set to 10 seconds for testing
 		if(isset($_SESSION['loggedin']) && time() - $_SESSION['timestamp'] > 10){
 			unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
