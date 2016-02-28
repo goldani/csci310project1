@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
                 
                 <form action="login-authentication.php" method="post">
                     <p id="error-box"></p>
-                    <input id="login-username" class="login-field" type="text" name="login-username" placeholder="Username" required autofocus>
+                    <input id="login-username" class="login-field" type="email" name="login-username" placeholder="Username" required autofocus>
                     <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
 
                     <div class="button-wrapper">

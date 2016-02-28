@@ -44,7 +44,7 @@ p{
 
 
 .widget-box{
-	background-color: #fff;
+	background-color: #F0F0F0;
 	/*background-color: #1A1A1D;*/
 	padding: 1em;
 	/*border-radius: 10px;*/
@@ -64,9 +64,6 @@ p{
 	position: relative;
 }
 
-#buySell-stockTicker{
-    text-transform:uppercase;
-}
 /* Login styles */
 .login-content{
 	padding: 5em 1em;
@@ -84,14 +81,17 @@ p{
 	width: 98%;
 }
 .buySell-field{
-	background-color:#1A1A1D;
-	color:#FFFFFF;
+	background-color:#F0F0F0;
+	color:#000;
 	font-size:16px;
 	font-weight:300;
 	border-style:none;
 	width: 98%;
 }
-#buySell-quantity{
+#tickerInput{
+    text-transform:uppercase;
+}
+#qty{
     width:30%;
 }
 #searchInput{
