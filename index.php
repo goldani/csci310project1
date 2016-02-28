@@ -1,12 +1,3 @@
-<?php
-<<<<<<< HEAD
-if (session_status() == PHP_SESSION_NONE) {
-=======
-if(session_status() == PHP_SESSION_NONE){
->>>>>>> 42285a8f55a11f3c8d78fa94d0f5e9fb67696a22
-    session_start();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +21,21 @@ if(session_status() == PHP_SESSION_NONE){
             echo '<script type="text/javascript">var logged_in=true;</script>';
         } else {
             echo '<script type="text/javascript">var logged_in=false;</script>';
-
+            $username = $_POST["login-username"];
+            $password = $_POST["login-password"];
+            try {
+                $user = ParseUser::logIn($username, $password);
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user'] = $user->getObjectID();
+                $_SESSION['username'] = $username;
+                echo '<script type="text/javascript">var logged_in=true;</script>';
+            } catch(ParseException $ex) {
+                echo "Wrong credentials! ";
+                    //use red letters under password field!
+            }
         }
 
+        /*
         if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
             echo '<script type="text/javascript">var logged_in=true;</script>';
         }
@@ -54,6 +57,8 @@ if(session_status() == PHP_SESSION_NONE){
                 }
             }
         }
+        */
+        /*
 		# timeout functionality. currently set to 10 seconds for testing
 		if(isset($_SESSION['loggedin']) && time() - $_SESSION['timestamp'] > 10){
 			unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
@@ -63,6 +68,7 @@ if(session_status() == PHP_SESSION_NONE){
 		else {
 			$_SESSION['timestamp'] = time();
 		}
+        */
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
@@ -140,8 +146,7 @@ if(session_status() == PHP_SESSION_NONE){
             var mainContent = document.getElementById("main-content");
             loginContent.style.display = "none";
             mainContent.style.display = "block";
-        }
-		else{
+        } else {
             var loginContent = document.getElementById("login-content");
             var mainContent = document.getElementById("main-content");
             loginContent.style.display = "block";
