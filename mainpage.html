@@ -70,13 +70,14 @@
 	    		</div>
 
 	    		<div id="buy-sell-section" class="widget-box">
-					<input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
-					<input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
-	    			<div class="button-wrapper">
-	    				<input type="submit" name="buy"  alt="Buy" value="Buy" class="button">
-	    				<input type="submit" name="sell" alt="Sell" value="Sell" class="button">
-	    			</div>
- 
+					 <form action="" method="post">
+						<input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
+						<input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
+						<div class="button-wrapper">
+							<input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy" class="button">
+							<input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell" class="button">
+						</div>
+					</form>
 	    		</div>
 
 	    	</div>

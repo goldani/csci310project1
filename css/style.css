@@ -132,16 +132,6 @@ input:focus{
 	padding: 1em 0;
 	text-align: center;
 }
-.button-buySell{
-	background-color: #F0F0F0;
-	color: #777;
-	font-size: 16px;
-	font-weight:300;
-	height: 2.5em;
-	width: 12em;
-	cursor: pointer;
-	border: none;
-}
 .button{
 	background-color: #F0F0F0;
 	color: #777;
@@ -152,11 +142,16 @@ input:focus{
 	cursor: pointer;
 	border: none;
 }
-.button-buySell:active{
-	background-color: #ccc;
-}
-.button-buySell:hover{
-	background-color: #ccc;
+.button-buySell{
+	background-color: #F0F0F0;
+	color: #777;
+	font-size: 16px;
+	font-weight:300;
+	height: 2.5em;
+	width: 12em;
+	cursor: pointer;
+	border: none;
+    text-align:left;
 }
 .button:hover{
 	background-color: #ccc;
@@ -230,6 +225,7 @@ a {
 	}
 	#user-section{
 		float: right;
+        margin:auto;
 	}
 	#user-section p, button{
 		display: inline-block;
