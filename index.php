@@ -30,8 +30,7 @@
                 $_SESSION['username'] = $username;
                 echo '<script type="text/javascript">var logged_in=true;</script>';
             } catch(ParseException $ex) {
-                echo "Wrong credentials! ";
-                    //use red letters under password field!
+                //use red letters under password field!
             }
         }
 
