@@ -22,7 +22,7 @@ Class User {
 		$this->stocks = populateStocks($results->get("stocks"));
 	}
 
-	public function buyStock ($ticker, $companyName, $quantity){
+	public function buyStock ($ticker, $quantity){
 
 		$result = getQuote($ticker, "na");
 
@@ -34,7 +34,7 @@ Class User {
 
 	}
 
-	public function sellStock($ticker, $companyName, $quantity){
+	public function sellStock($ticker, $quantity){
 		#look up stock and confirm it is valid
 		#check current time to see if market is open
 

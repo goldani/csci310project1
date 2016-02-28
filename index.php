@@ -21,26 +21,6 @@
             echo '<script type="text/javascript">var logged_in=true;</script>';
         } else {
             echo '<script type="text/javascript">var logged_in=false;</script>';
-            $username = $_POST["login-username"];
-            $password = $_POST["login-password"];
-            try {
-                $user = ParseUser::logIn($username, $password);
-                $_SESSION['loggedin'] = true;
-                $_SESSION['user'] = $user->getObjectID();
-                $_SESSION['username'] = $username;
-                echo '<script type="text/javascript">var logged_in=true;</script>';
-            } catch(ParseException $ex) {
-                //use red letters under password field!
-            }
-        }
-
-        /*
-        if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-            echo '<script type="text/javascript">var logged_in=true;</script>';
-        }
-        else{
-            echo '<script type="text/javascript">var logged_in=false;</script>';
-            // should encrypt through 256-bit one-way hash down the road
             if(isset($_POST["login-username"]) && isset($_POST["login-password"])){
                 $username = $_POST["login-username"];
                 $password = $_POST["login-password"];
@@ -51,34 +31,34 @@
                     $_SESSION['username'] = $username;
                     echo '<script type="text/javascript">var logged_in=true;</script>';
                 } catch(ParseException $ex) {
-                    echo "Wrong credentials! ";
+                    echo "Wrong credentials<br>";
                     //use red letters under password field!
                 }
             }
         }
 		if(isset($_POST['buyStock'])){
 			$ticker = $_POST["buySell-stockTicker"];
-			$companyName = $_POST["buySell-companyName"];
 			$quantity = $_POST["buySell-quantity"];
-			$_SESSION['user']->buyStock($ticker, $companyName, $quantity);
+			$currentUser->buyStock($ticker, $quantity);
 		}
 		else if(isset($_POST['sellStock'])){
 			$ticker = $_POST["buySell-stockTicker"];
-			$companyName = $_POST["buySell-companyName"];
 			$quantity = $_POST["buySell-quantity"];
-			$_SESSION['user']->sellStock($ticker, $companyName, $quantity);
+			$currentUser->sellStock($ticker, $quantity);
 		} 
 
-		# timeout functionality. currently set to 10 seconds for testing
+        # timeout functionality. currently set to 10 seconds for testing
+        /*
 		if(isset($_SESSION['loggedin']) && time() - $_SESSION['timestamp'] > 10){
 			unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
-			$_SESSION['loggedin'] = false;
+            $_SESSION['loggedin'] = false;
+            ParseUser::logOut();
 			echo '<script type="text/javascript">var logged_in=false;</script>';
 		} 
 		else {
 			$_SESSION['timestamp'] = time();
-		}
-        */
+        }
+         */
     ?>
     <div class="overall-wrapper">
 	    <div class="header">
@@ -117,7 +97,6 @@
                 <div class="buySell">
                     <form action="buySell.php" method="post">
 						<input id="buySell-stockTicker" class="buySell-field" type="text" name="buySell-stockTicker" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
-						<input id="buySell-companyName" class="buySell-field" type="text" name="buySell-companyName" placeholder="Company Name" required><br>
 						<input id="buySell-quantity" class="buySell-field" type="number" min="1" name="buySell-quantity" placeholder="Quantity" required><br>
 						<div class="button-wrapper">
 							<button type="submit" id="buyStock" name="buyStock" class="button-buySell">Buy</button>
