@@ -96,10 +96,13 @@ p{
 .buySell-field{
 	background-color:#1A1A1D;
 	color:#FFFFFF;
-	font-size:14px;
+	font-size:16px;
 	font-weight:300;
 	border-style:none;
 	width: 98%;
+}
+#buySell-quantity{
+    width:50%;
 }
 #searchInput{
 	background-color:#1A1A1D;
@@ -135,8 +138,8 @@ input:focus{
 	color: #777;
 	font-size: 14px;
 	font-weight:300;
-	height: 1.5em;
-	width: 10em;
+	height: 2.5em;
+	width: 12em;
 	cursor: pointer;
 	border: none;
 }
@@ -149,6 +152,12 @@ input:focus{
 	width: 12em;
 	cursor: pointer;
 	border: none;
+}
+.button-buySell:active{
+	background-color: #ccc;
+}
+.button-buySell:hover{
+	background-color: #ccc;
 }
 .button:hover{
 	background-color: #ccc;
