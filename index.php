@@ -1,5 +1,5 @@
 <?php
-if(session_status() == PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 ?>
@@ -7,7 +7,7 @@ if(session_status() == PHP_SESSION_NONE) {
 <html lang="en">
 <head>
     <title>StockOverflow</title>
-    <!-- bottom icon not working -->
+    <!-- tab bar icon not working -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,10 +15,20 @@ if(session_status() == PHP_SESSION_NONE) {
     <?php
         require 'vendor/autoload.php';
         use Parse\ParseClient;
-        ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');        	
-        date_default_timezone_set('America/New_York');
         use Parse\ParseUser;
         use Parse\ParseException;
+
+        ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');        	
+        date_default_timezone_set('America/New_York');
+        
+        $currentUser = ParseUser::getCurrentUser();
+        if ($currentUser) {
+            echo '<script type="text/javascript">var logged_in=true;</script>';
+        } else {
+            echo '<script type="text/javascript">var logged_in=false;</script>';
+
+        }
+
         if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
             echo '<script type="text/javascript">var logged_in=true;</script>';
         } 
@@ -109,14 +119,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 </div>
             </div>
         </div>
-        <!--
-	    <footer>
-	    <p><small>This is the work of college students.</small></p>
-	    <br>
-	    <br>
-	    <p><small>For more information, <a href="mailto:halfond@usc.edu" target="_top">email</a> or <a href="tel:12137401239">call</a> Professor Halfond.</small></p>
-	    </footer>
-        -->
     </div>
     <script src="js/Chart.js"></script>
     <script type="text/javascript">
