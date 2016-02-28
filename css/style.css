@@ -37,7 +37,7 @@ th, td {
 }
 
 #logout:link{
-    float:right;
+    /*float:right;*/
 	text-decoration:none;
 }
 
@@ -106,7 +106,8 @@ th, td {
     text-transform:uppercase;
 }
 #qty{
-    width:30%;
+    width:50%;
+    padding-bottom:0;
 }
 #searchInput{
 	background-color:#1A1A1D;
@@ -140,7 +141,7 @@ input:focus{
 }
 .button{
 	background-color: #F0F0F0;
-	color: #777;
+	/*color: #777;*/
 	font-size: 16px;
 	font-weight:300;
 	height: 2.5em;
@@ -151,7 +152,6 @@ input:focus{
 }
 .button-buySell{
 	background-color: #F0F0F0;
-	color: #777;
 	font-size: 16px;
 	font-weight:300;
 	height: 2.5em;
@@ -161,15 +161,6 @@ input:focus{
     text-align:left;
 }
 .button-buySell:active{
-	background-color: #ccc;
-}
-.button-buySell:hover{
-	background-color: #ccc;
-}
-.button:hover{
-	background-color: #ccc;
-}
-.button:active{
 	background-color: #ccc;
 }
 .graph-button{
@@ -188,16 +179,10 @@ footer{
 }
 
 a {
-    color:white;
+    color:#000000;
+	font-weight:300;
 }
 #logout:link{
-    float:right;
-	color:#212325;
-	text-decoration:none;
-}
-#logout:hover{
-    float:right;
-	color:#F28032;
 	text-decoration:none;
 }
 /* -- [Media Query 1] --*/
@@ -213,12 +198,15 @@ a {
 	}
 	.button{
 		width: 10em;
-		/*text-align:left;*/
+		text-align:left;
 		padding-left:0px;
 	}
 	.graph-button{
 		width: 6em;
 	}
+	#logout{
+        float:left;
+    }
 }
 
 @media only screen and (min-width: 50em){
@@ -240,13 +228,9 @@ a {
 	}
 	#user-section{
 		float: right;
-        margin:auto;
 	}
 	#user-section p, button{
 		display: inline-block;
-	}
-	h1{
-		float: left;
 	}
 
 	/* clear float */
@@ -262,4 +246,23 @@ a {
 		*zoom:1;
 	}
 
+}
+@media only screen and (min-width: 15em){
+	.login-content{
+		padding: 9.5em 2em;
+	}
+
+
+	/* buttons */
+	.button-wrapper{
+		text-align: left;
+	}
+	.button{
+		width: 10em;
+		text-align:left;
+		padding-left:0px;
+	}
+	.graph-button{
+		width: 6em;
+	}
 }
