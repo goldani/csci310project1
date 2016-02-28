@@ -67,6 +67,11 @@ th, td {
 	border-style:none;
 }
 
+#CSV-section{
+    width:auto;
+    text-align:center;
+}
+
 /* Login styles */
 .login-content{
 	padding: 5em 1em;
