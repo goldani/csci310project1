@@ -12,19 +12,20 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 //get current text typed at search bar from javacript
-//$currentText = $_GET['ticker'];
-
+$current = $_GET['ticker'];
+$allResults = "";
 
 $query = new ParseQuery("Stock");
-$query->limit(50); // limit to at most 10 results
-//$query->equalTo($currentText);
-$query->startsWith("ticker", "A");
+$query->limit(10); // limit to at most 10 results
+$query->startsWith("ticker", $current);
 $results = $query->find();
+
 
 for ($i=0; $i < count($results); $i++) {
   $result = $results[$i];
-  echo $result->get("ticker") . " - " . $result->get("name") . "\n";
+  $allResults .= $result->get("ticker") . " - " . $result->get("name") . "\n";
 }
-  //pass it to java script
+
+echo $allResults;
 
 ?>

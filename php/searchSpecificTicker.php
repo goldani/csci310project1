@@ -14,7 +14,7 @@ if (session_status() == PHP_SESSION_NONE) {
 //$tickerSymbol= $_GET['ticker'];
 
 
-$query = new ParseQuery("Stock");
+$query = new ParseQuery("User");
 $query->limit(50); // limit to at most 10 results
 //$query->equalTo($currentText);
 $query->equalTo("ticker", "A");//user $tickerSymbol instead
