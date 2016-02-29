@@ -20,7 +20,6 @@ $query->limit(10); // limit to at most 10 results
 $query->startsWith("ticker", $current);
 $results = $query->find();
 
-
 for ($i=0; $i < count($results); $i++) {
   $result = $results[$i];
   $allResults .= $result->get("ticker") . " - " . $result->get("name") . "\n";
