@@ -161,6 +161,9 @@ input:focus{
 	border: none;
 	text-align:center;
 }
+.button:hover{
+	background-color: #ccc;
+}
 .button-buySell{
 	background-color: #F0F0F0;
 	font-size: 16px;
@@ -171,7 +174,7 @@ input:focus{
 	border: none;
     text-align:left;
 }
-.button-buySell:active{
+.button-buySell:hover{
 	background-color: #ccc;
 }
 .graph-button{

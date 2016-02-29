@@ -10,7 +10,7 @@
     }
     $currentUser = ParseUser::getCurrentUser();
     if ($currentUser) {
-        header('Location: /mainpage.html');
+        header('Location: /mainpage.php');
     }
 ?>
 <!DOCTYPE html>
