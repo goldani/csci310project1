@@ -34,18 +34,18 @@
                     <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
                     <div class="button-wrapper">
                         <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="login();"/>
-                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" formnovalidate onclick="forget();"/>
+                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="reset();" formnovalidate/>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <script>
-        function login(){
+        function login() {
             document.form1.action="login.php";
         }
-        function forget(){
-            document.form1.action="forget.php";
+        function reset() {
+            document.form1.action="reset.php";
         }
     </script>
 </body>
