@@ -36,7 +36,6 @@ $format = na;
 $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=" . $format . "&e=.csv");
 $data = explode( ',', $quote);
 
-#pull user balance from database
 
 
 #make sure the stock exists
@@ -54,19 +53,19 @@ if ($data[0] != "N/A" && $quantity > 0) {
     $stocks = $currentUser->get("shares");
 
     if ($action == "buy") {
-      if(isset($stocks) && array_key_exists($ticker, $stocks) ) {}
+      if(isset($stocks) && array_key_exists($ticker, $stocks) ) {
         $stocks[$ticker] += $quantity;
       } else {
         $stocks[$ticker] = $quantity;
       }
+      echo "Stock brought";
     } else {
       #if sell, check can sell or not then echo result and exit
       if ($stocks[$ticker]-$quantity >= 0 && array_key_exists($ticker, $stocks)) {
         $stocks[$ticker] -= $quantity;
         echo "Stock sold";
-        exit();
       } else {
-        echo "Cannot sell more than user have";
+        echo "Cannot sell more than user have or sell stocks user do not own";
         exit();
       }
     }
@@ -75,7 +74,7 @@ if ($data[0] != "N/A" && $quantity > 0) {
     $currentUser->setAssociativeArray("shares", $stocks);
     $currentUser->set("balance", $remainingBalance);
     $currentUser->save();
-    echo "Stock brought";
+
   } else {
     echo "Insufficient balance";
   }
