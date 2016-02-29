@@ -182,10 +182,46 @@ a {
     color:#000000;
 	font-weight:300;
 }
+.contact{
+    color:#FFFFFF;
+	font-weight:300;
+	text-decoration:none;
+}
+a.contact:hover{
+    color:#F28032;
+	font-weight:300;
+}
 #logout:link{
 	text-decoration:none;
 }
+#logout:hover{
+    color:#F28032;
+}
+#manual:link{
+	text-decoration:none;
+}
+#manual:hover{
+    color:#F28032;
+}
 /* -- [Media Query 1] --*/
+@media only screen and (min-width: 15em){
+	.login-content{
+		padding: 9.5em 2em;
+	}
+
+	/* buttons */
+	.button-wrapper{
+		text-align: left;
+	}
+	.button{
+		width: 10em;
+		text-align:center;
+		padding-left:0px;
+	}
+	.graph-button{
+		width: 6em;
+	}
+}
 @media only screen and (min-width: 25em){
 	.login-content{
 		padding: 9.5em 2em;
@@ -198,7 +234,7 @@ a {
 	}
 	.button{
 		width: 10em;
-		text-align:left;
+		text-align:center;
 		padding-left:0px;
 	}
 	.graph-button{
@@ -246,23 +282,4 @@ a {
 		*zoom:1;
 	}
 
-}
-@media only screen and (min-width: 15em){
-	.login-content{
-		padding: 9.5em 2em;
-	}
-
-
-	/* buttons */
-	.button-wrapper{
-		text-align: left;
-	}
-	.button{
-		width: 10em;
-		text-align:left;
-		padding-left:0px;
-	}
-	.graph-button{
-		width: 6em;
-	}
 }

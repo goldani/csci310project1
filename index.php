@@ -28,13 +28,13 @@
 	    </div>
         <div class="content login-content">
             <div class="widget-box login-box">
-                <form action="login.php" method="post">
+                <form action="" method="post" name="form1">
                     <p id="error-box"></p>
                     <input id="login-username" class="login-field" type="text" name="login-username" placeholder="Username" required autofocus>
                     <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
                     <div class="button-wrapper">
-                        <input id="login-submit" class="button submit-button" type="submit" value="Login">
-                        <button id="forgot-password" class="button">Forgot Password</button>
+                        <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="login();"/>
+                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="forget();"/>
                     </div>
                     <div class="forget-password-field">
                         <p>Please enter your email</p>
@@ -44,5 +44,13 @@
             </div>
         </div>
     </div>
+    <script>
+        function login(){
+            document.form1.action="login.php";
+        }
+        function forget(){
+            document.form1.action="forget.php";
+        }
+    </script>
 </body>
 </html>
