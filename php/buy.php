@@ -1,35 +1,56 @@
 <?php
-public function buyStock ($ticker, $quantity){
+#initialize databse connection
+include '../vendor/autoload.php';
+use Parse\ParseClient;
+use Parse\ParseQuery;
+use Parse\ParseException;
+use Parse\ParseUser;
+date_default_timezone_set('America/New_York');
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+  ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');
+}
 
+#get current user from Parse for further query
+$currentUser = ParseUser::getCurrentUser();
+if (!$currentUser) {
+  echo "eror getting current user or not logged in!";
+  exit();
+}
 
-  #TODO:check current time to see if market is open
-  # either do it in frontend or backend
+#load the ticker to buy and quantity
+$ticker = $_GET['ticker'];
+$quantity = $_GET['quantity'];
 
-  #Get quote from Yahoo API with $ticker and na option(Company name and Current price)
-  $result = getQuote($ticker, "na");
+#in order to buy a stock, we need to know current price. compant name tag is used in comformation
+$format = na;
 
-  #Make sure the stock exists
-  if ($result[0] != "N/A" && $quantity > 0) {
-    $currPrice = $result[1];
-    if( ($balance - $currPrice*$quantity) > 0 ) {
-      addStock($ticker, $quantiry);
+#get quotes from Yahoo API
+$quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=" . $format . "&e=.csv");
+$data = explode( ',', $quote);
+
+#pull user balance from database
+$balance = $currentUser->get("balance");
+
+#make sure the stock exists
+if ($data[0] != "N/A" && $quantity > 0) {
+  $currPrice = $data[1];
+  $remainingBalance = $balance - $currPrice*$quantity;
+
+  if( ($remainingBalance) > 0 ) {
+    $stocks = $currentUser->get("shares");
+
+    if(isset($stocks) && array_key_exists($ticker, $stocks) ) {
+      $stocks[$ticker] += $quantity;
+    } else {
+      $stocks[$ticker] = $quantity;
     }
-  } else {
-    echo "Wrong ticker name!";
+
+    $currentUser->setAssociativeArray("shares", $stocks);
+    $currentUser->set("balance", $remainingBalance);
+    $currentUser->save();
+    echo "stock brought!";
   }
+} else {
+  echo "Wrong ticker name!";
 }
-
-private function addStock($ticker, $quantity) {
-  #TODO discuss if we really need a Stock table in database
-
-  #if the stock purchsed already in user's porfolio, updata amount
-  # if not, create new stock&amount in $amounts and add stock to user's
-  # $stocks array and update in database
-  if (array_key_exists($ticker,$amounts)) {
-    $amounts[$ticker] += $quantity;
-  } else {
-    #need know if we need Stock table or not
-  }
-}
-
- ?>
