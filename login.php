@@ -1,5 +1,4 @@
 <?php
-	ob_start();
 	include 'vendor/autoload.php';
     use Parse\ParseClient;
     use Parse\ParseUser;
