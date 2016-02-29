@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<title>Server Time</title>
+<link href="http://bit.ly/GPvP5H" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h1>Server Time</h1>
+<div id="mainContent">
+	<p id="time">?</p>
+	<button id="clickButton" class="buttonStyle" action="php/getquotes.php">
+	show time</button>
+</div>
+
+<script>
+
+var myButton = document.getElementById("clickButton");
+var myText = document.getElementById("time");
+
+myButton.addEventListener('click', getServerTime, false)
+
+function getServerTime() {
+    var request = new XMLHttpRequest();
+    var url = "php/getquotes.php?ticker=FB&format=na";
+
+    request.open("GET", url, false);
+    request.setRequestHeader("Content-Type", "text/html");
+    request.addEventListener("readystatechange", processData, false);
+    request.send();
+}
+
+function processData(e) {
+	var currentReadyState = e.target.readyState;
+	var currentStatus = e.target.status;
+
+	if(currentReadyState == 4 && currentStatus == 200) {
+	   showTime(e.target.responseText);
+	}
+}
+
+function showTime(response) {
+	// var time = JSON.parse(response);
+	//
+	// var hour = time.tm_hour;
+	// var minute = time.tm_min;
+	//
+	// if (minute < 10) {
+	// 	minute = "0" + minute;
+	// }
+
+	// myText.textContent = hour + ":" + minute;
+	myText.textContent = response;
+}
+
+
+
+</script>
+
+</body>
+</html>
