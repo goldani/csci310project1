@@ -9,12 +9,13 @@
         ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');   
     }
     $currentUser = ParseUser::getCurrentUser();
-	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 10){
-		include 'logout.php';
+	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300){
+        include('logout.php');
+        die();
 	} 
 	else{
 		$_SESSION['timestamp'] = time();
-	} 
+    }
     if($currentUser) {
     }
     else{
