@@ -69,8 +69,11 @@
 	    	</div>
 
 	    	<div id="left-area">
-				<div id="CSV-section" class="widget-box">
-					<button class="button" id="csv-button">Import CSV</button>
+                <div id="CSV-section" class="widget-box">
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="submit" name="submit"  alt="Import CSV" value="Upload CSV" class="button">
+                    </form>
 				</div>
 	    		<div id="portfolio-section" class="widget-box">
 	    			<table>
@@ -98,7 +101,10 @@
 					 <form action="" method="post">
 						<input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
 						<input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
-						<div class="button-wrapper">
+                        <div class="button-wrapper">
+                            <!-- 
+                            these two inputs have two classes each
+                            -->
 							<input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy" class="button">
 							<input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell" class="button">
 						</div>
