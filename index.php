@@ -48,7 +48,7 @@
         function login() {
             document.form1.action="login.php";
         }
-        function forget() {
+        function reset() {
             document.form1.action="reset.php";
         }
     </script>
