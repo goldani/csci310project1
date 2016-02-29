@@ -14,7 +14,7 @@
     else{
         header('Location: /');
     }
-	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] > 300){
+	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300){
 		include 'logout.php';
 	} 
 	else{
@@ -30,7 +30,7 @@
 <body>
     <div class="overall-wrapper">
 	    <div class="header">
-            <a href="/mainpage.php"><img src="img/so-logo.png" width=20% height=auto></a>
+            <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
 	   		<div id="user-section" class="clearfix">
                 <a href="" id="manual">User Manual</a>
 	   			<p id="balance">$10,000</p>
