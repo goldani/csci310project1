@@ -34,7 +34,7 @@
                     <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
                     <div class="button-wrapper">
                         <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="login();"/>
-                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="reset();" formnovalidate/>
+                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="reset();"/>
                     </div>
                 </form>
             </div>

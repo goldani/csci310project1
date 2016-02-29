@@ -1,5 +1,4 @@
 <?php
-	ob_start();
 	include 'vendor/autoload.php';
     use Parse\ParseClient;
     use Parse\ParseUser;
@@ -11,12 +10,9 @@
     }
     $username = $_POST['login-username'];
     try {
-    	echo 'Password being Reset';
-    	ParseUser::requestPasswordReset($username);
-    	//header('Location: /');
-    	echo 'Password was Reset';
+    	ParseUser::requestPasswordReset('christdv@usc.edu');
+    	header('Location: /');
     } catch(ParseException $error) {
-    	//header('Location: /');
-    	echo 'Unable to Reset Password';
+    	header('Location: /');
     }
 ?>
