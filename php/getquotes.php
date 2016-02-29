@@ -2,16 +2,14 @@
 
 $ticker = $_GET['ticker'];
 $format = $_GET['format'];
-// $ticker = "AAPL";
-// $format = "na";
 $data = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker. "&f=" . $format . "&e=.csv");
-// // $result = explode( ',', $data);
-//
+// $result = explode( ',', $data);
+
 echo $data;
 
 
-//$localtime = localtime(time(), true);
-//echo json_encode($localtime);
+// $localtime = localtime(time(), true);
+// echo json_encode($localtime);
 
 
 // var url = 'http://query.yahooapis.com/v1/public/yql';

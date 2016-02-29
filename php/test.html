@@ -25,9 +25,12 @@ myButton.addEventListener('click', getServerTime, false)
 
 function getServerTime() {
     var request = new XMLHttpRequest();
-    var url = "php/getquotes.php?ticker=FB&format=na";
+		var ticker = "AAPL";
+		var format = "na";
+    var url = "getquotes.php?ticker=" + ticker + "&format=" + format;
+		// var url = "getquotes.php";
 
-    request.open("GET", url, false);
+    request.open("GET", url, true);
     request.setRequestHeader("Content-Type", "text/html");
     request.addEventListener("readystatechange", processData, false);
     request.send();
