@@ -10,9 +10,12 @@
     }
     $username = $_POST['login-username'];
     try {
-    	ParseUser::requestPasswordReset('christdv@usc.edu');
+    	echo '1';
+    	ParseUser::requestPasswordReset($username);
+    	echo '2';
     	header('Location: /');
     } catch(ParseException $error) {
+    	echo '3';
     	header('Location: /');
     }
 ?>
