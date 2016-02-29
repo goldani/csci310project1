@@ -22,8 +22,12 @@ p{
 	font-size:16px;
 	font-weight:300;
 }
+
 th, td {
 	padding: 5px; 
+}
+td {
+	font-weight:300;
 }
 
 .header{
@@ -226,7 +230,6 @@ a.contact:hover{
 	.login-content{
 		padding: 9.5em 2em;
 	}
-
 
 	/* buttons */
 	.button-wrapper{
