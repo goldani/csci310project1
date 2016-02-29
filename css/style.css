@@ -46,7 +46,9 @@ td {
     height:10vh;
     /*min-height:30%;*/
 }
-
+#user-section{
+    display:block;
+}
 #logout:link{
     /*float:right;*/
 	text-decoration:none;
@@ -203,9 +205,10 @@ input:focus{
 }
 /* Footer */
 footer{
-	background-color: #222;
+    background-color: #1A1A1D;
 	border-style:solid;
-	border-color:#000;
+	border-color:#1A1A1D;
+	border-top-color:#F0F0F0;
 	color: #fff;
 	padding: 1em;
 	text-align: center;
@@ -297,9 +300,6 @@ a.contact:hover{
 	}
 	#user-section{
 		float: right;
-	}
-	#user-section p, button{
-		display: inline-block;
 	}
 
 	/* clear float */
