@@ -1,4 +1,11 @@
 <?php
+
+//-----------------------------------------------------
+// The front end Javascript will call buy.php with ?ticker="TICKERNAME"
+//  &quantity=SOMENUMBER&action="BUYORSELL"
+//
+//-----------------------------------------------------
+
 #initialize databse connection
 include '../vendor/autoload.php';
 use Parse\ParseClient;
@@ -21,7 +28,7 @@ if (!$currentUser) {
 #load the ticker to buy and quantity
 $ticker = $_GET['ticker'];
 $quantity = $_GET['quantity'];
-
+$action = $_GET['action'];
 #in order to buy a stock, we need to know current price. compant name tag is used in comformation
 $format = na;
 
@@ -30,27 +37,48 @@ $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker 
 $data = explode( ',', $quote);
 
 #pull user balance from database
-$balance = $currentUser->get("balance");
+
 
 #make sure the stock exists
 if ($data[0] != "N/A" && $quantity > 0) {
+
+  #calculate remainning balance to determine wheather user can buy
   $currPrice = $data[1];
-  $remainingBalance = $balance - $currPrice*$quantity;
+  $balance = $currentUser->get("balance");
+
+  $actionConstant = ($action == "buy") ? -1 : 1;
+
+  $remainingBalance = $balance + $currPrice*$quantity*$actionConstant;
 
   if( ($remainingBalance) > 0 ) {
     $stocks = $currentUser->get("shares");
 
-    if(isset($stocks) && array_key_exists($ticker, $stocks) ) {
-      $stocks[$ticker] += $quantity;
+    if ($action == "buy") {
+      if(isset($stocks) && array_key_exists($ticker, $stocks) ) {}
+        $stocks[$ticker] += $quantity;
+      } else {
+        $stocks[$ticker] = $quantity;
+      }
     } else {
-      $stocks[$ticker] = $quantity;
+      #if sell, check can sell or not then echo result and exit
+      if ($stocks[$ticker]-$quantity >= 0 && array_key_exists($ticker, $stocks)) {
+        $stocks[$ticker] -= $quantity;
+        echo "Stock sold";
+        exit();
+      } else {
+        echo "Cannot sell more than user have";
+        exit();
+      }
     }
+
 
     $currentUser->setAssociativeArray("shares", $stocks);
     $currentUser->set("balance", $remainingBalance);
     $currentUser->save();
-    echo "stock brought!";
+    echo "Stock brought";
+  } else {
+    echo "Insufficient balance";
   }
 } else {
-  echo "Wrong ticker name!";
+  echo "Wrong ticker name or non-positive quantiry";
 }
