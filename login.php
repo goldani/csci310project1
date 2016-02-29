@@ -10,13 +10,13 @@
     }
     $currentUser = ParseUser::getCurrentUser();
     if ($currentUser) {
-        header('Location: /mainpage');
+        header('Location: /mainpage.html');
     } else {
         $username = $_POST['login-username'];
         $password = $_POST['login-password'];
         try {
             $user = ParseUser::logIn($username, $password);
-            header('Location: /mainpage');
+            header('Location: /mainpage.html');
         } catch(ParseException $error) {
             header('Location: /');
         }
