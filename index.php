@@ -30,15 +30,11 @@
             <div class="widget-box login-box">
                 <form action="" method="post" name="form1">
                     <p id="error-box"></p>
-                    <input id="login-username" class="login-field" type="text" name="login-username" placeholder="Username" required autofocus>
-                    <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password">
+                    <input id="login-username" class="login-field" type="email" name="login-username" placeholder="Email" required autofocus>
+                    <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
                     <div class="button-wrapper">
                         <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="login();"/>
-                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="reset();"/>
-                    </div>
-                    <div class="forget-password-field">
-                        <p>Please enter your email</p>
-                        <input id="input-email" class="login-field" type="text" value="someone@somewhere.com">
+                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="reset();" formnovalidate/>
                     </div>
                 </form>
             </div>
