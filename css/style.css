@@ -177,6 +177,26 @@ input:focus{
 .button-buySell:hover{
 	background-color: #ccc;
 }
+.button-fileUpload{
+	background-color: #F0F0F0;
+	font-size: 16px;
+	font-weight:300;
+	height: 2.5em;
+	width: 12em;
+	cursor: pointer;
+	border: none;
+	text-align:center;
+	opacity:0;
+
+	/*
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	*/
+}
 .graph-button{
 	font-size: 10px;
 	margin-bottom: .5em;
