@@ -14,6 +14,12 @@
     else{
         header('Location: /');
     }
+	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] > 300){
+		include 'logout.php';
+	} 
+	else{
+		$_SESSION['timestamp'] = time();
+	} 
 ?>
 <!DOCTYPE html>
 <html lang="en">
