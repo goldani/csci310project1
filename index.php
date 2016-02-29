@@ -31,7 +31,7 @@
                 <form action="" method="post" name="form1">
                     <p id="error-box"></p>
                     <input id="login-username" class="login-field" type="text" name="login-username" placeholder="Username" required autofocus>
-                    <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
+                    <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password">
                     <div class="button-wrapper">
                         <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="login();"/>
                         <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="forget();"/>
