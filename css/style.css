@@ -36,8 +36,15 @@ td {
 	padding-top:5px;
 	padding:.5em;
 	overflow: hidden;
-    width=20%;
-    height=auto;
+    min-height:3em;
+    height:auto;
+    width:auto;
+}
+#logo{
+    width:30%;
+    min-width:30%;
+    height:30%;
+    min-height:30%;
 }
 
 #logout:link{

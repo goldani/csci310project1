@@ -24,7 +24,7 @@
 <body>
     <div class="overall-wrapper">
 	    <div class="header">
-            <a href="/"><img src="img/so-logo.png" width=20% height=auto></a>
+            <a href="/"><img src="img/so-logo.png" id="logo"></a>
 	    </div>
         <div class="content login-content">
             <div class="widget-box login-box">
