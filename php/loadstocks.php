@@ -1,5 +1,6 @@
 <?php
 private function populateStocks($stocksID) {
+
   $query = new ParseQuery("Stock");
   foreach ($stocksID as $stockID) {
     try {
