@@ -63,11 +63,8 @@
 	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
-<<<<<<< HEAD
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
-=======
 	    			<input id="search-box" type="text" placeholder="Search">
->>>>>>> 79f1d3e79827b54943c93ad00896704c58b1cf7b
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
