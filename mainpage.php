@@ -338,11 +338,17 @@ $currentUser->save();
 			var hours = estDate.getHours()
 			var minutes = estDate.getMinutes();
 			var seconds = estDate.getSeconds();
+			var amPM = hours >= 12 ? 'PM' : 'AM';
+			if(hours >= 12){
+				hours-=12;
+			}
+			if(hours == 0){
+				hours = 12;
+			}
 			if(minutes < 10)
 				minutes = '0' + minutes;
 			if(seconds < 10)   
 				seconds = '0' + seconds;
-			var amPM = hours >= 12 ? 'PM' : 'AM';
 			document.getElementById('clock').innerHTML = "" 
 						   + hours + ":" 
 						   + minutes + ":" 
@@ -357,22 +363,8 @@ $currentUser->save();
 		}
 		window.onload=function() {
 			StartClock();
+			window.scrollTo(0,0);
         }
-/*
-		$(document).ready(function () {
-			var HeightDiv = $("div").height();
-			var HeightTable = $("portfolio-section").height();
-			if(HeightTable > HeightDiv) {
-				var FontSizeTable = parseInt($("table").css("font-size"), 10);
-				while (HeightTable > HeightDiv && FontSizeTable > 5) {
-					FontSizeTable--;
-					$("table").css("font-size", FontSizeTable);
-					HeightTable = $("table").height();
-				}
-			}
-		});
-
-*/
 </script>
 </body>
 </html>
