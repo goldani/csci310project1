@@ -78,4 +78,3 @@ function createTableHeaders(){
 	tHead.appendChild(tableRow);
 	watchlist.appendChild(tHead);
 }
-
