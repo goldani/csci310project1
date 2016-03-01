@@ -34,6 +34,7 @@ $currentUser->save();
 <head>
   <title>Portfolio | StockOverflow</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/confirmPopup.css">
 </head>
 <body>
 
@@ -110,121 +111,205 @@ $currentUser->save();
           </div>
           <div id="portfolio-section" class="widget-box">
             <table id="portfolio-content">
-            <thead>
-              <tr>
-                <th align="left">Ticker</th>
-                <th align="left">Company</th>
-                <th align="left">Quantity</th>
-                <th align="left">Current Price</th>
-                <th align="left">Percent Change</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $stocks = $currentUser->get('stocks');
-              $stocksOwned = NULL;
-              $stocksWatching = NULL;
-              foreach ($stocks as $ticker => $quantity) {
-                if ($quantity > 0) {
-                  $stocksOwned[$ticker] = $quantity;
+              <thead>
+                <tr>
+                  <th align="left">Ticker</th>
+                  <th align="left">Company</th>
+                  <th align="left">Quantity</th>
+                  <th align="left">Current Price</th>
+                  <th align="left">Percent Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $stocks = $currentUser->get('stocks');
+                $stocksOwned = NULL;
+                $stocksWatching = NULL;
+                foreach ($stocks as $ticker => $quantity) {
+                  if ($quantity > 0) {
+                    $stocksOwned[$ticker] = $quantity;
+                  } else {
+                    $stocksWatching[$ticker] = $quantity;
+                  }
+                }
+                if (empty($stocksOwned)) {
+                  echo '<tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  </tr>';
                 } else {
-                  $stocksWatching[$ticker] = $quantity;
+                  foreach ($stocksOwned as $ticker => $quantity) {
+                    $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
+                    $data = explode(',', $quote);
+                    if (count($data) == 5) {
+                      echo '<tr>
+                      <td>' . substr($data[0], 1, -1) . '</td>
+                      <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+                      <td>' . $quantity . '</td>
+                      <td>$' . $data[3] . '</td>
+                      <td>' . substr($data[4], 1, -2) . '</td>
+                      </tr>';
+                    } else {
+                      echo '<tr>
+                      <td>' . substr($data[0], 1, -1) . '</td>
+                      <td>' . substr($data[1], 1, -1) . '</td>
+                      <td>' . $quantity . '</td>
+                      <td>$' . $data[2] . '</td>
+                      <td>' . substr($data[3], 1, -2) . '</td>
+                      </tr>';
+                    }
+                  }
                 }
-              }
-              if (empty($stocksOwned)) {
-                echo '<tr>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                </tr>';
-              } else {
-                foreach ($stocksOwned as $ticker => $quantity) {
-                  $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
-				  $data = explode(',', $quote);
-                  if (count($data) == 5) {
-					  	echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[3] . '</td>
-		                  <td>' . substr($data[4], 1, -2) . '</td>
-		                  </tr>'; 
-				  } else {
-				  		echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[2] . '</td>
-		                  <td>' . substr($data[3], 1, -2) . '</td>
-		                  </tr>';
-				  }
-                }
-              }
-              ?>
-            </tbody>
+                ?>
+              </tbody>
             </table>
           </div>
           <div id="watchlist-section" class="widget-box">
             <table id="watchlist-content">
-            <thead>
-              <tr>
-                <th align="left">Ticker</th>
-                <th align="left">Company</th>
-                <th align="left">Quantity</th>
-                <th align="left">Current Price</th>
-                <th align="left">Percent Change</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              if (empty($stocksWatching)) {
-                echo '<tr>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                </tr>';
-              } else {
-                foreach ($stocksWatching as $ticker => $quantity) {
-                  $quote = file_get_contents('http://finance.yahoo.com/d/quotes.csv?s=' . $ticker . '&f=SNAP2&e=.csv');
-				  $data = explode(',', $quote);
-				  if (count($data) == 5) {
-					  	echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[3] . '</td>
-		                  <td>' . substr($data[4], 1, -2) . '</td>
-		                  </tr>'; 
-				  } else {
-				  		echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[2] . '</td>
-		                  <td>' . substr($data[3], 1, -2) . '</td>
-		                  </tr>';
-				  }
+              <thead>
+                <tr>
+                  <th align="left">Ticker</th>
+                  <th align="left">Company</th>
+                  <th align="left">Quantity</th>
+                  <th align="left">Current Price</th>
+                  <th align="left">Percent Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                if (empty($stocksWatching)) {
+                  echo '<tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  </tr>';
+                } else {
+                  foreach ($stocksWatching as $ticker => $quantity) {
+                    $quote = file_get_contents('http://finance.yahoo.com/d/quotes.csv?s=' . $ticker . '&f=SNAP2&e=.csv');
+                    $data = explode(',', $quote);
+                    if (count($data) == 5) {
+                      echo '<tr>
+                      <td>' . substr($data[0], 1, -1) . '</td>
+                      <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+                      <td>' . $quantity . '</td>
+                      <td>$' . $data[3] . '</td>
+                      <td>' . substr($data[4], 1, -2) . '</td>
+                      </tr>';
+                    } else {
+                      echo '<tr>
+                      <td>' . substr($data[0], 1, -1) . '</td>
+                      <td>' . substr($data[1], 1, -1) . '</td>
+                      <td>' . $quantity . '</td>
+                      <td>$' . $data[2] . '</td>
+                      <td>' . substr($data[3], 1, -2) . '</td>
+                      </tr>';
+                    }
+                  }
                 }
-              }
-            ?>
-            </tbody>
+                ?>
+              </tbody>
             </table>
           </div>
 
           <div id="buy-sell-section" class="widget-box">
-            <form action="php/buyAndSell.php" method="post">
+            <form method="post">
               <input id="tickerInput" name="ticker" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
               <input id="qty" name="quantity" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
               <div class="button-wrapper">
-                <input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">
-                <input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell">
+                <a href="#modal-one" class="btn btn-big" onclick="getInput('buy')">Buy</a>
+                <a href="#modal-one" class="btn btn-big" onclick="getInput('sell')">Sell</a>
+                <input type="hidden" id="action" value="">
+                <!-- use the following script to setup message in the popup -->
+                <script>
+                function getInput(action) {
+                  document.getElementById("confMsg").innerHTML = "Do you want to "
+                  + action.toUpperCase() + " " +
+                  + document.getElementById("qty").value + " share(s) of "
+                  + document.getElementById("tickerInput").value.toUpperCase() + "?";
+                  document.getElementById('action').value = action;
+
+                }
+                </script>
+
               </div>
+
+              <div class="modal" id="modal-one" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-header">
+                    <h2 id="modalHeader">Confirm?</h2>
+                    <!-- removed X button so that user can only click buttons below to proceed -->
+                  </div>
+                  <div class="modal-body" id="confMsg">
+                    <p id="status"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <!-- three buttons with the last one hidden and only shown when transaction is finished -->
+                    <a id="confBtn" href="#modal-one" onclick="buyOrSell()" class="btn" type="">Confirm</a>
+                    <a id="cancelBtn" href="#close" class="btn" type="">Cancel</a>
+                    <a id="clsBtn" href="#close" onclick="refresh()" class="btn" style="visibility: hidden">Close</a>
+                    <script>
+                    //called after close button is pressed. change visibility
+                    // of buttons back to default and try to reload watchlist
+                    function refresh() {
+                      document.getElementById("clsBtn").style.visibility = "hidden";
+                      document.getElementById("confBtn").style.visibility = "visible";
+                      document.getElementById("cancelBtn").style.visibility = "visible";
+                      //disabled for now
+                      // prepareToAddToWatchlist(document.getElementById('watchlist-content'));
+                    }
+
+                    //called after confirm button is pressed calls php to
+                    // do the actrual transaction then display the result
+                    function buyOrSell() {
+                      var request = new XMLHttpRequest();
+                      var url = "php/buyAndSell.php?"
+                      + "action=" + document.getElementById('action').value
+                      + "&ticker=" + document.getElementById("tickerInput").value
+                      + "&quantity=" + document.getElementById("qty").value;
+
+                      request.open("GET", url, true);
+                      request.setRequestHeader("Content-Type", "text/html");
+                      request.addEventListener("readystatechange", myFunc, false);
+
+                      request.send();
+                      document.getElementById("confMsg").innerHTML = "Processing";
+                    }
+                    function myFunc(e) {
+                      var currentReadyState = e.target.readyState;
+                      var currentStatus = e.target.status;
+
+                      if(currentReadyState == 4 && currentStatus == 200) {
+                        showResult(e.target.responseText);
+                      }
+                    }
+                    function showResult(result) {
+
+                      if (result.substr(0, 5) == "Stock") {
+                        document.getElementById("modalHeader").innerHTML = "Transaction succeeded";
+                      } else {
+                        document.getElementById("modalHeader").innerHTML = "Transaction failed";
+                      }
+                      document.getElementById("confMsg").innerHTML = result;
+
+                      //hide confirm and cancel button, dispaly close button
+                      document.getElementById("clsBtn").style.visibility = "visible";
+                      document.getElementById("confBtn").style.visibility = "hidden";
+                      document.getElementById("cancelBtn").style.visibility = "hidden";
+                    }
+                    </script>
+
+                  </div>
+                </div>
+              </div>
+
             </form>
           </div>
+
 
         </div>
       </div> <!--left float wrapper end -->
@@ -237,7 +322,6 @@ $currentUser->save();
       <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
     </footer>
   </div>
-
 	<!-- Load javascript here -->
 	<script src="js/Chart.js/Chart.min.js"></script>
 	<script src="js/stock-graph.js"></script>
@@ -287,7 +371,8 @@ $currentUser->save();
 				}
 			}
 		});
+
 */
-    </script>
+</script>
 </body>
 </html>

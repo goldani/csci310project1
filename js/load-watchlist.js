@@ -56,7 +56,6 @@ function addToWatchlist(new_stock_list){
 			watchlist.appendChild(tBody);
 		}
 	}
-	
 
 }
 
@@ -79,3 +78,4 @@ function createTableHeaders(){
 	tHead.appendChild(tableRow);
 	watchlist.appendChild(tHead);
 }
+

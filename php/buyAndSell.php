@@ -26,9 +26,15 @@ if (!$currentUser) {
 }
 
 #load the ticker to buy&make it upper caseand quantity
-$ticker = $_POST['ticker'];
+$ticker = $_GET['ticker'];
 $ticker = strtoupper($ticker);
-$quantity = $_POST['quantity'];
+$quantity = $_GET['quantity'];
+
+$action = $_GET['action'];
+// 
+// echo $ticker + "\n";
+// echo $quantity + "\n";
+// echo $action + "\n";
 
 #try to load the buy button is !isset() then it mean user clicked sell
 // $action = $_POST['sell'];
@@ -50,7 +56,12 @@ if ($data[0] != "N/A" && $quantity > 0) {
   // $actionConstant = ($action == "buy") ? -1 : 1;
   // $actionConstant = (isset($_POST['sell'])) ? 1 : -1;
   $actionConstant = 0;
-  if (isset($_POST['sell'])) {
+  // if (isset($_POST['sell'])) {
+  //   $actionConstant = 1;
+  // } else {
+  //   $actionConstant = -1;
+  // }
+  if ($action == "sell") {
     $actionConstant = 1;
   } else {
     $actionConstant = -1;
