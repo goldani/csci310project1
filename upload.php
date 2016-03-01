@@ -14,17 +14,9 @@
 		echo "File not imported";
 	}
 	else{
-		if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $directory)){
+		//if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $directory)){
 			//echo "The file " . basename($_FILES["fileToUpload"]["name"]). " has been uploaded.";
       if (($handle = fopen($target_file, "r")) !== FALSE) {
-        $quote = file_get_contents($target_file);
-        $data = explode( ',', $quote);
-
-        for ($i=0; $i < count($data); $i++) {
-          $results .= $data[0] . " " . $data[1] . " " . $data[2] . " " . $stock . " " . $data[3] . "\n";
-        }
-
-
         while (($stocksInfo = fgetcsv($handle, 1000, ",")) !== FALSE) {
           $size = count($stocksInfo);
           echo '------------------------------'. "\n";
@@ -35,10 +27,6 @@
           $stockName = $stocksInfo[1];
           $currentPrice = $stocksInfo[2];
           $previousClose = $stocksInfo[3];
-          $open = $stocksInfo[4];
-          $percentChange = $stocksInfo[5];
-          $oneYear = $stocksInfo[6];
-          $fiftyTwoWeek = $stocksInfo[7];
 		}
 		else{
 			echo "Error uploading file";

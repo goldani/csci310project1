@@ -38,6 +38,15 @@ if(isset($stocks) && !array_key_exists($ticker, $stocks)) {
       #get quotes from Yahoo API
       $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $key . "&f=" . $format . "&e=.csv");
       $data = explode( ',', $quote);
+      if (count($data) == 5) {
+        substr($data[0], 1, -1);
+        substr($data[1] . $data[2], 1, -1);
+        substr($data[4], 1, -2);
+      } else {
+        substr($data[0], 1, -1);
+        substr($data[1], 1, -1);
+        substr($data[3], 1, -2);
+      }
       $data[0] = str_replace('"', "", $data[0]);
       $data[1] = str_replace('"', "", $data[1]);
       $results .= $data[0] . " " . $data[1] . " " . $stock . " " . $data[2] . " " . $data[3] . "\n";
