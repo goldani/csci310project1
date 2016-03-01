@@ -231,13 +231,17 @@ $currentUser->save();
                 <!-- use the following script to setup message in the popup -->
                 <script>
                 function getInput(action) {
-                  document.getElementById("modal-one").style.visibility = "visible";
-                  document.getElementById("confMsg").innerHTML = "Do you want to "
-                  + action.toUpperCase() + " " +
-                  + document.getElementById("qty").value + " share(s) of "
-                  + document.getElementById("tickerInput").value.toUpperCase() + "?";
-                  document.getElementById('action').value = action;
+                    if(checkClock()){
+                        document.getElementById("modal-one").style.visibility = "visible";
+                        document.getElementById("confMsg").innerHTML = "Do you want to "
+                        + action.toUpperCase() + " " +
+                        + document.getElementById("qty").value + " share(s) of "
+                        + document.getElementById("tickerInput").value.toUpperCase() + "?";
+                        document.getElementById('action').value = action;
+                    }
+                    else{
 
+                    }
                 }
                 </script>
 
@@ -342,7 +346,7 @@ $currentUser->save();
 		var d = new Date();
 		var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
 		var offset = tzDifference * 60 * 1000;
-		function UpdateClock() {
+		function updateClock() {
 			var estDate = new Date(new Date().getTime()+offset);
 			var hours = estDate.getHours()
 			var minutes = estDate.getMinutes();
@@ -364,14 +368,29 @@ $currentUser->save();
 						   + seconds + " "
 						   + amPM + " EST";
 		}
-		function StartClock() {
-			clockID = setInterval(UpdateClock, 500);
-		}
-		function KillClock() {
-			clearTimeout(clockID);
-		}
+		function startClock() {
+			clockID = setInterval(updateClock, 500);
+        }
+        function checkClock(){
+			var estDate = new Date(new Date().getTime()+offset);
+			var hours = estDate.getHours()
+			var minutes = estDate.getMinutes();
+			var amPM = hours >= 12 ? 'PM' : 'AM';
+			if(hours >= 12){
+				hours-=12;
+			}
+			if(hours == 0){
+				hours = 12;
+            }
+            if((hours >= 9 && minutes >= 30 && amPM == 'AM') || (hours <= 4 && amPM == 'PM')){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 		window.onload=function() {
-			StartClock();
+			startClock();
 			window.scrollTo(0,0);
         }
 </script>
