@@ -43,7 +43,7 @@ function addToWatchlist(new_stock_list){
 		//Put into table
 		//results format: TICKER Name Qty Price %Change
 		for(i = 0; i < resultsArray.length; i++){
-			var stockData = resultsArray[i].split(" ");
+			var stockData = resultsArray[i].split("_");
 			var tableRow = document.createElement("TR");
 			for(j = 0; j < stockData.length; j++){
 				var tableData = document.createElement("TD");
