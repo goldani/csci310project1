@@ -231,6 +231,7 @@ $currentUser->save();
                 <!-- use the following script to setup message in the popup -->
                 <script>
                 function getInput(action) {
+                  document.getElementById("modal-one").style.visibility = "visible";
                   document.getElementById("confMsg").innerHTML = "Do you want to "
                   + action.toUpperCase() + " " +
                   + document.getElementById("qty").value + " share(s) of "
@@ -242,7 +243,7 @@ $currentUser->save();
 
               </div>
 
-              <div class="modal" id="modal-one" aria-hidden="true">
+              <div class="modal" id="modal-one" aria-hidden="true" style="visibility: hidden">
                 <div class="modal-dialog">
                   <div class="modal-header">
                     <h2 id="modalHeader">Confirm?</h2>
@@ -263,6 +264,8 @@ $currentUser->save();
                       document.getElementById("clsBtn").style.visibility = "hidden";
                       document.getElementById("confBtn").style.visibility = "visible";
                       document.getElementById("cancelBtn").style.visibility = "visible";
+                      document.getElementById("modal-one").style.visibility = "hidden";
+                      location.reload();
                       //disabled for now
                       // loadWatchlist();
                       // prepareToAddToWatchlist(document.getElementById("tickerInput"));
