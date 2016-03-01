@@ -1,27 +1,3 @@
-<?php
-    include 'vendor/autoload.php';
-    use Parse\ParseClient;
-    use Parse\ParseUser;
-    use Parse\ParseException;
-    date_default_timezone_set('America/New_York');
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-        ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');   
-    }
-    $currentUser = ParseUser::getCurrentUser();
-	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300){
-        include('logout.php');
-        die();
-	} 
-	else{
-		$_SESSION['timestamp'] = time();
-    }
-    if($currentUser) {
-    }
-    else{
-        header('Location: /');
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,22 +7,11 @@
 <body>
     <div class="overall-wrapper">
 	    <div class="header">
-            <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
-            <div id="user-section">
-            <?php
-                echo "<div class='inline'>";
-                echo '<p id="username">' . $currentUser->get('username') . '</p>';
-                echo "</div>";
-                echo "<div class='inline'>";
-                echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
-                echo "</div>";
-            ?>
-                <div class="inline">
+            <a href="/mainpage.html"><img src="img/so-logo.png" width=20% height=auto></a>
+	   		<div id="user-section" class="clearfix">
                 <a href="" id="manual">User Manual</a>
-                </div>
-                <div class="inline">
+	   			<p id="balance">$10,000</p>
                 <a href="logout.php" id="logout">Logout</a>
-                </div>
 	   		</div>
 	    </div>
 
@@ -54,7 +19,7 @@
 	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
-	    			<input id="search-box" type="text" placeholder="Search">
+	    			<input id="search-box" type="text" placeholder="Search stocks...">
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
@@ -71,23 +36,16 @@
 	    		</div>
 
 	    		<div id="information-section" class="widget-box">
-	    			<p>Stock Information	    				
+	    			<p>Stock information section
+	    				
 	    			</p>
 	    		</div>
 
 	    	</div>
 
 	    	<div id="left-area">
-                <div id="CSV-section" class="widget-box">
-                    <form action="upload.php" method="post" enctype="multipart/form-data">
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="button-fileUpload">
-                            <label for="fileToUpload">
-                                <span>Upload CSV File</span>
-                            </label>
-                        <br>
-                        <br>
-                        <input type="submit" name="submit"  alt="Import CSV" value="Import CSV File" class="button">
-                    </form>
+				<div id="CSV-section" class="widget-box">
+					<button class="button" id="csv-button">Import CSV</button>
 				</div>
 	    		<div id="portfolio-section" class="widget-box">
 	    			<table>
@@ -95,7 +53,6 @@
 		    				<th align="left">Ticker</th>
 		    				<th align="left">Name</th>
 		    				<th align="left">Price</th>
-		    				<th align="left">Quantity</th>
 		    			</tr>
 		    			<tr>
 		    				<td>FB</td>
@@ -116,9 +73,9 @@
 					 <form action="" method="post">
 						<input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
 						<input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
-                        <div class="button-wrapper">
-							<input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">
-							<input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell">
+						<div class="button-wrapper">
+							<input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy" class="button">
+							<input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell" class="button">
 						</div>
 					</form>
 	    		</div>
