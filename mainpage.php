@@ -46,7 +46,7 @@
 	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
-	    			<input id="search-box" type="text" placeholder="Search stocks...">
+	    			<input id="search-box" type="text" placeholder="Search">
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
@@ -74,8 +74,7 @@
 	    		</div>
 
 	    		<div id="information-section" class="widget-box">
-	    			<p>Stock information section
-	    				
+	    			<p>Stock Information	    				
 	    			</p>
 	    		</div>
 
