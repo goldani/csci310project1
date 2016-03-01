@@ -25,10 +25,13 @@ if (!$currentUser) {
   exit();
 }
 
-#load the ticker to buy and quantity
-$ticker = $_GET['ticker'];
-$quantity = $_GET['quantity'];
-$action = $_GET['action'];
+#load the ticker to buy&make it upper caseand quantity
+$ticker = $_POST['ticker'];
+$ticker = strtoupper($ticker);
+$quantity = $_POST['quantity'];
+
+#try to load the buy button is !isset() then it mean user clicked sell
+// $action = $_POST['sell'];
 #in order to buy a stock, we need to know current price. compant name tag is used in comformation
 $format = na;
 
@@ -36,23 +39,30 @@ $format = na;
 $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=" . $format . "&e=.csv");
 $data = explode( ',', $quote);
 
-
-
 #make sure the stock exists
 if ($data[0] != "N/A" && $quantity > 0) {
 
   #calculate remainning balance to determine wheather user can buy
-  $currPrice = $data[1];
+  # little trick here to skip pos in array until element is numeric in case company has , in its name
+  $currPrice = $data[count($data) - 1];
   $balance = $currentUser->get("balance");
 
-  $actionConstant = ($action == "buy") ? -1 : 1;
-
+  // $actionConstant = ($action == "buy") ? -1 : 1;
+  // $actionConstant = (isset($_POST['sell'])) ? 1 : -1;
+  $actionConstant = 0;
+  if (isset($_POST['sell'])) {
+    $actionConstant = 1;
+  } else {
+    $actionConstant = -1;
+  }
   $remainingBalance = $balance + $currPrice*$quantity*$actionConstant;
 
   if( ($remainingBalance) > 0 ) {
-    $stocks = $currentUser->get("shares");
+    $stocks = $currentUser->get("stocks");
 
-    if ($action == "buy") {
+
+
+    if ($actionConstant == -1) {
       if(isset($stocks) && array_key_exists($ticker, $stocks) ) {
         $stocks[$ticker] += $quantity;
       } else {
@@ -63,15 +73,15 @@ if ($data[0] != "N/A" && $quantity > 0) {
       #if sell, check can sell or not then echo result and exit
       if ($stocks[$ticker]-$quantity >= 0 && array_key_exists($ticker, $stocks)) {
         $stocks[$ticker] -= $quantity;
-        echo "Stock sold";
+        echo "Stock brought";
       } else {
-        echo "Cannot sell more than user have or sell stocks user do not own";
+        echo " Cannot sell more than user have or sell stocks user do not own";
         exit();
       }
     }
 
-
-    $currentUser->setAssociativeArray("shares", $stocks);
+    #updateing database and save
+    $currentUser->setAssociativeArray("stocks", $stocks);
     $currentUser->set("balance", $remainingBalance);
     $currentUser->save();
 
