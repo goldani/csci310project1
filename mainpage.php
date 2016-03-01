@@ -34,6 +34,7 @@ $currentUser->save();
 <head>
   <title>Portfolio | StockOverflow</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/confirmPopup.css">
 </head>
 <body>
 
@@ -141,24 +142,24 @@ $currentUser->save();
               } else {
                 foreach ($stocksOwned as $ticker => $quantity) {
                   $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
-				  $data = explode(',', $quote);
+                  $data = explode(',', $quote);
                   if (count($data) == 5) {
-					  	echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[3] . '</td>
-		                  <td>' . substr($data[4], 1, -2) . '</td>
-		                  </tr>'; 
-				  } else {
-				  		echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[2] . '</td>
-		                  <td>' . substr($data[3], 1, -2) . '</td>
-		                  </tr>';
-				  }
+                    echo '<tr>
+                    <td>' . substr($data[0], 1, -1) . '</td>
+                    <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+                    <td>' . $quantity . '</td>
+                    <td>$' . $data[3] . '</td>
+                    <td>' . substr($data[4], 1, -2) . '</td>
+                    </tr>';
+                  } else {
+                    echo '<tr>
+                    <td>' . substr($data[0], 1, -1) . '</td>
+                    <td>' . substr($data[1], 1, -1) . '</td>
+                    <td>' . $quantity . '</td>
+                    <td>$' . $data[2] . '</td>
+                    <td>' . substr($data[3], 1, -2) . '</td>
+                    </tr>';
+                  }
                 }
               }
               ?>
@@ -189,24 +190,24 @@ $currentUser->save();
               } else {
                 foreach ($stocksWatching as $ticker => $quantity) {
                   $quote = file_get_contents('http://finance.yahoo.com/d/quotes.csv?s=' . $ticker . '&f=SNAP2&e=.csv');
-				  $data = explode(',', $quote);
-				  if (count($data) == 5) {
-					  	echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[3] . '</td>
-		                  <td>' . substr($data[4], 1, -2) . '</td>
-		                  </tr>'; 
-				  } else {
-				  		echo '<tr>
-		                  <td>' . substr($data[0], 1, -1) . '</td>
-		                  <td>' . substr($data[1], 1, -1) . '</td>
-		                  <td>' . $quantity . '</td>
-		                  <td>$' . $data[2] . '</td>
-		                  <td>' . substr($data[3], 1, -2) . '</td>
-		                  </tr>';
-				  }
+                  $data = explode(',', $quote);
+                  if (count($data) == 5) {
+                    echo '<tr>
+                    <td>' . substr($data[0], 1, -1) . '</td>
+                    <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+                    <td>' . $quantity . '</td>
+                    <td>$' . $data[3] . '</td>
+                    <td>' . substr($data[4], 1, -2) . '</td>
+                    </tr>';
+                  } else {
+                    echo '<tr>
+                    <td>' . substr($data[0], 1, -1) . '</td>
+                    <td>' . substr($data[1], 1, -1) . '</td>
+                    <td>' . $quantity . '</td>
+                    <td>$' . $data[2] . '</td>
+                    <td>' . substr($data[3], 1, -2) . '</td>
+                    </tr>';
+                  }
                 }
               }
             ?>
@@ -215,15 +216,102 @@ $currentUser->save();
           </div>
 
           <div id="buy-sell-section" class="widget-box">
-            <form action="php/buyAndSell.php" method="post">
+            <!-- <form action="php/buyAndSell.php" method="post"> -->
+            <form method="post">
               <input id="tickerInput" name="ticker" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
               <input id="qty" name="quantity" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
               <div class="button-wrapper">
-                <input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">
-                <input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell">
+                <!-- <input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">
+                <input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell"> -->
+                <!-- <a href="#modal-one" class="btn btn-big">Buy</a> -->
+
+                <a href="#modal-one" class="btn btn-big" onclick="getInput('buy')">Buy</a>
+                <a href="#modal-one" class="btn btn-big" onclick="getInput('sell')">Sell</a>
+                <input type="hidden" id="action" value="">
+                <script>
+                function getInput(action) {
+                  document.getElementById("confMsg").innerHTML = "Do you want to "
+                  + action.toUpperCase() + " " +
+                  + document.getElementById("qty").value + " share(s) of "
+                  + document.getElementById("tickerInput").value.toUpperCase() + "?";
+                  document.getElementById('action').value = action;
+
+                }
+                </script>
+
               </div>
+
+              <div class="modal" id="modal-one" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-header">
+                    <h2 id="modalHeader">Confirm?</h2>
+                    <!-- <a href="#close" class="btn-close" aria-hidden="true">x</a> -->
+                    <!--CHANGED TO "#close"-->
+                  </div>
+                  <div class="modal-body" id="confMsg">
+                    <p id="status"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <a id="confBtn" href="#modal-one" onclick="buyOrSell()" class="btn" type="">Confirm</a>
+                    <a id="cancelBtn" href="#close" class="btn" type="">Cancel</a>
+                    <a id="clsBtn" href="#close" onclick="refresh()" class="btn" style="visibility: hidden">Close</a>
+                    <!-- <input id="clsBtn" onclick="refresh()" class="btn" value="Close"> -->
+                    <script>
+                    function refresh() {
+                      document.getElementById("clsBtn").style.visibility = "hidden";
+                      document.getElementById("confBtn").style.visibility = "visible";
+                      document.getElementById("cancelBtn").style.visibility = "visible";
+                      // location.reload(true);
+                      prepareToAddToWatchlist(document.getElementById('watchlist-content'));
+                    }
+
+                    function buyOrSell() {
+                      var request = new XMLHttpRequest();
+                      var url = "php/buyAndSell.php?"
+                      + "action=" + document.getElementById('action').value
+                      + "&ticker=" + document.getElementById("tickerInput").value
+                      + "&quantity=" + document.getElementById("qty").value;
+
+                      request.open("GET", url, true);
+                      request.setRequestHeader("Content-Type", "text/html");
+                      request.addEventListener("readystatechange", myFunc, false);
+
+                      request.send();
+                      document.getElementById("confMsg").innerHTML = "Processing";
+                    }
+                    function myFunc(e) {
+                      var currentReadyState = e.target.readyState;
+                    	var currentStatus = e.target.status;
+
+                    	if(currentReadyState == 4 && currentStatus == 200) {
+                    	   showResult(e.target.responseText);
+                    	}
+                    }
+                    function showResult(result) {
+
+                      if (result.substr(0, 5) == "Stock") {
+                        document.getElementById("modalHeader").innerHTML = "Transaction succeeded";
+                      } else {
+                        document.getElementById("modalHeader").innerHTML = "Transaction failed";
+                      }
+                      document.getElementById("confMsg").innerHTML = result;
+
+
+                      document.getElementById("clsBtn").style.visibility = "visible";
+                      document.getElementById("confBtn").style.visibility = "hidden";
+                      document.getElementById("cancelBtn").style.visibility = "hidden";
+                    }
+                    </script>
+                    <!-- <input href="#close" type="submit" class="btn" name="buy"  alt="Buy" value="Buy"> -->
+                    <!-- <input href="#close" type="submit" class="btn" name="sell"  alt="Sell" value="Sell"> -->
+                    <!--CHANGED TO "#close"-->
+                  </div>
+                </div>
+              </div>
+
             </form>
           </div>
+
 
         </div>
       </div> <!--left float wrapper end -->
@@ -237,57 +325,57 @@ $currentUser->save();
     </footer>
   </div>
 
-	<!-- Load javascript here -->
-	<script src="js/Chart.js/Chart.min.js"></script>
-	<script src="js/stock-graph.js"></script>
-	<script src="js/stock-graph.js"></script>
-    <script src="js/search-stocks-handler.js"></script>
-    <script src="js/load-watchlist.js"></script>
-    <script>
-		var clockID;
-		var yourTimeZoneFrom = -5.00;
-		var d = new Date();  
-		var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
-		var offset = tzDifference * 60 * 1000;
-		function UpdateClock() {
-			var estDate = new Date(new Date().getTime()+offset);
-			var hours = estDate.getHours()
-			var minutes = estDate.getMinutes();
-			var seconds = estDate.getSeconds();
-			if(minutes < 10)
-				minutes = '0' + minutes;
-			if(seconds < 10)   
-				seconds = '0' + seconds;
-			var amPM = hours >= 12 ? 'PM' : 'AM';
-			document.getElementById('clock').innerHTML = "" 
-						   + hours + ":" 
-						   + minutes + ":" 
-						   + seconds + " "
-						   + amPM + " EST"; 
-		}
-		function StartClock() {
-			clockID = setInterval(UpdateClock, 500);
-		}
-		function KillClock() {
-			clearTimeout(clockID);
-		}
-		window.onload=function() {
-			StartClock();
-        }
-/*
-		$(document).ready(function () {
-			var HeightDiv = $("div").height();
-			var HeightTable = $("portfolio-section").height();
-			if(HeightTable > HeightDiv) {
-				var FontSizeTable = parseInt($("table").css("font-size"), 10);
-				while (HeightTable > HeightDiv && FontSizeTable > 5) {
-					FontSizeTable--;
-					$("table").css("font-size", FontSizeTable);
-					HeightTable = $("table").height();
-				}
-			}
-		});
+  <!-- Load javascript here -->
+  <script src="js/Chart.js/Chart.min.js"></script>
+  <script src="js/stock-graph.js"></script>
+  <script src="js/stock-graph.js"></script>
+  <script src="js/search-stocks-handler.js"></script>
+  <script src="js/load-watchlist.js"></script>
+  <script>
+  var clockID;
+  var yourTimeZoneFrom = -5.00;
+  var d = new Date();
+  var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
+  var offset = tzDifference * 60 * 1000;
+  function UpdateClock() {
+    var estDate = new Date(new Date().getTime()+offset);
+    var hours = estDate.getHours()
+    var minutes = estDate.getMinutes();
+    var seconds = estDate.getSeconds();
+    if(minutes < 10)
+    minutes = '0' + minutes;
+    if(seconds < 10)
+    seconds = '0' + seconds;
+    var amPM = hours >= 12 ? 'PM' : 'AM';
+    document.getElementById('clock').innerHTML = ""
+    + hours + ":"
+    + minutes + ":"
+    + seconds + " "
+    + amPM + " EST";
+  }
+  function StartClock() {
+    clockID = setInterval(UpdateClock, 500);
+  }
+  function KillClock() {
+    clearTimeout(clockID);
+  }
+  window.onload=function() {
+    StartClock();
+  }
+  /*
+  $(document).ready(function () {
+  var HeightDiv = $("div").height();
+  var HeightTable = $("portfolio-section").height();
+  if(HeightTable > HeightDiv) {
+  var FontSizeTable = parseInt($("table").css("font-size"), 10);
+  while (HeightTable > HeightDiv && FontSizeTable > 5) {
+  FontSizeTable--;
+  $("table").css("font-size", FontSizeTable);
+  HeightTable = $("table").height();
+}
+}
+});
 */
-    </script>
+</script>
 </body>
 </html>

@@ -54,7 +54,6 @@ function addToWatchlist(new_stock_list){
 			watchlist.appendChild(tableRow);
 		}
 	}
-	
 
 }
 
