@@ -238,7 +238,7 @@
 						   + hours + ":" 
 						   + minutes + ":" 
 						   + seconds + " "
-						   + amPM; 
+						   + amPM + " EST"; 
 		}
 		function StartClock() {
 			clockID = setInterval(UpdateClock, 500);
@@ -248,7 +248,21 @@
 		}
 		window.onload=function() {
 			StartClock();
-		}
+        }
+/*
+		$(document).ready(function () {
+			var HeightDiv = $("div").height();
+			var HeightTable = $("portfolio-section").height();
+			if(HeightTable > HeightDiv) {
+				var FontSizeTable = parseInt($("table").css("font-size"), 10);
+				while (HeightTable > HeightDiv && FontSizeTable > 5) {
+					FontSizeTable--;
+					$("table").css("font-size", FontSizeTable);
+					HeightTable = $("table").height();
+				}
+			}
+		});
+*/
     </script>
 </body>
 </html>
