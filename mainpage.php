@@ -20,15 +20,13 @@
         header('Location: /');
     }
     /*
-    <?php
-    	// HOW TO ADD STOCKS TO USER ACCOUNTS
-		$stocks['MSFT'] = 10;
-		$stocks['GOOG'] = 24;
-		$stocks['AAPL'] = 19;
-		$stocks['AMZN'] = 95;
-		$currentUser->setAssociativeArray('stocks', $stocks);
-		$currentUser->save();
-	?>
+	// HOW TO ADD STOCKS TO USER ACCOUNTS
+	$stocks['MSFT'] = 10;
+	$stocks['GOOG'] = 24;
+	$stocks['AAPL'] = 19;
+	$stocks['AMZN'] = 95;
+	$currentUser->setAssociativeArray('stocks', $stocks);
+	$currentUser->save();
 	*/
 ?>
 <!DOCTYPE html>
@@ -120,16 +118,16 @@
 		    						  </tr>';
 		    				} else {
 		    					foreach ($stocks as $ticker => $quantity) {
-		    					$query = new ParseQuery('Stock');
-		    					$query->equalTo('ticker', $ticker);
-		    					$stock = $query->first();
-		    					echo '<tr>
-		    							<td>' . $stock->get('ticker') . '</td>
-		    							<td>' . $stock->get('name') . '</td>
-		    							<td>' . $quantity . '</td>
-		    							<td>$24</td>
-		    							<td>+2%</td>
-		    						  </tr>';
+			    					$query = new ParseQuery('Stock');
+			    					$query->equalTo('ticker', $ticker);
+			    					$stock = $query->first();
+			    					echo '<tr>
+			    							<td>' . $stock->get('ticker') . '</td>
+			    							<td>' . $stock->get('name') . '</td>
+			    							<td>' . $quantity . '</td>
+			    							<td>$24</td>
+			    							<td>+2%</td>
+			    						  </tr>';
 		    					}
 		    				}
 		    			?>
