@@ -141,6 +141,8 @@
 		    				}
 		    			?>
 		    		</table>
+		    	</div>
+		    	<div id="portfolio-section" class="widget-box">
 		    		<table>
 		    			<tr>
 		    				<th align="left">Ticker</th>
@@ -164,9 +166,7 @@
 		    						  </tr>';
 		    				}
 		    			?>
-	    			</table>
-
-	    			
+	    			</table>	
 	    		</div>
 
 	    		<div id="buy-sell-section" class="widget-box">
