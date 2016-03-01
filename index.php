@@ -10,7 +10,7 @@
     }
     $currentUser = ParseUser::getCurrentUser();
     if ($currentUser) {
-        header('Location: /mainpage');
+        header('Location: /mainpage.php');
     }
 ?>
 <!DOCTYPE html>
@@ -24,29 +24,28 @@
 <body>
     <div class="overall-wrapper">
 	    <div class="header">
-            <a href="/"><img src="img/so-logo.png" width=20% height=auto></a>
+            <a href="/"><img src="img/so-logo.png" id="logo"></a>
 	    </div>
         <div class="content login-content">
             <div class="widget-box login-box">
-                <form action="" method="post" name="form1">
+                <form action="" method="post" id="form1">
                     <p id="error-box"></p>
                     <input id="login-username" class="login-field" type="email" name="login-username" placeholder="Email" required autofocus>
                     <input id="login-password" class="login-field" type="password" name="login-password" placeholder="Password" required>
                     <div class="button-wrapper">
-                        <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="login();"/>
-                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" onclick="reset();" formnovalidate/>
+                        <input id="login-submit" class="button submit-button" type="submit" value="Login" onclick="submitForm('login.php')"/>
+                        <input id="forgot-password" class="button submit-button" type="submit" value="Forgot Password" formnovalidate="formnovalidate" onclick="submitForm('reset.php')"/>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <script>
-        function login() {
-            document.form1.action="login.php";
-        }
-        function reset() {
-            document.form1.action="reset.php";
-        }
+		function submitForm(action)
+		{
+			document.getElementById('form1').action = action;
+			document.getElementById('form1').submit();
+		}
     </script>
 </body>
 </html>

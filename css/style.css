@@ -22,8 +22,12 @@ p{
 	font-size:16px;
 	font-weight:300;
 }
+
 th, td {
 	padding: 5px; 
+}
+td {
+	font-weight:300;
 }
 
 .header{
@@ -32,10 +36,19 @@ th, td {
 	padding-top:5px;
 	padding:.5em;
 	overflow: hidden;
-    width=20%;
-    height=auto;
+    min-height:3em;
+    height:auto;
+    width:auto;
 }
-
+#logo{
+    width:auto;
+    /*min-width:30%;*/
+    height:10vh;
+    /*min-height:30%;*/
+}
+#user-section{
+    display:block;
+}
 #logout:link{
     /*float:right;*/
 	text-decoration:none;
@@ -150,6 +163,9 @@ input:focus{
 	border: none;
 	text-align:center;
 }
+.button:hover{
+	background-color: #ccc;
+}
 .button-buySell{
 	background-color: #F0F0F0;
 	font-size: 16px;
@@ -160,8 +176,28 @@ input:focus{
 	border: none;
     text-align:left;
 }
-.button-buySell:active{
+.button-buySell:hover{
 	background-color: #ccc;
+}
+.button-fileUpload{
+	background-color: #F0F0F0;
+	font-size: 16px;
+	font-weight:300;
+	height: 2.5em;
+	width: 12em;
+	cursor: pointer;
+	border: none;
+	text-align:center;
+	opacity:0;
+
+	/*
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	*/
 }
 .graph-button{
 	font-size: 10px;
@@ -169,9 +205,10 @@ input:focus{
 }
 /* Footer */
 footer{
-	background-color: #222;
+    background-color: #1A1A1D;
 	border-style:solid;
-	border-color:#000;
+	border-color:#1A1A1D;
+	border-top-color:#F0F0F0;
 	color: #fff;
 	padding: 1em;
 	text-align: center;
@@ -227,7 +264,6 @@ a.contact:hover{
 		padding: 9.5em 2em;
 	}
 
-
 	/* buttons */
 	.button-wrapper{
 		text-align: left;
@@ -264,9 +300,6 @@ a.contact:hover{
 	}
 	#user-section{
 		float: right;
-	}
-	#user-section p, button{
-		display: inline-block;
 	}
 
 	/* clear float */
