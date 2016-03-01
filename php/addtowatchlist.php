@@ -31,16 +31,19 @@ if(isset($stocks) && !array_key_exists($ticker, $stocks)) {
   $stocks[$ticker] = 0;
 
   #in order to buy a stock, we need to know current price. compant name tag is used in comformation
-  $format = snap2;
+  $format = "snap2";
 
-  for ($i=0; $i < $stocks; $i++) {
-    # code...
+  foreach ($stocks as $key => $stock){
+    if($stock == 0){
+      #get quotes from Yahoo API
+      $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $key . "&f=" . $format . "&e=.csv");
+      $data = explode( ',', $quote);
+      $results .= $data[0] . " " . $data[1] . " " . $data[2] . " " . $stock . " " . $data[3] . "\n";
+    }
   }
-  #get quotes from Yahoo API
-  $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=" . $format . "&e=.csv");
-  $data = explode( ',', $quote);
 
-  echo
+  echo $results;
+
 } else {
   echo "";
 }
