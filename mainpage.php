@@ -32,13 +32,21 @@
     <div class="overall-wrapper">
 	    <div class="header">
             <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
-	   		<div id="user-section" class="clearfix">
-                <?php
-                	echo '<p id="balance">' . $currentUser->get('username') . '</p>';
-                	echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
-                ?>
-                <a href="logout.php" id="logout">Logout</a>
+            <div id="user-section">
+            <?php
+                echo "<div class='inline'>";
+                echo '<p id="username">' . $currentUser->get('username') . '</p>';
+                echo "</div>";
+                echo "<div class='inline'>";
+                echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
+                echo "</div>";
+            ?>
+                <div class="inline">
                 <a href="" id="manual">User Manual</a>
+                </div>
+                <div class="inline">
+                <a href="logout.php" id="logout">Logout</a>
+                </div>
 	   		</div>
 	    </div>
 
@@ -88,6 +96,8 @@
                             <label for="fileToUpload">
                                 <span>Upload CSV File</span>
                             </label>
+                        <br>
+                        <br>
                         <input type="submit" name="submit"  alt="Import CSV" value="Import CSV File" class="button">
                     </form>
 				</div>
@@ -97,6 +107,7 @@
 		    				<th align="left">Ticker</th>
 		    				<th align="left">Name</th>
 		    				<th align="left">Price</th>
+		    				<th align="left">Quantity</th>
 		    			</tr>
 		    			<tr>
 		    				<td>FB</td>

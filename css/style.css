@@ -47,8 +47,21 @@ td {
     /*min-height:30%;*/
 }
 #user-section{
-    display:block;
+    display:inline;
 }
+div.inline{
+    float:left;
+    padding-top:15px;
+    padding-right:30px;
+    font-size:20px;
+}
+p#username{
+    font-size:20px;
+}
+p#balance{
+    font-size:20px;
+}
+
 #logout:link{
     /*float:right;*/
 	text-decoration:none;
@@ -211,6 +224,7 @@ footer{
 	border-style:solid;
 	border-color:#1A1A1D;
 	border-top-color:#F0F0F0;
+	border-top-width:.5em;
 	color: #fff;
 	padding: 1em;
 	text-align: center;
@@ -286,19 +300,19 @@ a.contact:hover{
 @media only screen and (min-width: 50em){
 	.left-float-wrapper{
 		float: left;
-		width: 66%;
+		width: 80%;
 	}
 	#right-area{
 		float: right;
-		width: 33%;
+		width: 20%;
 	}
 	#center-area{
 		float: right;
-		width: 50%;
+		width: 60%;
 	}
 	#left-area{
 		float: left;
-		width: 50%;
+		width: 40%;
 	}
 	#user-section{
 		float: right;
