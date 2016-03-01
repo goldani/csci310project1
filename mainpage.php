@@ -3,24 +3,33 @@
     use Parse\ParseClient;
     use Parse\ParseUser;
     use Parse\ParseException;
+    use Parse\ParseQuery;
     date_default_timezone_set('America/New_York');
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
         ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');   
     }
     $currentUser = ParseUser::getCurrentUser();
-	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300){
+	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300) {
         include('logout.php');
         die();
-	} 
-	else{
+	} else {
 		$_SESSION['timestamp'] = time();
     }
-    if($currentUser) {
-    }
-    else{
+    if (!$currentUser) {
         header('Location: /');
     }
+    /*
+    <?php
+    	// HOW TO ADD STOCKS TO USER ACCOUNTS
+		$stocks['MSFT'] = 10;
+		$stocks['GOOG'] = 24;
+		$stocks['AAPL'] = 19;
+		$stocks['AMZN'] = 95;
+		$currentUser->setAssociativeArray('stocks', $stocks);
+		$currentUser->save();
+	?>
+	*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +41,21 @@
     <div class="overall-wrapper">
 	    <div class="header">
             <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
-	   		<div id="user-section" class="clearfix">
-                <?php
-                	echo '<p id="balance">' . $currentUser->get('username') . '</p>';
-                	echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
-                ?>
-                <a href="logout.php" id="logout">Logout</a>
+            <div id="user-section">
+            <?php
+                echo "<div class='inline'>";
+                echo '<p id="username">' . $currentUser->get('username') . '</p>';
+                echo "</div>";
+                echo "<div class='inline'>";
+                echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
+                echo "</div>";
+            ?>
+                <div class="inline">
                 <a href="" id="manual">User Manual</a>
+                </div>
+                <div class="inline" id="inline-logout">
+                <a href="logout.php" id="logout">Logout</a>
+                </div>
 	   		</div>
 	    </div>
 
@@ -46,7 +63,11 @@
 	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
+<<<<<<< HEAD
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
+=======
+	    			<input id="search-box" type="text" placeholder="Search">
+>>>>>>> 79f1d3e79827b54943c93ad00896704c58b1cf7b
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
@@ -63,8 +84,7 @@
 	    		</div>
 
 	    		<div id="information-section" class="widget-box">
-	    			<p>Stock information section
-	    				
+	    			<p>Stock Information	    				
 	    			</p>
 	    		</div>
 
@@ -77,6 +97,8 @@
                             <label for="fileToUpload">
                                 <span>Upload CSV File</span>
                             </label>
+                        <br>
+                        <br>
                         <input type="submit" name="submit"  alt="Import CSV" value="Import CSV File" class="button">
                     </form>
 				</div>
@@ -84,19 +106,26 @@
 	    			<table>
 		    			<tr>
 		    				<th align="left">Ticker</th>
-		    				<th align="left">Name</th>
-		    				<th align="left">Price</th>
+		    				<th align="left">Company</th>
+		    				<th align="left">Quantity</th>
+		    				<th align="left">Current Price</th>
+		    				<th align="left">% Change</th>
 		    			</tr>
-		    			<tr>
-		    				<td>FB</td>
-		    				<td>Facebook</td>
-		    				<td>$price</td>
-		    			</tr>
-		    			<tr>
-		    				<td>GOOG</td>
-		    				<td>Google</td>
-		    				<td>$price</td>
-		    			</tr>
+		    			<?php
+		    				$stocks = $currentUser->get('stocks');
+		    				foreach ($stocks as $ticker => $quantity) {
+		    					$query = new ParseQuery('Stock');
+		    					$query->equalTo('ticker', $ticker);
+		    					$stock = $query->first();
+		    					echo '<tr>
+		    							<td>' . $stock->get('ticker') . '</td>
+		    							<td>' . $stock->get('name') . '</td>
+		    							<td>' . $quantity . '</td>
+		    							<td>$24</td>
+		    							<td>+2%</td>
+		    						  </tr>';
+		    				}
+		    			?>
 	    			</table>
 
 	    			
@@ -134,7 +163,7 @@
 	    <footer>
 	    <p><small>This is the work of college students.</small></p>
 	    <br>
-        <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> Professor Halfond.</small></p>
+        <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
 	    </footer>
     </div>
 
