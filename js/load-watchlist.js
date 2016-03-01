@@ -19,6 +19,17 @@ function prepareToAddToWatchlist(menuitem_element){
 
 }
 
+function reloadAddToWatchlist(){
+	//Send request to database
+	var request = new XMLHttpRequest();
+  var url = "../php/loadstocks.php";
+  request.open("GET", url, true);
+	request.setRequestHeader("Content-Type", "text/html");
+	request.addEventListener("readystatechange", handleUserStockResult, false);
+	request.send();
+
+}
+
 /* Receive result of if user already has stock */
 function handleUserStockResult(e){
 	var currentReadyState = e.target.readyState;
