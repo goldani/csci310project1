@@ -46,7 +46,7 @@
 	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
-	    			<input id="search-box" type="text" placeholder="Search stocks...">
+	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
@@ -144,6 +144,7 @@
 	<script src="js/Chart.js/Chart.min.js"></script>
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
+	<script src="js/search-stocks-handler.js"></script>
 
 </body>
 </html>
