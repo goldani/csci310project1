@@ -38,6 +38,7 @@ function processData(e) {
 }
 
 
+var searchBox = document.getElementById('search-box');
 function populateDropdown(response){
 	var dropdown = document.getElementById('searchDropdown');
 	var resultString = response;
@@ -52,6 +53,12 @@ function populateDropdown(response){
 		//add to overall dropdown
 		dropdown.appendChild(menuitem);
 
+	}
+
+	//one last check to make sure input values are correct
+	var input = searchBox.value;
+	if(input === ""){
+		clearDropdown(dropdown);
 	}
 
 }
