@@ -77,6 +77,7 @@ $currentUser->save();
           <div id="graph-section" class="widget-box">
             <canvas id="canvas"></canvas>
 
+
             <div class="button-wrapper">
               <button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
               <button id="5d" class="button graph-button">5 days</button>
@@ -239,7 +240,6 @@ $currentUser->save();
 
 	<!-- Load javascript here -->
 	<script src="js/Chart.js/Chart.min.js"></script>
-	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
     <script src="js/search-stocks-handler.js"></script>
     <script src="js/load-watchlist.js"></script>

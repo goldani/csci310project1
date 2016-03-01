@@ -39,6 +39,7 @@ function addToWatchlist(new_stock_list){
 
 		createTableHeaders();
 
+		var tBody = document.createElement("TBODY");
 		//Put into table
 		//results format: TICKER Name Qty Price %Change
 		for(i = 0; i < resultsArray.length; i++){
@@ -51,7 +52,8 @@ function addToWatchlist(new_stock_list){
 				tableRow.appendChild(tableData);
 
 			}
-			watchlist.appendChild(tableRow);
+			tBody.appendChild(tableRow)
+			watchlist.appendChild(tBody);
 		}
 	}
 	
@@ -62,6 +64,7 @@ function addToWatchlist(new_stock_list){
 function createTableHeaders(){
 	//create a new row
 	var tableRow = document.createElement("TR");
+	var tHead = document.createElement("THEAD");
 	//create table header elements and content
 	for(i = 0; i < tableHeaders.length; i++){
 		var ticker = document.createElement("TH");
@@ -73,5 +76,6 @@ function createTableHeaders(){
 		tableRow.appendChild(ticker);
 	}
 	//add row to watchlist content
-	watchlist.appendChild(tableRow);
+	tHead.appendChild(tableRow);
+	watchlist.appendChild(tHead);
 }
