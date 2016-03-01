@@ -139,13 +139,23 @@ $currentUser->save();
                 foreach ($stocksOwned as $ticker => $quantity) {
                   $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
 				  $data = explode(',', $quote);
-                  echo '<tr>
-                  <td>' . substr($data[0], 1, -1) . '</td>
-                  <td>' . substr($data[1], 1, -1) . '</td>
-                  <td>' . $quantity . '</td>
-                  <td>$' . $data[2] . '</td>
-                  <td>' . substr($data[3], 1, -2) . '</td>
-                  </tr>';
+                  if (count($data) == 5) {
+					  	echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[3] . '</td>
+		                  <td>' . substr($data[4], 1, -2) . '</td>
+		                  </tr>'; 
+				  } else {
+				  		echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[2] . '</td>
+		                  <td>' . substr($data[3], 1, -2) . '</td>
+		                  </tr>';
+				  }
                 }
               }
               ?>
@@ -171,15 +181,25 @@ $currentUser->save();
                 </tr>';
               } else {
                 foreach ($stocksWatching as $ticker => $quantity) {
-                  $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
+                  $quote = file_get_contents('http://finance.yahoo.com/d/quotes.csv?s=' . $ticker . '&f=SNAP2&e=.csv');
 				  $data = explode(',', $quote);
-                  echo '<tr>
-                  <td>' . substr($data[0], 1, -1) . '</td>
-                  <td>' . substr($data[1], 1, -1) . '</td>
-                  <td>' . $quantity . '</td>
-                  <td>$' . $data[2] . '</td>
-                  <td>' . substr($data[3], 1, -2) . '</td>
-                  </tr>';
+				  if (count($data) == 5) {
+					  	echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[3] . '</td>
+		                  <td>' . substr($data[4], 1, -2) . '</td>
+		                  </tr>'; 
+				  } else {
+				  		echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[2] . '</td>
+		                  <td>' . substr($data[3], 1, -2) . '</td>
+		                  </tr>';
+				  }
                 }
               }
               ?>
@@ -187,9 +207,9 @@ $currentUser->save();
           </div>
 
           <div id="buy-sell-section" class="widget-box">
-            <form action="" method="post">
-              <input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
-              <input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
+            <form action="php/buyAndSell.php" method="post">
+              <input id="tickerInput" name="ticker" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
+              <input id="qty" name="quantity" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
               <div class="button-wrapper">
                 <input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">
                 <input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell">
@@ -214,6 +234,7 @@ $currentUser->save();
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
     <script src="js/search-stocks-handler.js"></script>
+    <script src="js/load-watchlist.js"></script>
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
