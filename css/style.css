@@ -24,8 +24,17 @@ p{
 }
 
 table{
-	/*width100%;*/
+	width:100%;
+	display:block;
 	margin: 0 auto;
+}
+thead, tbody{
+    display:block;
+}
+tbody{
+    height:100px;
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 #portfolio-section{
 	/*width:100%;*/

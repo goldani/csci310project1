@@ -109,6 +109,7 @@ $currentUser->save();
           </div>
           <div id="portfolio-section" class="widget-box">
             <table id="portfolio-content">
+            <thead>
               <tr>
                 <th align="left">Ticker</th>
                 <th align="left">Company</th>
@@ -116,6 +117,8 @@ $currentUser->save();
                 <th align="left">Current Price</th>
                 <th align="left">Percent Change</th>
               </tr>
+            </thead>
+            <tbody>
               <?php
               $stocks = $currentUser->get('stocks');
               $stocksOwned = NULL;
@@ -159,10 +162,12 @@ $currentUser->save();
                 }
               }
               ?>
+            </tbody>
             </table>
           </div>
           <div id="watchlist-section" class="widget-box">
             <table id="watchlist-content">
+            <thead>
               <tr>
                 <th align="left">Ticker</th>
                 <th align="left">Company</th>
@@ -170,6 +175,8 @@ $currentUser->save();
                 <th align="left">Current Price</th>
                 <th align="left">Percent Change</th>
               </tr>
+            </thead>
+            <tbody>
               <?php
               if (empty($stocksWatching)) {
                 echo '<tr>
@@ -202,7 +209,8 @@ $currentUser->save();
 				  }
                 }
               }
-              ?>
+            ?>
+            </tbody>
             </table>
           </div>
 
