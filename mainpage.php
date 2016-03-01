@@ -113,11 +113,11 @@ $currentUser->save();
             <table id="portfolio-content">
               <thead>
                 <tr>
-                  <th align="left">Ticker</th>
-                  <th align="left">Company</th>
-                  <th align="left">Quantity</th>
-                  <th align="left">Current Price</th>
-                  <th align="left">Percent Change</th>
+                  <th>Ticker</th>
+                  <th>Company</th>
+                  <th>Quantity</th>
+                  <th>Current Price</th>
+                  <th>Percent Change</th>
                 </tr>
               </thead>
               <tbody>
@@ -175,11 +175,11 @@ $currentUser->save();
             <table id="watchlist-content">
               <thead>
                 <tr>
-                  <th align="left">Ticker</th>
-                  <th align="left">Company</th>
-                  <th align="left">Quantity</th>
-                  <th align="left">Current Price</th>
-                  <th align="left">Percent Change</th>
+                  <th>Ticker</th>
+                  <th>Company</th>
+                  <th>Quantity</th>
+                  <th>Current Price</th>
+                  <th>Percent Change</th>
                 </tr>
               </thead>
               <tbody>
