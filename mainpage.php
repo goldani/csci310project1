@@ -65,7 +65,7 @@
 	    	<div class="float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
-	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
+	    			<input id="search-box" type="text" placeholder="Search stocks..." pattern="[A-Za-z]{1,5}" oninput="requestStockNames(this);">
 	    			<div class="dropdown">
 	    				<div id="searchDropdown" class="dropdown-content">
     						
@@ -140,7 +140,7 @@
 
 	    		<div id="buy-sell-section" class="widget-box">
 					 <form action="" method="post">
-						<input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" pattern="[A-Za-z]{1,5}" maxlength="5" required autofocus><br>
+						<input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
 						<input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
                         <div class="button-wrapper">
 							<input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">

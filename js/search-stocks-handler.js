@@ -9,7 +9,7 @@
  * Takes in the input element, sends the ticker to searchstocks.php
  */
 function requestStockNames(element){
-	var input = element.value;
+	var input = element.value.toUpperCase();
 	if(input === ""){
 		var dropdown = document.getElementById('searchDropdown');
 		clearDropdown(dropdown);
@@ -38,6 +38,7 @@ function processData(e) {
 }
 
 
+var searchBox = document.getElementById('search-box');
 function populateDropdown(response){
 	var dropdown = document.getElementById('searchDropdown');
 	var resultString = response;
@@ -52,6 +53,12 @@ function populateDropdown(response){
 		//add to overall dropdown
 		dropdown.appendChild(menuitem);
 
+	}
+
+	//one last check to make sure input values are correct
+	var input = searchBox.value;
+	if(input === ""){
+		clearDropdown(dropdown);
 	}
 
 }
