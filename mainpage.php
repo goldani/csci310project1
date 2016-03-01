@@ -74,10 +74,7 @@
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
-
 	    			<canvas id="canvas"></canvas>
-
-	    			<canvas id="canvas" height="100px" width="200px"></canvas>
 
 	    			<div class="button-wrapper">
 	    				<button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
