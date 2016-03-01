@@ -139,13 +139,23 @@ $currentUser->save();
                 foreach ($stocksOwned as $ticker => $quantity) {
                   $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
 				  $data = explode(',', $quote);
-                  echo '<tr>
-                  <td>' . substr($data[0], 1, -1) . '</td>
-                  <td>' . substr($data[1], 1, -1) . '</td>
-                  <td>' . $quantity . '</td>
-                  <td>$' . $data[2] . '</td>
-                  <td>' . substr($data[3], 1, -2) . '</td>
-                  </tr>';
+                  if (count($data) == 5) {
+					  	echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[3] . '</td>
+		                  <td>' . substr($data[4], 1, -2) . '</td>
+		                  </tr>'; 
+				  } else {
+				  		echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[2] . '</td>
+		                  <td>' . substr($data[3], 1, -2) . '</td>
+		                  </tr>';
+				  }
                 }
               }
               ?>
@@ -171,15 +181,25 @@ $currentUser->save();
                 </tr>';
               } else {
                 foreach ($stocksWatching as $ticker => $quantity) {
-                  $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
+                  $quote = file_get_contents('http://finance.yahoo.com/d/quotes.csv?s=' . $ticker . '&f=SNAP2&e=.csv');
 				  $data = explode(',', $quote);
-                  echo '<tr>
-                  <td>' . substr($data[0], 1, -1) . '</td>
-                  <td>' . substr($data[1], 1, -1) . '</td>
-                  <td>' . $quantity . '</td>
-                  <td>$' . $data[2] . '</td>
-                  <td>' . substr($data[3], 1, -2) . '</td>
-                  </tr>';
+				  if (count($data) == 5) {
+					  	echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[3] . '</td>
+		                  <td>' . substr($data[4], 1, -2) . '</td>
+		                  </tr>'; 
+				  } else {
+				  		echo '<tr>
+		                  <td>' . substr($data[0], 1, -1) . '</td>
+		                  <td>' . substr($data[1], 1, -1) . '</td>
+		                  <td>' . $quantity . '</td>
+		                  <td>$' . $data[2] . '</td>
+		                  <td>' . substr($data[3], 1, -2) . '</td>
+		                  </tr>';
+				  }
                 }
               }
               ?>

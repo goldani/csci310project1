@@ -6,6 +6,6 @@
 	$data = explode(',', $quote);
 	for ($i = 0; $i < count($data); $i++) {
 	  $result = $data[$i];
-	  echo $result;
+	  echo $result . "\n";
 	}
 ?>
