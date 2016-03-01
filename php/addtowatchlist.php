@@ -38,9 +38,13 @@ if(isset($stocks) && !array_key_exists($ticker, $stocks)) {
       #get quotes from Yahoo API
       $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $key . "&f=" . $format . "&e=.csv");
       $data = explode( ',', $quote);
-      $results .= $data[0] . " " . $data[1] . " " . $data[2] . " " . $stock . " " . $data[3] . "\n";
+      $data[0] = str_replace('"', "", $data[0]);
+      $data[1] = str_replace('"', "", $data[1]);
+      $results .= $data[0] . " " . $data[1] . " " . $stock . " " . $data[2] . " " . $data[3] . "\n";
     }
   }
+  $currentUser->setAssociativeArray("stocks", $stocks);
+  $currentUser->save();
 
   echo $results;
 

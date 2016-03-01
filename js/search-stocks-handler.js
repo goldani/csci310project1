@@ -58,7 +58,8 @@ function populateDropdown(response){
 		menuitem.className += ' menu-item';
 		//link menu items to action
 		var action = document.createAttribute("onclick");
-		action.value = "prepareToAddToWatchlist(this)";
+		action.value = "prepareToAddToWatchlist(this);";
+		menuitem.setAttributeNode(action);
 		//add to overall dropdown
 		dropdown.appendChild(menuitem);
 
@@ -79,75 +80,7 @@ function clearElementChildren(element){
 	}
 }
 
-/* --- [ Code for adding to watchlist] --- */
-/* variables */
-var watchlist = document.getElementById('watchlist-content');
-var tableHeaders = ["Ticker", "Company", "Current Price", "Percent Change"];
 
-/* Check database if user has stock already*/
-function prepareToAddToWatchList(menuitem_element){
-	//Get the ticker
-	var elementString = menuitem_element.value;
-	var resultsArray = elementString.split(" ");
-	var ticker = resultsArray[0];
-	//Send request to database
-	var request = new XMLHttpRequest();
-    var url = "../php/addToWatchlist.php?ticker=" + ticker;
-    request.open("GET", url, true);
-	request.setRequestHeader("Content-Type", "text/html");
-	request.addEventListener("readystatechange", handleUserStockResult, false);
-	request.send();
-
-}
-
-/* Receive result of if user already has stock */
-function handleUserStockResult(e){
-	var currentReadyState = e.target.readyState;
-	var currentStatus = e.target.status;
-
-	if(currentReadyState == 4 && currentStatus == 200) {
-	   addToWatchlist(e.target.responseText);
-	}
-}
-
-/* Append item to end of watchlist */
-function addToWatchlist(new_stock_list){
-	clearElementChildren(watchlist);
-	var resultsArray = new_stock_list.splice("\n");
-	
-	createTableHeaders();
-
-	//Put into table
-	//results format: TICKER Name Qty Price %Change
-	for(i = 0; i < resultsArray.length; i++){
-		var stockData = resultsArray[i].splice(" ");
-		var tableRow = document.createElement("TR");
-		for(j = 0; j < stockData.length; j++){
-			var tableData = document.createElement("TD");
-			var value = document.createTextNode(stockData[j]);
-			tableData.appendChild(value);
-			tableRow.appendChild(tableData);
-
-		}
-		watchlist.appendChild(tableRow);
-	}
-
-}
-
-/* Create headers for watchlist or stock portfolio table */
-function createTableHeaders(){
-	//create a new row
-	var tableRow = document.createElement("TR");
-	//create table header elements and content
-	for(i = 0; i < tableHeaders.length; i++){
-		var ticker = document.createElement("TH");
-		var content = document.createTextNode(tableHeaders[i]);
-		ticker.appendChild(content);
-		tableRow.appendChild(ticker);
-	}
-	//add row to watchlist content
-	watchlist.appendChild(tableRow);
-}
 
 
 
