@@ -21,6 +21,7 @@
     }
     /*
     <?php
+    	// HOW TO ADD STOCKS TO USER ACCOUNTS
 		$stocks['MSFT'] = 10;
 		$stocks['GOOG'] = 24;
 		$stocks['AAPL'] = 19;
@@ -62,7 +63,11 @@
 	    	<div class="left-float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
+<<<<<<< HEAD
+	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
+=======
 	    			<input id="search-box" type="text" placeholder="Search">
+>>>>>>> 79f1d3e79827b54943c93ad00896704c58b1cf7b
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
@@ -101,14 +106,23 @@
 	    			<table>
 		    			<tr>
 		    				<th align="left">Ticker</th>
-		    				<th align="left">Name</th>
+		    				<th align="left">Company</th>
 		    				<th align="left">Quantity</th>
-		    				<th align="left">Price</th>
+		    				<th align="left">Current Price</th>
 		    				<th align="left">% Change</th>
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
-		    				foreach ($stocks as $ticker => $quantity) {
+		    				if (empty($stocks)) {
+		    					echo '<tr>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    						  </tr>';
+		    				} else {
+		    					foreach ($stocks as $ticker => $quantity) {
 		    					$query = new ParseQuery('Stock');
 		    					$query->equalTo('ticker', $ticker);
 		    					$stock = $query->first();
@@ -119,6 +133,7 @@
 		    							<td>$24</td>
 		    							<td>+2%</td>
 		    						  </tr>';
+		    					}
 		    				}
 		    			?>
 	    			</table>
@@ -168,6 +183,7 @@
 	<script src="js/Chart.js/Chart.min.js"></script>
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
+	<script src="js/search-stocks-handler.js"></script>
 
 </body>
 </html>
