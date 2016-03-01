@@ -23,7 +23,7 @@ $nameQuery->startsWith("name", $name);
 
 $combinedQuery = ParseQuery::orQueries([$tickerQuery, $nameQuery]);
 $combinedQuery->ascending("name");
-$combinedQuery->limit(10);
+$combinedQuery->limit(5);
 $results = $combinedQuery->find();
 
 $allResults = "";
