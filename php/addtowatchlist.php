@@ -47,12 +47,12 @@ if(isset($stocks) && !array_key_exists($ticker, $stocks)) {
       if (count($data) == 5) {
         $ticker = substr($data[0], 1, -1);
         $name = substr($data[1] . $data[2], 1, -1);
-        $price = substr($data[3], 1, -2);
+        $price = substr($data[3], 1, -1);
         $percent = substr($data[4], 1, -2);
       } else {
         $ticker = substr($data[0], 1, -1);
         $name = substr($data[1], 1, -1);
-        $price = substr($data[2], 1, -2);
+        $price = substr($data[2], 1, -1);
         $percent = substr($data[3], 1, -2);
       }
       str_replace('"', "", $percent);
