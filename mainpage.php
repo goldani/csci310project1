@@ -36,9 +36,50 @@ $currentUser->save();
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<<<<<<< HEAD
 
     
 
+=======
+<<<<<<< HEAD
+    <div class="overall-wrapper">
+	    <div class="header">
+            <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
+            <div id="clock">
+				<?php #echo date('h:i:s a') ?>
+            </div>
+            <div id="user-section">
+            <?php
+                $currentUser = ParseUser::getCurrentUser();
+                echo "<div class='inline'>";
+                echo '<p id="username">' . $currentUser->get('username') . '</p>';
+                echo "</div>";
+                echo "<div class='inline'>";
+                echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
+                echo "</div>";
+            ?>
+                <div class="inline">
+                <a href="" id="manual">User Manual</a>
+                </div>
+                <div class="inline" id="inline-logout">
+                <a href="logout.php" id="logout">Logout</a>
+                </div>
+	   		</div>
+	    </div>
+
+	    <div class="content clearfix">
+	    	<div class="float-wrapper">
+	    	<div id="center-area">
+	    		<div id="search-section" class="widget-box">
+	    			<input id="search-box" type="text" placeholder="Search stocks..." pattern="[A-Za-z]{1,5}" oninput="requestStockNames(this);">
+	    			<div class="dropdown">
+	    				<div id="searchDropdown" class="dropdown-content">
+    						<!-- To be populated by search-stocks-handler.js -->
+  						</div>
+	    			</div>
+	    		</div>
+=======
+>>>>>>> c7ecad9a141bb977ce037f21048d7eb33b66c4de
   <div class="overall-wrapper">
     <div class="header">
       <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
@@ -62,6 +103,7 @@ $currentUser->save();
         </div>
       </div>
     </div>
+>>>>>>> 5219a595178df39f98bf160f50307058e5c84b8e
 
 
     <div class="content clearfix">
