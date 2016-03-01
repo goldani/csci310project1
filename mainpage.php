@@ -84,8 +84,11 @@
 	    	<div id="left-area">
                 <div id="CSV-section" class="widget-box">
                     <form action="upload.php" method="post" enctype="multipart/form-data">
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="button-fileUpload" >
-                        <input type="submit" name="submit"  alt="Import CSV" value="Upload CSV" class="button">
+                        <input type="file" name="fileToUpload" id="fileToUpload" class="button-fileUpload">
+                            <label for="fileToUpload">
+                                <span>Upload CSV File</span>
+                            </label>
+                        <input type="submit" name="submit"  alt="Import CSV" value="Import CSV File" class="button">
                     </form>
 				</div>
 	    		<div id="portfolio-section" class="widget-box">
