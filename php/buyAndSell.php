@@ -73,7 +73,7 @@ if ($data[0] != "N/A" && $quantity > 0) {
       #if sell, check can sell or not then echo result and exit
       if ($stocks[$ticker]-$quantity >= 0 && array_key_exists($ticker, $stocks)) {
         $stocks[$ticker] -= $quantity;
-        echo "Stock brought";
+        echo "Stock sold";
       } else {
         echo " Cannot sell more than user have or sell stocks user do not own";
         exit();
