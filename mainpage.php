@@ -21,6 +21,7 @@
     }
     /*
     <?php
+    	// HOW TO ADD STOCKS TO USER ACCOUNTS
 		$stocks['MSFT'] = 10;
 		$stocks['GOOG'] = 24;
 		$stocks['AAPL'] = 19;
@@ -101,9 +102,9 @@
 	    			<table>
 		    			<tr>
 		    				<th align="left">Ticker</th>
-		    				<th align="left">Name</th>
+		    				<th align="left">Company</th>
 		    				<th align="left">Quantity</th>
-		    				<th align="left">Price</th>
+		    				<th align="left">Current Price</th>
 		    				<th align="left">% Change</th>
 		    			</tr>
 		    			<?php
