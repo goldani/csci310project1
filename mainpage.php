@@ -53,7 +53,7 @@
                 <div class="inline">
                 <a href="" id="manual">User Manual</a>
                 </div>
-                <div class="inline">
+                <div class="inline" id="inline-logout">
                 <a href="logout.php" id="logout">Logout</a>
                 </div>
 	   		</div>
@@ -159,7 +159,7 @@
 	    <footer>
 	    <p><small>This is the work of college students.</small></p>
 	    <br>
-        <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> Professor Halfond.</small></p>
+        <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
 	    </footer>
     </div>
 
