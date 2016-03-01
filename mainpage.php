@@ -168,19 +168,5 @@
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
     <script src="js/search-stocks-handler.js"></script>
-	<script>
-		function startInterval(){  
-			setInterval('updateTime();', 1000);  
-		}
-		startInterval();
-		function updateTime(){
-			nowMS += 1000;
-			now.setTime(nowMS);
-			var clock = document.getElementById('clock');
-			if(clock){
-				clock.innerHTML = now.toTimeString();//adjust to suit
-			}
-		} 
-	</script>
 </body>
 </html>
