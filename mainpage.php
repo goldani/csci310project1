@@ -63,10 +63,8 @@
 	    		<div id="search-section" class="widget-box">
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
 	    			<div class="dropdown">
-	    				<div id="myDropdown" class="dropdown-content">
-    						<div class="menu-item">What</div>
-    						<div class="menu-item">What</div>
-    						<div class="menu-item">What</div>
+	    				<div id="searchDropdown" class="dropdown-content">
+    						
   						</div>
 	    			</div>
 	    		</div>
