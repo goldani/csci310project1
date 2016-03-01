@@ -64,7 +64,6 @@
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
-	    			<input id="search-box" type="text" placeholder="Search">
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
