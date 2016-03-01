@@ -60,18 +60,14 @@
 	    </div>
 
 	    <div class="content clearfix">
-	    	<div class="left-float-wrapper">
+	    	<div class="float-wrapper">
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
-<<<<<<< HEAD
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
-=======
-	    			<input id="search-box" type="text" placeholder="Search">
->>>>>>> 79f1d3e79827b54943c93ad00896704c58b1cf7b
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
-	    			<canvas id="canvas" height="150px" width="200px"></canvas>
+	    			<canvas id="canvas"></canvas>
 	    			<div class="button-wrapper">
 	    				<button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
 	    				<button id="5d" class="button graph-button">5 days</button>
@@ -109,7 +105,7 @@
 		    				<th align="left">Company</th>
 		    				<th align="left">Quantity</th>
 		    				<th align="left">Current Price</th>
-		    				<th align="left">% Change</th>
+		    				<th align="left">Percent Change</th>
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
@@ -154,19 +150,6 @@
 
 	    	</div>
 	    </div> <!--left float wrapper end -->
-	    	<div id="right-area">
-	    		<div id="time-date" class="widget-box">
-	    			<p>Time</p>
-	    		</div>
-
-	    		<div id="graph-key" class="widget-box">
-	    			<p>Key</p>
-	    		</div>
-
-	    		<div id="watchlist" class="widget-box">
-	    			<p>Watchlist</p>
-	    		</div>
-	    	</div>
 
 	    </div>
 
