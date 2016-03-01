@@ -109,7 +109,16 @@
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
-		    				foreach ($stocks as $ticker => $quantity) {
+		    				if (empty($stocks)) {
+		    					echo '<tr>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    						  </tr>';
+		    				} else {
+		    					foreach ($stocks as $ticker => $quantity) {
 		    					$query = new ParseQuery('Stock');
 		    					$query->equalTo('ticker', $ticker);
 		    					$stock = $query->first();
@@ -120,6 +129,7 @@
 		    							<td>$24</td>
 		    							<td>+2%</td>
 		    						  </tr>';
+		    					}
 		    				}
 		    			?>
 	    			</table>
