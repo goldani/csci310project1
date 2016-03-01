@@ -261,8 +261,8 @@ $currentUser->save();
                       document.getElementById("clsBtn").style.visibility = "hidden";
                       document.getElementById("confBtn").style.visibility = "visible";
                       document.getElementById("cancelBtn").style.visibility = "visible";
-                      // location.reload(true);
-                      prepareToAddToWatchlist(document.getElementById('watchlist-content'));
+                      //disabled for now
+                      // prepareToAddToWatchlist(document.getElementById('watchlist-content'));
                     }
 
                     function buyOrSell() {
