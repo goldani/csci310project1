@@ -39,10 +39,9 @@
     <div class="overall-wrapper">
 	    <div class="header">
             <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
-            <div id="clock">
-				<?php #echo date('h:i:s a') ?>
-            </div>
             <div id="user-section">
+				<div id="clock" class="inline">
+				</div>
             <?php
                 $currentUser = ParseUser::getCurrentUser();
                 echo "<div class='inline'>";
@@ -165,5 +164,37 @@
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
     <script src="js/search-stocks-handler.js"></script>
+    <script>
+		var clockID;
+		var yourTimeZoneFrom = -5.00;
+		var d = new Date();  
+		var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
+		var offset = tzDifference * 60 * 1000;
+		function UpdateClock() {
+			var estDate = new Date(new Date().getTime()+offset);
+			var hours = estDate.getHours()
+			var minutes = estDate.getMinutes();
+			var seconds = estDate.getSeconds();
+			if(minutes < 10)
+				minutes = '0' + minutes;
+			if(seconds < 10)   
+				seconds = '0' + seconds;
+			var amPM = hours >= 12 ? 'PM' : 'AM';
+			document.getElementById('clock').innerHTML = "" 
+						   + hours + ":" 
+						   + minutes + ":" 
+						   + seconds + " "
+						   + amPM; 
+		}
+		function StartClock() {
+			clockID = setInterval(UpdateClock, 500);
+		}
+		function KillClock() {
+			clearTimeout(clockID);
+		}
+		window.onload=function() {
+			StartClock();
+		}
+    </script>
 </body>
 </html>
