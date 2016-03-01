@@ -233,12 +233,7 @@ input:focus{
 }
 /* Footer */
 footer{
-    background-color: #1A1A1D;
-	border-style:solid;
-	border-color:#1A1A1D;
-	border-top-color:#F0F0F0;
-	border-top-width:.5em;
-	color: #fff;
+    background-color: #F0F0F0;
 	padding: 1em;
 	text-align: center;
 	width: 100%;
@@ -249,7 +244,7 @@ a {
 	font-weight:300;
 }
 .contact{
-    color:#FFFFFF;
+    /*color:#FFFFFF;*/
 	font-weight:300;
 	text-decoration:none;
 }
