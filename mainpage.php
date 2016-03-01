@@ -36,6 +36,9 @@ $currentUser->save();
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    
+
   <div class="overall-wrapper">
     <div class="header">
       <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
@@ -59,6 +62,7 @@ $currentUser->save();
         </div>
       </div>
     </div>
+
 
     <div class="content clearfix">
       <div class="float-wrapper">
