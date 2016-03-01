@@ -9,7 +9,7 @@
  * Takes in the input element, sends the ticker to searchstocks.php
  */
 function requestStockNames(element){
-	var input = element.value;
+	var input = element.value.toUpperCase();
 	if(input === ""){
 		var dropdown = document.getElementById('searchDropdown');
 		clearDropdown(dropdown);
