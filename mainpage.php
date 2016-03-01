@@ -116,22 +116,76 @@
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
-	    					foreach ($stocks as $ticker => $quantity) {
-		    					$query = new ParseQuery('Stock');
-		    					$query->equalTo('ticker', $ticker);
-		    					$stock = $query->first();
+		    				$stocksOwned = NULL;
+		    				$stocksWatching = NULL;
+		    				foreach ($stocks as $ticker => $quantity) {
+		    					if ($quantity > 0) {
+		    						$stocksOwned[$ticker] = $quantity;
+		    					} else {
+		    						$stocksWatching[$ticker] = $quantity;
+		    					}
+		    				}
+		    				if (empty($stocksOwned)) {
 		    					echo '<tr>
-		    							<td>' . $stock->get('ticker') . '</td>
-		    							<td>' . $stock->get('name') . '</td>
-		    							<td>' . $quantity . '</td>
-		    							<td>$24</td>
-		    							<td>+2%</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
 		    						  </tr>';
-	    					}
+		    				} else {
+		    					foreach ($stocksOwned as $ticker => $quantity) {
+			    					$query = new ParseQuery('Stock');
+			    					$query->equalTo('ticker', $ticker);
+			    					$query->limit(1);
+			    					$stock = $query->first();
+			    					echo '<tr>
+			    							<td>' . $stock->get('ticker') . '</td>
+			    							<td>' . $stock->get('name') . '</td>
+			    							<td>' . $quantity . '</td>
+			    							<td>$24</td>
+			    							<td>+2%</td>
+			    						  </tr>';
+		    					}
+		    				}
 		    			?>
-	    			</table>
-
-	    			
+		    		</table>
+		    	</div>
+		    	<div id="portfolio-section" class="widget-box">
+		    		<table>
+		    			<tr>
+		    				<th align="left">Ticker</th>
+		    				<th align="left">Company</th>
+		    				<th align="left">Quantity</th>
+		    				<th align="left">Current Price</th>
+		    				<th align="left">Percent Change</th>
+		    			</tr>
+		    			<?php 
+		    				if (empty($stocksWatching)) {
+		    					echo '<tr>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    						  </tr>';
+		    				} else {
+			    				foreach ($stocksWatching as $ticker => $quantity) {
+			    					$query = new ParseQuery('Stock');
+			    					$query->equalTo('ticker', $ticker);
+			    					$query->limit(1);
+			    					$stock = $query->first();
+			    					echo '<tr>
+			    							<td>' . $stock->get('ticker') . '</td>
+			    							<td>' . $stock->get('name') . '</td>
+			    							<td>0</td>
+			    							<td>$24</td>
+			    							<td>+2%</td>
+			    						  </tr>';
+			    				}
+			    			}
+		    			?>
+	    			</table>	
 	    		</div>
 
 	    		<div id="buy-sell-section" class="widget-box">

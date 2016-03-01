@@ -1,4 +1,6 @@
 /* SEARCH STOCKS HANDLER
+ * BY: StockOverflow Frontend Team <3
+ * -----------------------------------------
  * Takes value from input (stock prefix)
  * Sends a request to the php for a list of stocks
  * Receives information
@@ -27,7 +29,7 @@ function requestStockNames(element){
 	
 }
 
-/* Receive data */
+/* Handle the received data */
 function processData(e) {
 	var currentReadyState = e.target.readyState;
 	var currentStatus = e.target.status;
@@ -39,6 +41,8 @@ function processData(e) {
 
 
 var searchBox = document.getElementById('search-box');
+
+/* Put results from query into the dropdown */
 function populateDropdown(response){
 	var dropdown = document.getElementById('searchDropdown');
 	var resultString = response;
@@ -63,6 +67,7 @@ function populateDropdown(response){
 
 }
 
+/* Takes in dropdown content and clears it */
 function clearDropdown(dropdown){
 	while (dropdown.firstChild) {
     	dropdown.removeChild(dropdown.firstChild);
