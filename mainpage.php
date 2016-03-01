@@ -260,7 +260,7 @@ $currentUser->save();
                       document.getElementById("confBtn").style.visibility = "visible";
                       document.getElementById("cancelBtn").style.visibility = "visible";
                       //disabled for now
-                      // prepareToAddToWatchlist(document.getElementById('watchlist-content'));
+                      // loadWatchlist();
                     }
 
                     //called after confirm button is pressed calls php to
@@ -330,7 +330,7 @@ $currentUser->save();
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
-		var d = new Date();  
+		var d = new Date();
 		var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
 		var offset = tzDifference * 60 * 1000;
 		function UpdateClock() {
@@ -347,13 +347,13 @@ $currentUser->save();
 			}
 			if(minutes < 10)
 				minutes = '0' + minutes;
-			if(seconds < 10)   
+			if(seconds < 10)
 				seconds = '0' + seconds;
-			document.getElementById('clock').innerHTML = "" 
-						   + hours + ":" 
-						   + minutes + ":" 
+			document.getElementById('clock').innerHTML = ""
+						   + hours + ":"
+						   + minutes + ":"
 						   + seconds + " "
-						   + amPM + " EST"; 
+						   + amPM + " EST";
 		}
 		function StartClock() {
 			clockID = setInterval(UpdateClock, 500);
