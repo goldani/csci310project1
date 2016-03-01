@@ -218,6 +218,7 @@ $currentUser->save();
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
     <script src="js/search-stocks-handler.js"></script>
+    <script src="js/load-watchlist.js"></script>
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
