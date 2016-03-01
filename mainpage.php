@@ -62,10 +62,21 @@
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
+	    			<div class="dropdown">
+	    				<div id="myDropdown" class="dropdown-content">
+    						<div class="menu-item">What</div>
+    						<div class="menu-item">What</div>
+    						<div class="menu-item">What</div>
+  						</div>
+	    			</div>
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
+<<<<<<< Updated upstream
 	    			<canvas id="canvas"></canvas>
+=======
+	    			<canvas id="canvas" height="100px" width="200px"></canvas>
+>>>>>>> Stashed changes
 	    			<div class="button-wrapper">
 	    				<button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
 	    				<button id="5d" class="button graph-button">5 days</button>
