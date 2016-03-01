@@ -95,7 +95,9 @@ p#balance{
 	-webkit-border-radius: 0px;
 	border-radius: 0px;
 }
-/* Buttons */
+#search-section{
+	max-height: 80px
+}
 #search-box{
 	height: 30px;
 	width: 98%;
@@ -279,11 +281,10 @@ a.contact:hover{
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    /*display: none;*/
-    
     background-color: #f9f9f9;
-    
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    max-height: 10em;
+    overflow: scroll;
 }
 
 /* Links inside the dropdown */
