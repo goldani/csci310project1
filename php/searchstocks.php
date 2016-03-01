@@ -13,13 +13,20 @@ if (session_status() == PHP_SESSION_NONE) {
 
 //get current text typed at search bar from javacript
 $current = $_GET['ticker'];
+
+$tickerQuery = new ParseQuery("Stock");
+$tickerQuery->startsWith("ticker", $current);
+
+$nameQuery = new ParseQuery("Stock");
+$name = ucwords(strtolower($current));
+$nameQuery->startsWith("name", $name);
+
+$combinedQuery = ParseQuery::orQueries([$tickerQuery, $nameQuery]);
+$combinedQuery->ascending("name");
+$combinedQuery->limit(5);
+$results = $combinedQuery->find();
+
 $allResults = "";
-
-$query = new ParseQuery("Stock");
-$query->limit(10); // limit to at most 10 results
-$query->startsWith("ticker", $current);
-$results = $query->find();
-
 for ($i=0; $i < count($results); $i++) {
   $result = $results[$i];
   $allResults .= $result->get("ticker") . " - " . $result->get("name") . "\n";
