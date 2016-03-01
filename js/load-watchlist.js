@@ -16,7 +16,6 @@ function prepareToAddToWatchlist(menuitem_element){
 	request.setRequestHeader("Content-Type", "text/html");
 	request.addEventListener("readystatechange", handleUserStockResult, false);
 	request.send();
-	alert("sent");
 
 }
 
