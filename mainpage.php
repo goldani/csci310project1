@@ -41,6 +41,7 @@
             <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
             <div id="user-section">
             <?php
+                $currentUser = ParseUser::getCurrentUser();
                 echo "<div class='inline'>";
                 echo '<p id="username">' . $currentUser->get('username') . '</p>';
                 echo "</div>";
@@ -116,28 +117,18 @@
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
-		    				if (empty($stocks)) {
+	    					foreach ($stocks as $ticker => $quantity) {
+		    					$query = new ParseQuery('Stock');
+		    					$query->equalTo('ticker', $ticker);
+		    					$stock = $query->first();
 		    					echo '<tr>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
+		    							<td>' . $stock->get('ticker') . '</td>
+		    							<td>' . $stock->get('name') . '</td>
+		    							<td>' . $quantity . '</td>
+		    							<td>$24</td>
+		    							<td>+2%</td>
 		    						  </tr>';
-		    				} else {
-		    					foreach ($stocks as $ticker => $quantity) {
-			    					$query = new ParseQuery('Stock');
-			    					$query->equalTo('ticker', $ticker);
-			    					$stock = $query->first();
-			    					echo '<tr>
-			    							<td>' . $stock->get('ticker') . '</td>
-			    							<td>' . $stock->get('name') . '</td>
-			    							<td>' . $quantity . '</td>
-			    							<td>$24</td>
-			    							<td>+2%</td>
-			    						  </tr>';
-		    					}
-		    				}
+	    					}
 		    			?>
 	    			</table>
 
