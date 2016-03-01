@@ -3,6 +3,7 @@
     use Parse\ParseClient;
     use Parse\ParseUser;
     use Parse\ParseException;
+    use Parse\ParseQuery;
     date_default_timezone_set('America/New_York');
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -101,19 +102,25 @@
 		    			<tr>
 		    				<th align="left">Ticker</th>
 		    				<th align="left">Name</th>
-		    				<th align="left">Price</th>
 		    				<th align="left">Quantity</th>
+		    				<th align="left">Price</th>
+		    				<th align="left">% Change</th>
 		    			</tr>
-		    			<tr>
-		    				<td>FB</td>
-		    				<td>Facebook</td>
-		    				<td>$price</td>
-		    			</tr>
-		    			<tr>
-		    				<td>GOOG</td>
-		    				<td>Google</td>
-		    				<td>$price</td>
-		    			</tr>
+		    			<?php
+		    				$stocks = $currentUser->get('stocks');
+		    				foreach ($stocks as $ticker => $quantity) {
+		    					$query = new ParseQuery('Stock');
+		    					$query->equalTo('ticker', $ticker);
+		    					$stock = $query->first();
+		    					echo '<tr>
+		    							<td>' . $stock->get('ticker') . '</td>
+		    							<td>' . $stock->get('name') . '</td>
+		    							<td>' . $quantity . '</td>
+		    							<td>$24</td>
+		    							<td>+2%</td>
+		    						  </tr>';
+		    				}
+		    			?>
 	    			</table>
 
 	    			
