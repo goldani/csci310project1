@@ -39,6 +39,9 @@
     <div class="overall-wrapper">
 	    <div class="header">
             <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
+            <div id="clock">
+				<?php #echo date('h:i:s a') ?>
+            </div>
             <div id="user-section">
             <?php
                 echo "<div class='inline'>";
@@ -164,7 +167,20 @@
 	<script src="js/Chart.js/Chart.min.js"></script>
 	<script src="js/stock-graph.js"></script>
 	<script src="js/stock-graph.js"></script>
-	<script src="js/search-stocks-handler.js"></script>
-
+    <script src="js/search-stocks-handler.js"></script>
+	<script>
+		function startInterval(){  
+			setInterval('updateTime();', 1000);  
+		}
+		startInterval();
+		function updateTime(){
+			nowMS += 1000;
+			now.setTime(nowMS);
+			var clock = document.getElementById('clock');
+			if(clock){
+				clock.innerHTML = now.toTimeString();//adjust to suit
+			}
+		} 
+	</script>
 </body>
 </html>
