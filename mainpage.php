@@ -126,18 +126,28 @@
 		    						$stocksWatching[$ticker] = $quantity;
 		    					}
 		    				}
-		    				foreach ($stocksOwned as $ticker => $quantity) {
-		    					$query = new ParseQuery('Stock');
-		    					$query->equalTo('ticker', $ticker);
-		    					$query->limit(1);
-		    					$stock = $query->first();
+		    				if (empty($stocksOwned)) {
 		    					echo '<tr>
-		    							<td>' . $stock->get('ticker') . '</td>
-		    							<td>' . $stock->get('name') . '</td>
-		    							<td>' . $quantity . '</td>
-		    							<td>$24</td>
-		    							<td>+2%</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
 		    						  </tr>';
+		    				} else {
+		    					foreach ($stocksOwned as $ticker => $quantity) {
+			    					$query = new ParseQuery('Stock');
+			    					$query->equalTo('ticker', $ticker);
+			    					$query->limit(1);
+			    					$stock = $query->first();
+			    					echo '<tr>
+			    							<td>' . $stock->get('ticker') . '</td>
+			    							<td>' . $stock->get('name') . '</td>
+			    							<td>' . $quantity . '</td>
+			    							<td>$24</td>
+			    							<td>+2%</td>
+			    						  </tr>';
+		    					}
 		    				}
 		    			?>
 		    		</table>
@@ -152,19 +162,29 @@
 		    				<th align="left">Percent Change</th>
 		    			</tr>
 		    			<?php 
-		    				foreach ($stocksWatching as $ticker => $quantity) {
-		    					$query = new ParseQuery('Stock');
-		    					$query->equalTo('ticker', $ticker);
-		    					$query->limit(1);
-		    					$stock = $query->first();
+		    				if (empty($stocksWatching)) {
 		    					echo '<tr>
-		    							<td>' . $stock->get('ticker') . '</td>
-		    							<td>' . $stock->get('name') . '</td>
 		    							<td>N/A</td>
-		    							<td>$24</td>
-		    							<td>+2%</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
+		    							<td>N/A</td>
 		    						  </tr>';
-		    				}
+		    				} else {
+			    				foreach ($stocksWatching as $ticker => $quantity) {
+			    					$query = new ParseQuery('Stock');
+			    					$query->equalTo('ticker', $ticker);
+			    					$query->limit(1);
+			    					$stock = $query->first();
+			    					echo '<tr>
+			    							<td>' . $stock->get('ticker') . '</td>
+			    							<td>' . $stock->get('name') . '</td>
+			    							<td>0</td>
+			    							<td>$24</td>
+			    							<td>+2%</td>
+			    						  </tr>';
+			    				}
+			    			}
 		    			?>
 	    			</table>	
 	    		</div>
