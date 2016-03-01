@@ -106,7 +106,7 @@
                     </form>
 				</div>
 	    		<div id="portfolio-section" class="widget-box">
-	    			<table>
+	    			<table id="portfolio-content">
 		    			<tr>
 		    				<th align="left">Ticker</th>
 		    				<th align="left">Company</th>
@@ -151,8 +151,8 @@
 		    			?>
 		    		</table>
 		    	</div>
-		    	<div id="portfolio-section" class="widget-box">
-		    		<table>
+		    	<div id="watchlist-section" class="widget-box">
+		    		<table id="watchlist-content">
 		    			<tr>
 		    				<th align="left">Ticker</th>
 		    				<th align="left">Company</th>
