@@ -38,18 +38,24 @@ if(isset($stocks) && !array_key_exists($ticker, $stocks)) {
       #get quotes from Yahoo API
       $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $key . "&f=" . $format . "&e=.csv");
       $data = explode( ',', $quote);
+
+      $ticker = NULL;
+      $name = NULL;
+      $price = NULL;
+      $percent = NULL;
+
       if (count($data) == 5) {
-        substr($data[0], 1, -1);
-        substr($data[1] . $data[2], 1, -1);
-        substr($data[4], 1, -2);
+        $ticker = substr($data[0], 1, -1);
+        $name = substr($data[1] . $data[2], 1, -1);
+        $price = substr($data[4], 1, -2);
+        $percent = $data[4];
       } else {
-        substr($data[0], 1, -1);
-        substr($data[1], 1, -1);
-        substr($data[3], 1, -2);
+        $ticker = substr($data[0], 1, -1);
+        $name = substr($data[1], 1, -1);
+        $price = substr($data[2], 1, -2);
+        $percent = substr($data[3], 1, -2);
       }
-      $data[0] = str_replace('"', "", $data[0]);
-      $data[1] = str_replace('"', "", $data[1]);
-      $results .= $data[0] . " " . $data[1] . " " . $stock . " " . $data[2] . " " . $data[3] . "\n";
+      $results .= $ticker . "_" . $name . "_" . $stock . "_" . $price . "_" . $percent . "\n";
     }
   }
   $currentUser->setAssociativeArray("stocks", $stocks);
