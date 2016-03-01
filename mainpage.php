@@ -117,9 +117,19 @@
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
-	    					foreach ($stocks as $ticker => $quantity) {
+		    				$stocksOwned = NULL;
+		    				$stocksWatching = NULL;
+		    				foreach ($stocks as $ticker => $quantity) {
+		    					if ($quantity > 0) {
+		    						$stocksOwned[$ticker] = $quantity;
+		    					} else {
+		    						$stocksWatching[$ticker] = $quantity;
+		    					}
+		    				}
+		    				foreach ($stocksOwned as $ticker => $quantity) {
 		    					$query = new ParseQuery('Stock');
 		    					$query->equalTo('ticker', $ticker);
+		    					$query->limit(1);
 		    					$stock = $query->first();
 		    					echo '<tr>
 		    							<td>' . $stock->get('ticker') . '</td>
@@ -128,7 +138,31 @@
 		    							<td>$24</td>
 		    							<td>+2%</td>
 		    						  </tr>';
-	    					}
+		    				}
+		    			?>
+		    		</table>
+		    		<table>
+		    			<tr>
+		    				<th align="left">Ticker</th>
+		    				<th align="left">Company</th>
+		    				<th align="left">Quantity</th>
+		    				<th align="left">Current Price</th>
+		    				<th align="left">Percent Change</th>
+		    			</tr>
+		    			<?php 
+		    				foreach ($stocksWatching as $ticker => $quantity) {
+		    					$query = new ParseQuery('Stock');
+		    					$query->equalTo('ticker', $ticker);
+		    					$query->limit(1);
+		    					$stock = $query->first();
+		    					echo '<tr>
+		    							<td>' . $stock->get('ticker') . '</td>
+		    							<td>' . $stock->get('name') . '</td>
+		    							<td>N/A</td>
+		    							<td>$24</td>
+		    							<td>+2%</td>
+		    						  </tr>';
+		    				}
 		    			?>
 	    			</table>
 
