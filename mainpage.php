@@ -122,6 +122,7 @@ $currentUser->save();
               </thead>
               <tbody>
                 <?php
+                // function loadPortfolio() {
                 $stocks = $currentUser->get('stocks');
                 $stocksOwned = NULL;
                 $stocksWatching = NULL;
@@ -163,6 +164,9 @@ $currentUser->save();
                     }
                   }
                 }
+
+              // }
+              // loadPortfolio();
                 ?>
               </tbody>
             </table>
@@ -261,6 +265,8 @@ $currentUser->save();
                       document.getElementById("cancelBtn").style.visibility = "visible";
                       //disabled for now
                       // loadWatchlist();
+                      // prepareToAddToWatchlist(document.getElementById("tickerInput"));
+                      // reloadAddToWatchlist();
                     }
 
                     //called after confirm button is pressed calls php to
