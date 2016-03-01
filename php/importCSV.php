@@ -30,7 +30,7 @@ if (($handle = fopen("filename", "r")) !== FALSE) {
 	echo 'Price a year ago: ' . $oneYear . "\n";
 	//echo $fiftyTwoWeek . "\n";
 
-	//create an object for each different stock that will come on the 
+	//create an object for each different stock that will come on the
   }
   fclose($handle);
 }
