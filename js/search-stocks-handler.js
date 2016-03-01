@@ -9,15 +9,22 @@
  * Takes in the input element, sends the ticker to searchstocks.php
  */
 function requestStockNames(element){
-	var request = new XMLHttpRequest();
 	var input = element.value;
-    var url = "../php/searchstocks.php?ticker=" + input;
+	if(input === ""){
+		var dropdown = document.getElementById('searchDropdown');
+		clearDropdown(dropdown);
+	}
+	else{
+		var request = new XMLHttpRequest();
+    	var url = "../php/searchstocks.php?ticker=" + input;
 		// var url = "getquotes.php";
 
-    request.open("GET", url, true);
-    request.setRequestHeader("Content-Type", "text/html");
-    request.addEventListener("readystatechange", processData, false);
-    request.send();
+    	request.open("GET", url, true);
+	    request.setRequestHeader("Content-Type", "text/html");
+	    request.addEventListener("readystatechange", processData, false);
+	    request.send();
+	}
+	
 }
 
 /* Receive data */
@@ -32,6 +39,25 @@ function processData(e) {
 
 
 function populateDropdown(response){
-	alert(response);
+	var dropdown = document.getElementById('searchDropdown');
+	var resultString = response;
+	var resultsArray = resultString.split("\n");
+	clearDropdown(dropdown);
+	for(i=0; i<resultsArray.length; i++){
+		//put together the menu item
+		var menuitem = document.createElement("DIV");
+		var content = document.createTextNode(resultsArray[i]);
+		menuitem.appendChild(content);
+		menuitem.className += ' menu-item';
+		//add to overall dropdown
+		dropdown.appendChild(menuitem);
 
+	}
+
+}
+
+function clearDropdown(dropdown){
+	while (dropdown.firstChild) {
+    	dropdown.removeChild(dropdown.firstChild);
+	}
 }

@@ -44,6 +44,7 @@
             </div>
             <div id="user-section">
             <?php
+                $currentUser = ParseUser::getCurrentUser();
                 echo "<div class='inline'>";
                 echo '<p id="username">' . $currentUser->get('username') . '</p>';
                 echo "</div>";
@@ -65,10 +66,19 @@
 	    	<div id="center-area">
 	    		<div id="search-section" class="widget-box">
 	    			<input id="search-box" type="text" placeholder="Search stocks..." oninput="requestStockNames(this);">
+	    			<div class="dropdown">
+	    				<div id="searchDropdown" class="dropdown-content">
+    						
+  						</div>
+	    			</div>
 	    		</div>
 
 	    		<div id="graph-section" class="widget-box">
+
 	    			<canvas id="canvas"></canvas>
+
+	    			<canvas id="canvas" height="100px" width="200px"></canvas>
+
 	    			<div class="button-wrapper">
 	    				<button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
 	    				<button id="5d" class="button graph-button">5 days</button>
@@ -110,28 +120,18 @@
 		    			</tr>
 		    			<?php
 		    				$stocks = $currentUser->get('stocks');
-		    				if (empty($stocks)) {
+	    					foreach ($stocks as $ticker => $quantity) {
+		    					$query = new ParseQuery('Stock');
+		    					$query->equalTo('ticker', $ticker);
+		    					$stock = $query->first();
 		    					echo '<tr>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
-		    							<td>N/A</td>
+		    							<td>' . $stock->get('ticker') . '</td>
+		    							<td>' . $stock->get('name') . '</td>
+		    							<td>' . $quantity . '</td>
+		    							<td>$24</td>
+		    							<td>+2%</td>
 		    						  </tr>';
-		    				} else {
-		    					foreach ($stocks as $ticker => $quantity) {
-			    					$query = new ParseQuery('Stock');
-			    					$query->equalTo('ticker', $ticker);
-			    					$stock = $query->first();
-			    					echo '<tr>
-			    							<td>' . $stock->get('ticker') . '</td>
-			    							<td>' . $stock->get('name') . '</td>
-			    							<td>' . $quantity . '</td>
-			    							<td>$24</td>
-			    							<td>+2%</td>
-			    						  </tr>';
-		    					}
-		    				}
+	    					}
 		    			?>
 	    			</table>
 
