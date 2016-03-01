@@ -33,27 +33,29 @@ function handleUserStockResult(e){
 /* Append item to end of watchlist */
 function addToWatchlist(new_stock_list){
 	alert(new_stock_list);
-	clearElementChildren(watchlist);
 	var stockList = new_stock_list;
-	var resultsArray = stockList.split("\n");
+	if(stockList.length > 0){
+		clearElementChildren(watchlist);
+		var resultsArray = stockList.split("\n");
 
-	
-	createTableHeaders();
+		createTableHeaders();
 
-	//Put into table
-	//results format: TICKER Name Qty Price %Change
-	for(i = 0; i < resultsArray.length; i++){
-		var stockData = resultsArray[i].split(" ");
-		var tableRow = document.createElement("TR");
-		for(j = 0; j < stockData.length; j++){
-			var tableData = document.createElement("TD");
-			var value = document.createTextNode(stockData[j]);
-			tableData.appendChild(value);
-			tableRow.appendChild(tableData);
+		//Put into table
+		//results format: TICKER Name Qty Price %Change
+		for(i = 0; i < resultsArray.length; i++){
+			var stockData = resultsArray[i].split(" ");
+			var tableRow = document.createElement("TR");
+			for(j = 0; j < stockData.length; j++){
+				var tableData = document.createElement("TD");
+				var value = document.createTextNode(stockData[j]);
+				tableData.appendChild(value);
+				tableRow.appendChild(tableData);
 
+			}
+			watchlist.appendChild(tableRow);
 		}
-		watchlist.appendChild(tableRow);
 	}
+	
 
 }
 
@@ -66,7 +68,7 @@ function createTableHeaders(){
 		var ticker = document.createElement("TH");
 		var content = document.createTextNode(tableHeaders[i]);
 		ticker.appendChild(content);
-		var alignAttr = document.createAttributeNode("align");
+		var alignAttr = document.createAttribute("align");
 		alignAttr.value = "left";
 		ticker.setAttributeNode(alignAttr);
 		tableRow.appendChild(ticker);
