@@ -207,9 +207,9 @@ $currentUser->save();
           </div>
 
           <div id="buy-sell-section" class="widget-box">
-            <form action="" method="post">
-              <input id="tickerInput" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
-              <input id="qty" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
+            <form action="php/buyAndSell.php" method="post">
+              <input id="tickerInput" name="ticker" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
+              <input id="qty" name="quantity" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
               <div class="button-wrapper">
                 <input type="submit" class="button-buySell" name="buy"  alt="Buy" value="Buy">
                 <input type="submit" class="button-buySell" name="sell" alt="Sell" value="Sell">
