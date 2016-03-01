@@ -135,16 +135,14 @@ $currentUser->save();
                 </tr>';
               } else {
                 foreach ($stocksOwned as $ticker => $quantity) {
-                  $query = new ParseQuery('Stock');
-                  $query->equalTo('ticker', $ticker);
-                  $query->limit(1);
-                  $stock = $query->first();
+                  $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
+				  $data = explode(',', $quote);
                   echo '<tr>
-                  <td>' . $stock->get('ticker') . '</td>
-                  <td>' . $stock->get('name') . '</td>
+                  <td>' . substr($data[0], 1, -1) . '</td>
+                  <td>' . substr($data[1], 1, -1) . '</td>
                   <td>' . $quantity . '</td>
-                  <td>$24</td>
-                  <td>+2%</td>
+                  <td>$' . $data[2] . '</td>
+                  <td>' . substr($data[3], 1, -2) . '</td>
                   </tr>';
                 }
               }
@@ -171,16 +169,14 @@ $currentUser->save();
                 </tr>';
               } else {
                 foreach ($stocksWatching as $ticker => $quantity) {
-                  $query = new ParseQuery('Stock');
-                  $query->equalTo('ticker', $ticker);
-                  $query->limit(1);
-                  $stock = $query->first();
+                  $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
+				  $data = explode(',', $quote);
                   echo '<tr>
-                  <td>' . $stock->get('ticker') . '</td>
-                  <td>' . $stock->get('name') . '</td>
-                  <td>0</td>
-                  <td>$24</td>
-                  <td>+2%</td>
+                  <td>' . substr($data[0], 1, -1) . '</td>
+                  <td>' . substr($data[1], 1, -1) . '</td>
+                  <td>' . $quantity . '</td>
+                  <td>$' . $data[2] . '</td>
+                  <td>' . substr($data[3], 1, -2) . '</td>
                   </tr>';
                 }
               }
