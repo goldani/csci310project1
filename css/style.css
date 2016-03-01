@@ -24,7 +24,7 @@ p{
 }
 
 th, td {
-	padding: 5px; 
+	padding: 3px; 
 }
 td {
 	font-weight:300;
@@ -42,6 +42,8 @@ td {
 }
 #logo{
     width:auto;
+    float:left;
+    padding-right:10px;
     /*min-width:30%;*/
     height:10vh;
     /*min-height:30%;*/
@@ -52,14 +54,17 @@ td {
 div.inline{
     float:left;
     padding-top:15px;
-    padding-right:30px;
-    font-size:20px;
+    padding-right:35px;
+    font-size:22px;
+}
+#inline-logout{
+    padding-right:10px;
 }
 p#username{
-    font-size:20px;
+    font-size:22px;
 }
 p#balance{
-    font-size:20px;
+    font-size:22px;
 }
 
 #logout:link{
@@ -316,7 +321,10 @@ a.contact:hover{
 	}
 	#user-section{
 		float: right;
+        display:block;
 	}
+	div.inline{
+    }
 
 	/* clear float */
 	.clearfix:before,
