@@ -33,9 +33,12 @@
 	    <div class="header">
             <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
 	   		<div id="user-section" class="clearfix">
-                <a href="" id="manual">User Manual</a>
-	   			<p id="balance">$10,000</p>
+                <?php
+                	echo '<p id="balance">' . $currentUser->get('username') . '</p>';
+                	echo '<p id="balance">$' . $currentUser->get('balance') . '</p>';
+                ?>
                 <a href="logout.php" id="logout">Logout</a>
+                <a href="" id="manual">User Manual</a>
 	   		</div>
 	    </div>
 
@@ -48,7 +51,6 @@
 
 	    		<div id="graph-section" class="widget-box">
 	    			<canvas id="canvas" height="200px" width="200px"></canvas>
-<<<<<<< HEAD:mainpage.html
 	    			<div class="button-wrapper">
 	    				<button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
 	    				<button id="5d" class="button graph-button">5 days</button>
@@ -58,7 +60,6 @@
 	    				<button id="1y" class="button graph-button">1 year</button>
 	    				<button id="all" class="button graph-button">All</button>
 	    			</div>
-=======
                     <form action="" method="post">
                         <div class="button-wrapper">
                             <button id="1d" class="button graph-button">1 day</button>
@@ -70,7 +71,6 @@
                             <button id="all" class="button graph-button">All</button>
                         </div>
                     </form>
->>>>>>> 68d7da1a466a47b6736b1e6cf880b8b4abc60312:mainpage.php
 	    		</div>
 
 	    		<div id="information-section" class="widget-box">
