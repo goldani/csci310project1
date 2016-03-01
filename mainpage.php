@@ -3,24 +3,32 @@
     use Parse\ParseClient;
     use Parse\ParseUser;
     use Parse\ParseException;
+    use Parse\ParseQuery;
     date_default_timezone_set('America/New_York');
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
         ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');   
     }
     $currentUser = ParseUser::getCurrentUser();
-	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300){
+	if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300) {
         include('logout.php');
         die();
-	} 
-	else{
+	} else {
 		$_SESSION['timestamp'] = time();
     }
-    if($currentUser) {
-    }
-    else{
+    if (!$currentUser) {
         header('Location: /');
     }
+    /*
+    <?php
+		$stocks['MSFT'] = 10;
+		$stocks['GOOG'] = 24;
+		$stocks['AAPL'] = 19;
+		$stocks['AMZN'] = 95;
+		$currentUser->setAssociativeArray('stocks', $stocks);
+		$currentUser->save();
+	?>
+	*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,19 +102,25 @@
 		    			<tr>
 		    				<th align="left">Ticker</th>
 		    				<th align="left">Name</th>
-		    				<th align="left">Price</th>
 		    				<th align="left">Quantity</th>
+		    				<th align="left">Price</th>
+		    				<th align="left">% Change</th>
 		    			</tr>
-		    			<tr>
-		    				<td>FB</td>
-		    				<td>Facebook</td>
-		    				<td>$price</td>
-		    			</tr>
-		    			<tr>
-		    				<td>GOOG</td>
-		    				<td>Google</td>
-		    				<td>$price</td>
-		    			</tr>
+		    			<?php
+		    				$stocks = $currentUser->get('stocks');
+		    				foreach ($stocks as $ticker => $quantity) {
+		    					$query = new ParseQuery('Stock');
+		    					$query->equalTo('ticker', $ticker);
+		    					$stock = $query->first();
+		    					echo '<tr>
+		    							<td>' . $stock->get('ticker') . '</td>
+		    							<td>' . $stock->get('name') . '</td>
+		    							<td>' . $quantity . '</td>
+		    							<td>$24</td>
+		    							<td>+2%</td>
+		    						  </tr>';
+		    				}
+		    			?>
 	    			</table>
 
 	    			
