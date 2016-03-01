@@ -23,7 +23,20 @@ p{
 	font-weight:300;
 }
 
+table{
+	/*width100%;*/
+	margin: 0 auto;
+}
+#portfolio-section{
+	/*width:100%;*/
+	height:100%;
+}
+#watchlist-section{
+	/*width:100%;*/
+	height:100%;
+}
 th, td {
+	width:50%;
 	padding: 3px; 
 }
 td {

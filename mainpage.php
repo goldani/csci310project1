@@ -36,6 +36,7 @@ $currentUser->save();
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <div class="overall-wrapper">
     <div class="header">
       <a href="/mainpage.php"><img src="img/so-logo.png" id="logo"></a>
@@ -59,6 +60,7 @@ $currentUser->save();
         </div>
       </div>
     </div>
+
 
     <div class="content clearfix">
       <div class="float-wrapper">
@@ -207,44 +209,56 @@ $currentUser->save();
     </footer>
   </div>
 
-
-
-  <!-- Load javascript here -->
-  <script src="js/Chart.js/Chart.min.js"></script>
-  <script src="js/stock-graph.js"></script>
-  <script src="js/stock-graph.js"></script>
-  <script src="js/search-stocks-handler.js"></script>
-  <script>
-  var clockID;
-  var yourTimeZoneFrom = -5.00;
-  var d = new Date();
-  var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
-  var offset = tzDifference * 60 * 1000;
-  function UpdateClock() {
-    var estDate = new Date(new Date().getTime()+offset);
-    var hours = estDate.getHours()
-    var minutes = estDate.getMinutes();
-    var seconds = estDate.getSeconds();
-    if(minutes < 10)
-    minutes = '0' + minutes;
-    if(seconds < 10)
-    seconds = '0' + seconds;
-    var amPM = hours >= 12 ? 'PM' : 'AM';
-    document.getElementById('clock').innerHTML = ""
-    + hours + ":"
-    + minutes + ":"
-    + seconds + " "
-    + amPM;
-  }
-  function StartClock() {
-    clockID = setInterval(UpdateClock, 500);
-  }
-  function KillClock() {
-    clearTimeout(clockID);
-  }
-  window.onload=function() {
-    StartClock();
-  }
-  </script>
+	<!-- Load javascript here -->
+	<script src="js/Chart.js/Chart.min.js"></script>
+	<script src="js/stock-graph.js"></script>
+	<script src="js/stock-graph.js"></script>
+    <script src="js/search-stocks-handler.js"></script>
+    <script>
+		var clockID;
+		var yourTimeZoneFrom = -5.00;
+		var d = new Date();  
+		var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
+		var offset = tzDifference * 60 * 1000;
+		function UpdateClock() {
+			var estDate = new Date(new Date().getTime()+offset);
+			var hours = estDate.getHours()
+			var minutes = estDate.getMinutes();
+			var seconds = estDate.getSeconds();
+			if(minutes < 10)
+				minutes = '0' + minutes;
+			if(seconds < 10)   
+				seconds = '0' + seconds;
+			var amPM = hours >= 12 ? 'PM' : 'AM';
+			document.getElementById('clock').innerHTML = "" 
+						   + hours + ":" 
+						   + minutes + ":" 
+						   + seconds + " "
+						   + amPM + " EST"; 
+		}
+		function StartClock() {
+			clockID = setInterval(UpdateClock, 500);
+		}
+		function KillClock() {
+			clearTimeout(clockID);
+		}
+		window.onload=function() {
+			StartClock();
+        }
+/*
+		$(document).ready(function () {
+			var HeightDiv = $("div").height();
+			var HeightTable = $("portfolio-section").height();
+			if(HeightTable > HeightDiv) {
+				var FontSizeTable = parseInt($("table").css("font-size"), 10);
+				while (HeightTable > HeightDiv && FontSizeTable > 5) {
+					FontSizeTable--;
+					$("table").css("font-size", FontSizeTable);
+					HeightTable = $("table").height();
+				}
+			}
+		});
+*/
+    </script>
 </body>
 </html>
