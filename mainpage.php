@@ -68,7 +68,7 @@
 	    			<input id="search-box" type="text" placeholder="Search stocks..." pattern="[A-Za-z]{1,5}" oninput="requestStockNames(this);">
 	    			<div class="dropdown">
 	    				<div id="searchDropdown" class="dropdown-content">
-    						
+    						<!-- To be populated by search-stocks-handler.js -->
   						</div>
 	    			</div>
 	    		</div>
