@@ -54,12 +54,16 @@ td {
     width:auto;
 }
 #logo{
-    width:auto;
     float:left;
     padding-right:10px;
-    /*min-width:30%;*/
+    display:block;
+    max-height:60;
+    max-width:250px;
+    width:100%;
+    height:auto;
+    /*
     height:10vh;
-    /*min-height:30%;*/
+    */
 }
 #clock{
     display:inline;
