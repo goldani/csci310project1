@@ -77,16 +77,6 @@ $currentUser->save();
 
           <div id="graph-section" class="widget-box">
             <div id="chartdiv" style="width:100%; height:400px;"></div>
-
-            <div class="button-wrapper">
-              <button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
-              <button id="5d" class="button graph-button">5 days</button>
-              <button id="1d" class="button graph-button">1 month</button>
-              <button id="3m" class="button graph-button">3 months</button>
-              <button id="6m" class="button graph-button">6 months</button>
-              <button id="1y" class="button graph-button">1 year</button>
-              <button id="all" class="button graph-button">All</button>
-            </div>
           </div>
 
           <div id="information-section" class="widget-box">
