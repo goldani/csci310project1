@@ -269,7 +269,7 @@ if (!$currentUser) {
                     document.getElementById("confBtn").style.visibility = "hidden";
                     document.getElementById("cancelBtn").style.visibility = "hidden";
                     document.getElementById("modalHeader").innerHTML = "Please Wait";
-                    document.getElementById("confMsg").innerHTML = "Graph loading"; 
+                    document.getElementById("confMsg").innerHTML = "Graph loading";
                     document.getElementById("modal-one").style.visibility = "visible";
                 }
                 function hideOverlay(){

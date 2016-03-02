@@ -22,6 +22,7 @@
   $target_dir = sys_get_temp_dir();
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   echo "inside upload.php";
+  echo $target_file;
   $uploadOK = 1;
   $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 	if($fileType != "csv"){
