@@ -1,32 +1,40 @@
 
+/* Variables */
+var chart;
 
-
+function parseData(data_array){
+	for(i=data_array.length-1; i > 0; i--){
+		//get date, closing_price pair
+		var pairArray = data_array[i];
+		var date = pairArray[0];
+		var closingPrice = pairArray[1];
+		var dataObject = {
+            date: date,
+            cp: closingPrice
+        };
+        // add object to chartData array
+        chartData.push(dataObject);
+	}
+	chart.validateData();
+}
 
 
 /* Initial chart data (dummy) */
 var chartData = [
-	{date: new Date(2011, 5, 1, 10, 0, 0, 0), val:10},
-    {date: new Date(2011, 5, 1, 11, 0, 0, 0), val:11},
-    {date: new Date(2011, 5, 1, 12, 0, 0, 0), val:12},
-    {date: new Date(2011, 5, 1, 13, 0, 0, 0), val:11},
-    {date: new Date(2011, 5, 1, 14, 0, 0, 0), val:10},
-    {date: new Date(2011, 5, 1, 15, 0, 0, 0), val:11},
-    {date: new Date(2011, 5, 1, 16, 0, 0, 0), val:13},
-    {date: new Date(2011, 5, 1, 17, 0, 0, 0), val:14},
-    {date: new Date(2011, 5, 1, 18, 0, 0, 0), val:17},
-    {date: new Date(2011, 5, 1, 19, 0, 0, 0), val:13}
+	
 			];
 
 /* Prepare the chart and write to the HTML */
 AmCharts.ready(function(){
-	var chart = new AmCharts.AmStockChart();
+	chart = new AmCharts.AmStockChart();
 	chart.pathToImages = "amcharts/images/";
 
 var dataSet = new AmCharts.DataSet();
 dataSet.dataProvider = chartData;
-	dataSet.fieldMappings = [{fromField: "val", toField: "value"}];
+	dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
 	dataSet.categoryField = "date";
 	chart.dataSets = [dataSet];
+	chart.dataDateFormat = "YYYY-MM-DD";
 
 	//create stock panel
 	var stockPanel = new AmCharts.StockPanel();
@@ -39,16 +47,16 @@ dataSet.dataProvider = chartData;
 
 	//create graph
 	var graph = new AmCharts.StockGraph();
-	graph.valueField = "value";
+	graph.valueField = "closingPrice";
 	graph.type = "line";
 	//graph.fillAlphas = 1;
-	graph.title = "MyGraph"; 
+	graph.title = "Stock Trends Graph"; 
 	stockPanel.addStockGraph(graph);
 
     //set minimum period of time (to hours)
 	//category axes settings
 	var categoryAxesSettings = new AmCharts.CategoryAxesSettings();
-	categoryAxesSettings.minPeriod = "hh";
+	categoryAxesSettings.minPeriod = "DD";
 	categoryAxesSettings.dashLength = 5;
 	chart.categoryAxesSettings = categoryAxesSettings;
 	//set spacing

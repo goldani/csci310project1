@@ -190,6 +190,7 @@ $currentUser->save();
                                 array_shift($graphData);
                                 echo json_encode($graphData);
                                 ?>;
+                            parseData(historicalData);
                         }
                         else{
                             var idx = stockList.indexOf(tickerSymbol);
@@ -368,10 +369,10 @@ $currentUser->save();
 	<!-- Load javascript here -->
     <script src="js/search-stocks-handler.js"></script>
     <script src="js/load-watchlist.js"></script>
-    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script> 
-	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script> 
+    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script>
+	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script>
 	<script src="js/amstockchart/amcharts/amstock.js" type="text/javascript"></script>
-	<script src="js/stock-graph.js"></script> 
+	<script src="js/stock-graph.js"></script>
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
