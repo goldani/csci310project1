@@ -35,6 +35,7 @@ $currentUser->save();
   <title>Portfolio | StockOverflow</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="../css/confirmPopup.css">
+  <link rel="stylesheet" href="js/amstockchart/amcharts/style.css" type="text/css">
 </head>
 <body>
 
@@ -70,13 +71,12 @@ $currentUser->save();
             <input id="search-box" type="text" placeholder="Search stocks..." pattern="[A-Za-z]{1,5}" oninput="requestStockNames(this);">
             <div class="dropdown">
               <div id="searchDropdown" class="dropdown-content">
-
               </div>
             </div>
           </div>
 
           <div id="graph-section" class="widget-box">
-            <canvas id="canvas"></canvas>
+            <div id="chartdiv" style="width:100%; height:400px;"></div>
 
 
             <div class="button-wrapper">
@@ -323,10 +323,12 @@ $currentUser->save();
     </footer>
   </div>
 	<!-- Load javascript here -->
-	<script src="js/Chart.js/Chart.min.js"></script>
-	<script src="js/stock-graph.js"></script>
     <script src="js/search-stocks-handler.js"></script>
     <script src="js/load-watchlist.js"></script>
+    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script> 
+	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script> 
+	<script src="js/amstockchart/amcharts/amstock.js" type="text/javascript"></script>
+	<script src="js/stock-graph.js"></script> 
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
