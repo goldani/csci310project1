@@ -28,16 +28,8 @@ function getInput(action) {
     }
     else{
         document.getElementById("modal-one").style.visibility = "visible";
-        document.getElementById("confMsg").innerHTML = "Do you want to "
-        + action.toUpperCase() + " " +
-        + document.getElementById("qty").value + " share(s) of "
-        + document.getElementById("tickerInput").value.toUpperCase() + "?";
-        document.getElementById('action').value = action;
-        /*
-        document.getElementById("modal-one").style.visibility = "visible";
         document.getElementById("confMsg").innerHTML = "Sorry, stock market is closed!";
         document.getElementById("confBtn").style.visibility = "hidden";
-        */
     }
     
 }
