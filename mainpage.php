@@ -75,8 +75,14 @@ if (!$currentUser) {
           </div>
 
           <div id="information-section" class="widget-box">
-            <p>Stock Information
-            </p>
+            <div>
+            	<p>Stock Information</p>
+            	<div id="stock-information-box">
+            		<p id="stockinfo1"></p>
+            		<p id="stockinfo2"></p>
+            		<p id="stockinfo3"></p>
+            	</div>
+            </div>
           </div>
 
         </div>
