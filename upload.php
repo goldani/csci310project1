@@ -17,6 +17,7 @@ $currentUser = ParseUser::getCurrentUser();
 if (!$currentUser) {
     echo "error getting current user or not logged in!";
     exit();
+
 }
 
 //get file from temporary direcory where it is stored
