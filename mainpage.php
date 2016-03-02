@@ -165,15 +165,15 @@ $currentUser->save();
                         var stockListLength = stockList.length;
                         while(stockListLength--){
                             if(stockList[stockListLength] === tickerSymbol){
-                                return true; 
+                                return true;
                             }
-                        } 
+                        }
                         return false;
                     }
                     function updateGraph(tickerSymbol){
                         if(!stockInGraph(tickerSymbol)){
                             stockList += tickerSymbol;
-                            historicalData += <?php 
+                            historicalData += <?php
                                 $cols = array(0, 4);
                                 $graphData = array();
                                 if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
