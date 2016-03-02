@@ -78,7 +78,6 @@ $currentUser->save();
           <div id="graph-section" class="widget-box">
             <canvas id="canvas"></canvas>
 
-
             <div class="button-wrapper">
               <button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
               <button id="5d" class="button graph-button">5 days</button>
@@ -145,22 +144,23 @@ $currentUser->save();
                   foreach ($stocksOwned as $ticker => $quantity) {
                     $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
                     $data = explode(',', $quote);
+                    $tickerSymbol = substr($data[0], 1, -1);
                     if (count($data) == 5) {
-                      echo '<tr>
-                      <td>' . substr($data[0], 1, -1) . '</td>
-                      <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>$' . $data[3] . '</td>
-                      <td>' . substr($data[4], 1, -2) . '</td>
-                      </tr>';
+                        echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
+                        '<td>' . substr($data[0], 1, -1) . '</td>
+                        <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+                        <td>' . $quantity . '</td>
+                        <td>$' . $data[3] . '</td>
+                        <td>' . substr($data[4], 1, -2) . '</td>
+                        </tr>';
                     } else {
-                      echo '<tr>
-                      <td>' . substr($data[0], 1, -1) . '</td>
-                      <td>' . substr($data[1], 1, -1) . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>$' . $data[2] . '</td>
-                      <td>' . substr($data[3], 1, -2) . '</td>
-                      </tr>';
+                        echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
+                        '<td>' . substr($data[0], 1, -1) . '</td>
+                        <td>' . substr($data[1], 1, -1) . '</td>
+                        <td>' . $quantity . '</td>
+                        <td>$' . $data[2] . '</td>
+                        <td>' . substr($data[3], 1, -2) . '</td>
+                        </tr>';
                     }
                   }
                 }
@@ -168,6 +168,28 @@ $currentUser->save();
               // }
               // loadPortfolio();
                 ?>
+                <script>
+                    function updateGraph(tickerSymbol){
+						var historicalData = <?php 
+							$cols = array(0, 4);
+							$graphData = array();
+							if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
+								while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
+									$numCols = count($data);
+									$row = array();
+									for($c = 0; $c < $numCols; $c++)
+										if(in_array($c, $cols))
+											$row[] = $data[$c];
+									$graphData[] = $row;
+								}
+								fclose($csvFile);
+							}
+							array_shift($graphData);
+							echo json_encode($graphData);
+							?>;
+						// historicalData ready to go
+                    }
+                </script>
               </tbody>
             </table>
           </div>
@@ -331,7 +353,6 @@ $currentUser->save();
 
     <footer>
       <p><small>This is the work of college students.</small></p>
-      <br>
       <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
     </footer>
   </div>
