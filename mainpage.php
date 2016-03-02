@@ -264,40 +264,7 @@ if (!$currentUser) {
           </div>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script>
-                function showOverlay(){
-                    document.getElementById("clsBtn").style.visibility = 'hidden';
-                    document.getElementById("confBtn").style.visibility = 'hidden';
-                    document.getElementById("cancelBtn").style.visibility = "hidden";
-                    document.getElementById("modalHeader").innerHTML = "Please Wait";
-                    document.getElementById("confMsg").innerHTML = "Graph loading"; 
-                    document.getElementById("modal-one").style.display = "visible";
-                }
-                function hideOverlay(){
-                    document.getElementById("modal-one").style.visibility = "hidden";
-                }
-                var tickerSymbols = [];
-                function updateGraph(tickerSymbol){
-                    var idx = tickerSymbols.indexOf(tickerSymbol);
-                    // if stock exists in graph
-                    if(idx > -1){
-                        tickerSymbols.splice(idx, 1);
-                        parseData(tickerSymbol, []);
-                    }
-                    // else stock does not exist in graph
-                    else{
-                        showOverlay();
-                        $.ajax({
-                            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
-                            type:"POST",
-                            async:true,
-                            dataType:'json',
-                        }).done(function(historicalData){
-                            parseData(tickerSymbol, historicalData);
-                            tickerSymbols.push(tickerSymbol);
-                            hideOverlay();
-                        });
-                    }
-                }
+                
             </script>
 
           <div id="buy-sell-section" class="widget-box">
@@ -324,9 +291,6 @@ if (!$currentUser) {
                     <a id="confBtn" href="#modal-one" onclick="buyOrSell()" class="btn" type="">Confirm</a>
                     <a id="cancelBtn" href="#close" class="btn" type="">Cancel</a>
                     <a id="clsBtn" href="#close" onclick="refresh()" class="btn" style="visibility: hidden">Close</a>
-                    <script>
-                    
-                    </script>
                   </div>
                 </div>
               </div>

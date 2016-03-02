@@ -6,6 +6,43 @@ var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 var stockColors = [];
 var colorIndex = 0;
 
+var tickerSymbols = [];
+function updateGraph(tickerSymbol){
+    var idx = tickerSymbols.indexOf(tickerSymbol);
+    // if stock exists in graph
+    if(idx > -1){
+        tickerSymbols.splice(idx, 1);
+        parseData(tickerSymbol, []);
+    }
+    // else stock does not exist in graph
+    else{
+        showOverlay();
+        $.ajax({
+            url:"../updateGraph.php?tickerSymbol=" + tickerSymbol,
+            type:"POST",
+            async:true,
+            dataType:'json',
+        }).done(function(historicalData){
+            parseData(tickerSymbol, historicalData);
+            tickerSymbols.push(tickerSymbol);
+            hideOverlay();
+        });
+    }
+}
+
+//Hiding and showing loading box for graph
+function showOverlay(){
+    document.getElementById("clsBtn").style.visibility = 'hidden';
+    document.getElementById("confBtn").style.visibility = 'hidden';
+    document.getElementById("cancelBtn").style.visibility = "hidden";
+    document.getElementById("modalHeader").innerHTML = "Please Wait";
+    document.getElementById("confMsg").innerHTML = "Graph loading"; 
+    document.getElementById("modal-one").style.display = "visible";
+}
+function hideOverlay(){
+    document.getElementById("modal-one").style.visibility = "hidden";
+}
+
 /* data_array format: { [TICKER: [data]], [TICKER2: [data]], ...}
  * data: [date, closingPrice], [date, closingPrice], ...
  */
