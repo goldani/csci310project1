@@ -36,6 +36,12 @@ tbody{
     overflow-y:auto;
     overflow-x:hidden;
 }
+tr{
+    cursor:pointer
+}
+tr:hover{
+	background-color: #ccc;
+}
 #portfolio-section{
 	/*width:100%;*/
 	height:100%;
