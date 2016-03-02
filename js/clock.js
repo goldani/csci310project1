@@ -32,24 +32,6 @@ function updateClock() {
 function startClock() {
 	clockID = setInterval(updateClock, 500);
 }
-function checkClock(){
-	var estDate = new Date(new Date().getTime()+offset);
-	var hours = estDate.getHours()
-	var minutes = estDate.getMinutes();
-	var amPM = hours >= 12 ? 'PM' : 'AM';
-	if(hours >= 12){
-		hours-=12;
-	}
-	if(hours == 0){
-		hours = 12;
-    }
-    if((hours >= 9 && minutes >= 30 && amPM == 'AM') || (hours <= 4 && amPM == 'PM')){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
 window.onload=function() {
 	startClock();
 	window.scrollTo(0,0);
