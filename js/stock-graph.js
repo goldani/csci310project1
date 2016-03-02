@@ -1,39 +1,61 @@
 
 /* Variables */
 var chart;
+var dataSets = []; //Array of dataset objects
+var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 
-function parseData(data_array){
-	for(i=data_array.length-1; i > 0; i--){
-		//get date, closing_price pair
-		var pairArray = data_array[i];
-		var date = pairArray[0];
-		var closingPrice = pairArray[1];
-		var dataObject = {
-            date: date,
-            cp: closingPrice
-        };
-        // add object to chartData array
-        chartData.push(dataObject);
+/* data_array format: { [TICKER: [data]], [TICKER2: [data]], ...}
+ * data: [date, closingPrice], [date, closingPrice], ...
+ */
+function parseData(ticker, data_array){
+
+	//remove from dataSets if data_array is empty
+	if(data_array.length == 0){
+		for(i=0; i<dataSets.length; i++){
+			if(dataSets.title == ticker){
+				dataSets.splice(i, 1); //remove dataset
+			}
+		}
+	}
+	else{
+		//if data_array is populated, put into the graph
+
+		//create data structures
+		var chartData = [];
+		var dataSet = new AmCharts.DataSet();
+		dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
+		dataSet.categoryField = "date";
+		dataSet.dataProvider = chartData;
+		dataSet.title = ticker;
+		dataSets.push(dataSet); //add dataSet to stockchart's dataSets array
+
+		//loop through stock data
+		for(i=data_array.length-1; i>0; i--){
+			//get pairs of data: [date, closingPrice]
+			var pairArray = stockData[i];
+			var date = pairArray[0];
+			var closingPrice = pairArray[1];
+			var dataObject = {
+				date: date,
+				cp: closingPrice
+			};
+			//add object to chartData array
+			chartData.push(dataObject);
+		}
 	}
 	chart.validateData();
 }
 
 
-/* Initial chart data (dummy) */
-var chartData = [
-	
-			];
 
 /* Prepare the chart and write to the HTML */
 AmCharts.ready(function(){
-	chart = new AmCharts.AmStockChart();
-	chart.pathToImages = "amcharts/images/";
 
-var dataSet = new AmCharts.DataSet();
-dataSet.dataProvider = chartData;
-	dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
-	dataSet.categoryField = "date";
-	chart.dataSets = [dataSet];
+	chart = new AmCharts.AmStockChart();
+	chart.pathToImages = "amstockchart/amcharts/images/";
+
+	//link to dataSets array	
+	chart.dataSets = dataSets;
 	chart.dataDateFormat = "YYYY-MM-DD";
 
 	//create stock panel
@@ -77,6 +99,9 @@ dataSet.dataProvider = chartData;
 	//legend
 	var legend = new AmCharts.StockLegend();
 	stockPanel.stockLegend = legend;
+
+	//Color settings
+	chart.colors = lineColors;
 
 	//tooltip/balloon
 	var chartCursorSettings = new AmCharts.ChartCursorSettings();

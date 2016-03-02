@@ -99,6 +99,7 @@ $currentUser->save();
             </form>
           </div>
           <div id="portfolio-section" class="widget-box">
+            <h3>Portfolio</h3>
             <table id="portfolio-content">
               <thead>
                 <tr>
@@ -158,6 +159,7 @@ $currentUser->save();
               // }
               // loadPortfolio();
                 ?>
+<<<<<<< HEAD
                 <script>
                     var stockList = []
                     var historicalData = [];
@@ -191,12 +193,37 @@ $currentUser->save();
                                 echo json_encode($graphData);
                                 ?>;
                             parseData(historicalData);
+=======
+				<div class="button-wrapper">
+					<a href="#overlay-modal" id="overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
+				</div>
+				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+				<script>
+					function show_overlay(){
+						document.getElementById("overlay-modal").display = "inline";
+					}
+					function hide_overlay(){
+						document.getElementById("overlay-modal").display = "none";
+					}
+                    var tickerSymbols = [];
+                    function updateGraph(tickerSymbol){
+                        if(tickerSymbol in tickerSymbols){
+                            delete tickerSymbols[tickerSymbol];
+                            parseData(tickerSymbol, []);
+>>>>>>> github/master
                         }
                         else{
-                            var idx = stockList.indexOf(tickerSymbol);
-                            if(idx > -1){
-                                stockList.splice(idx, 1);
-                            }
+							show_overlay();	
+							$.ajax({
+								url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
+								type:"POST",
+								async:true,
+								dataType:'json',
+                            }).done(function(historicalData){
+                                parseData(tickerSymbol, historicalData);
+                                tickerSymbols.push(tickerSymbol);
+								hide_overlay();
+							});
                         }
                     }
                 </script>
@@ -204,6 +231,7 @@ $currentUser->save();
             </table>
           </div>
           <div id="watchlist-section" class="widget-box">
+            <h3>Watchlist</h3>
             <table id="watchlist-content">
               <thead>
                 <tr>
@@ -363,7 +391,7 @@ $currentUser->save();
 
     <footer>
       <p><small>This is the work of college students.</small></p>
-      <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
+      <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor William G.J. Halfond</a>.</small></p>
     </footer>
   </div>
 	<!-- Load javascript here -->
