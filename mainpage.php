@@ -99,6 +99,7 @@ $currentUser->save();
             </form>
           </div>
           <div id="portfolio-section" class="widget-box">
+            <h3>Portfolio</h3>
             <table id="portfolio-content">
               <thead>
                 <tr>
@@ -159,21 +160,10 @@ $currentUser->save();
               // loadPortfolio();
                 ?>
                 <script>
-                    var stockList = []
-                    var historicalData = [];
-                    function stockInGraph(tickerSymbol, stockList){
-                        var stockListLength = stockList.length;
-                        while(stockListLength--){
-                            if(stockList[stockListLength] === tickerSymbol){
-                                return true; 
-                            }
-                        } 
-                        return false;
-                    }
+                    var graphData = [];
                     function updateGraph(tickerSymbol){
-                        if(!stockInGraph(tickerSymbol)){
-                            stockList += tickerSymbol;
-                            historicalData += <?php 
+                        if(!(tickerSymbol in graphData)){
+                            graphData[tickerSymbol] = <?php 
                                 $cols = array(0, 4);
                                 $graphData = array();
                                 if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
@@ -189,21 +179,20 @@ $currentUser->save();
                                 }
                                 array_shift($graphData);
                                 echo json_encode($graphData);
-                                ?>;
-                            parseData(historicalData);
+                            ?>;
                         }
                         else{
-                            var idx = stockList.indexOf(tickerSymbol);
-                            if(idx > -1){
-                                stockList.splice(idx, 1);
-                            }
+                            delete graphData[tickerSymbol];
                         }
+                        //console.log(graphData);
+                        parseData(graphData);
                     }
                 </script>
               </tbody>
             </table>
           </div>
           <div id="watchlist-section" class="widget-box">
+            <h3>Watchlist</h3>
             <table id="watchlist-content">
               <thead>
                 <tr>
