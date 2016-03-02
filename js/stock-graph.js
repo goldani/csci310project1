@@ -11,8 +11,10 @@ function parseData(data_array){
 	for(var ticker in data_array){
 
 		//create data structures
-		var dataSet = new AmCharts.DataSet();
 		var chartData = [];
+		var dataSet = new AmCharts.DataSet();
+		dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
+		dataSet.categoryField = "date";
 		dataSet.dataProvider = chartData;
 		dataSet.title = ticker;
 		dataSets.push(dataSet); //add dataSet to stockchart's dataSets array
@@ -52,19 +54,23 @@ function parseData(data_array){
 	// chart.validateData();
 }
 
-
-var dataSets = []; //Array of dataset objects
+var chartData = [
+	{date: "2011-02-01", cp: 40},
+	{date: "2011-02-02", cp: 50}];
+var dataSet = new AmCharts.DataSet();
+dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
+		dataSet.categoryField = "date";
+		dataSet.dataProvider = chartData;
+var dataSets = [dataSet]; //Array of dataset objects
 var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 
 /* Prepare the chart and write to the HTML */
 AmCharts.ready(function(){
-	chart = new AmCharts.AmStockChart();
-	chart.pathToImages = "amcharts/images/";
 
-// var dataSet = new AmCharts.DataSet();
-// dataSet.dataProvider = chartData;
-	dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
-	dataSet.categoryField = "date";
+	chart = new AmCharts.AmStockChart();
+	chart.pathToImages = "amstockchart/amcharts/images/";
+
+	//link to dataSets array	
 	chart.dataSets = dataSets;
 	chart.dataDateFormat = "YYYY-MM-DD";
 
