@@ -233,6 +233,7 @@ if (!$currentUser) {
             </table>
           </div>
 
+
           <div id="buy-sell-section" class="widget-box">
             <form method="post">
               <input id="tickerInput" name="ticker" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
