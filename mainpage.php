@@ -26,6 +26,7 @@ if (!$currentUser) {
 <html lang="en">
 <head>
   <title>Portfolio | StockOverflow</title>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="../css/confirmPopup.css">
   <link rel="stylesheet" href="js/amstockchart/amcharts/style.css" type="text/css">
@@ -262,7 +263,6 @@ if (!$currentUser) {
               </tbody>
             </table>
           </div>
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script>
                 function showOverlay(){
                     document.getElementById("clsBtn").style.visibility = 'hidden';
