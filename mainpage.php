@@ -50,7 +50,7 @@ if (!$currentUser) {
         echo "</div>";
         ?>
         <div class="inline">
-          <a href="downloadUserManual.php" id="manual">User Manual</a>
+          <a href="php/downloadUserManual.php" id="manual">User Manual</a>
         </div>
         <div class="inline" id="inline-logout">
           <a href="logout.php" id="logout">Logout</a>
@@ -76,7 +76,8 @@ if (!$currentUser) {
 
           <div id="information-section" class="widget-box">
             <div>
-            	<p>Stock Information</p>
+            	<h3>Stock Information</h3>
+                <br>
             	<div id="stock-information-box">
             		<p id="stockinfo1"></p>
             		<p id="stockinfo2"></p>
@@ -288,13 +289,13 @@ if (!$currentUser) {
 		function updateGraph(tickerSymbol){
 		    var idx = tickerSymbols.indexOf(tickerSymbol);
 		    // if stock exists in graph
+            updateInfoBox(tickerSymbol);
 		    if(idx > -1){
 		        tickerSymbols.splice(idx, 1);
 		        parseData(tickerSymbol, []);
 		    }
 		    // else stock does not exist in graph
 		    else{
-		        showOverlay();
 		        $.ajax({
 		            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
 		            type:"POST",
@@ -303,10 +304,9 @@ if (!$currentUser) {
 		        }).done(function(historicalData){
 		            parseData(tickerSymbol, historicalData);
 		            tickerSymbols.push(tickerSymbol);
-		            hideOverlay();
 		        });
 		    }
-		    updateInfoBox(tickerSymbol); //to populate the detailed information section
+
 		}
 	</script>
 

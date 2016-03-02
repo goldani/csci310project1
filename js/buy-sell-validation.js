@@ -1,4 +1,22 @@
 /* use the following script to setup message in the popup */
+function checkClock(){
+	var estDate = new Date(new Date().getTime()+offset);
+	var hours = estDate.getHours()
+	var minutes = estDate.getMinutes();
+	var amPM = hours >= 12 ? 'PM' : 'AM';
+	if(hours >= 12){
+		hours-=12;
+	}
+	if(hours == 0){
+		hours = 12;
+    }
+    if((hours >= 9 && minutes >= 30 && amPM == 'AM') || (hours <= 4 && amPM == 'PM')){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 function getInput(action) {
     if(checkClock()){
         document.getElementById("modal-one").style.visibility = "visible";
