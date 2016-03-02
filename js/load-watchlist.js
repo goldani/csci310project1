@@ -42,7 +42,7 @@ function handleUserStockResult(e){
 
 /* Append item to end of watchlist */
 function addToWatchlist(new_stock_list){
-	alert(new_stock_list);
+
 	var stockList = new_stock_list;
 	if(stockList.length > 0){
 		clearElementChildren(watchlist);

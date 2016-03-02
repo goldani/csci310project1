@@ -350,6 +350,7 @@ a.contact:hover{
     position: relative;
     display: inline-block;
     width: 98%;
+    z-index: 100;
 }
 
 /* Dropdown Content (Hidden by Default) */

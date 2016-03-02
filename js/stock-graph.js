@@ -11,13 +11,10 @@ var colorIndex = 0;
 function parseData(ticker, data_array){
 
 	//remove from dataSets if data_array is empty
-	alert(data_array.length);
 	if(data_array.length == 0){
 		for(i=0; i<chart.dataSets.length; i++){
 			if(dataSets[i].title == ticker){
 				chart.dataSets.splice(i, 1); //remove dataset
-				//dataSets.splice(i, 1);
-				alert("trying to remove, dataSets length="+chart.dataSets.length);
 			}
 		}
 	}
@@ -30,9 +27,9 @@ function parseData(ticker, data_array){
 		dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
 		dataSet.categoryField = "date";
 		dataSet.title = ticker;
-		dataSet.color = lineColors[colorIndex];
 		colorIndex++;
 		colorIndex = colorIndex%lineColors.length;
+		dataSet.color = lineColors[colorIndex];
 		
 
 		//loop through stock data
@@ -48,23 +45,21 @@ function parseData(ticker, data_array){
 			//add object to chartData array
 			chartData.push(dataObject);
 		}
-
 		dataSet.dataProvider = chartData;
 		chart.dataSets.push(dataSet); //add dataSet to stockchart's dataSets array
 	}
 	
+	chart.validateData();
 	chart.validateNow();
-	alert(chart.dataSets.length);
 	//chart.validateNow(validateData, skipEvents);
 }
-
 
 
 /* Prepare the chart and write to the HTML */
 AmCharts.ready(function(){
 
 	chart = new AmCharts.AmStockChart();
-	chart.pathToImages = "amstockchart/amcharts/images/";
+	//chart.pathToImages = "amcharts/images/";
 
 	//link to dataSets array	
 	chart.dataSets = dataSets;
