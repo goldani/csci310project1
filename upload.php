@@ -15,7 +15,10 @@ if (session_status() == PHP_SESSION_NONE) {
 //get current user from Parse for further query
 $currentUser = ParseUser::getCurrentUser();
 if (!$currentUser) {
-    echo "error getting current user or not logged in!";
+    echo '<script language="javascript">';
+    echo 'alert("Error getting current user or not logged in!");';
+    echo 'window.location.assign("mainpage.php");';
+    echo '</script>';
     exit();
 }
 //get file from temporary direcory where it is stored
@@ -31,7 +34,12 @@ if($fileType != "csv"){
     $uploadOK = 0;
 }
 if($uploadOK == 0){
-	echo "You did not provide a CSV file, please go back";
+    echo '<script language="javascript">';
+    echo 'alert("You did not provide a CSV file");';
+    echo 'window.location.assign("mainpage.php");';
+    echo '</script>';
+// header("Location:mainpage.php");
+    // echo "You did not provide a CSV file, please go back";
     exit();
 }
 else{
@@ -99,7 +107,11 @@ else{
     //echo the full results for the JS to collect
     // echo $results;
     } else {
-		echo "Error";
+
+        echo '<script language="javascript">';
+        echo 'alert("Error");';
+        echo 'window.location.assign("mainpage.php");';
+        echo '</script>';
     }
 }
 //delete file from temporary directory to avoid conflicts with future uploads
