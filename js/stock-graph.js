@@ -8,7 +8,10 @@ var colorIndex = 0;
 
 var tickerSymbols = [];
 function updateGraph(tickerSymbol){
+
     var idx = tickerSymbols.indexOf(tickerSymbol);
+
+    updateInfoBox(tickerSymbol);
     // if stock exists in graph
     if(idx > -1){
         tickerSymbols.splice(idx, 1);
@@ -28,6 +31,31 @@ function updateGraph(tickerSymbol){
             hideOverlay();
         });
     }
+
+}
+
+function updateInfoBox(tickerSymbol) {
+    // alert(tickerSymbol);
+  var request = new XMLHttpRequest();
+  var url = "../php/getquotes.php?ticker=" + tickerSymbol;
+
+  request.open("GET", url, true);
+  request.setRequestHeader("Content-Type", "text/html");
+  request.addEventListener("readystatechange", myFunc, false);
+
+  request.send();
+}
+function myFunc(e) {
+  var currentReadyState = e.target.readyState;
+  var currentStatus = e.target.status;
+
+  if(currentReadyState == 4 && currentStatus == 200) {
+    showResult(e.target.responseText);
+  }
+}
+
+function showResult(result) {
+    alert(result);
 }
 
 //Hiding and showing loading box for graph
@@ -36,7 +64,7 @@ function showOverlay(){
     document.getElementById("confBtn").style.visibility = 'hidden';
     document.getElementById("cancelBtn").style.visibility = "hidden";
     document.getElementById("modalHeader").innerHTML = "Please Wait";
-    document.getElementById("confMsg").innerHTML = "Graph loading"; 
+    document.getElementById("confMsg").innerHTML = "Graph loading";
     document.getElementById("modal-one").style.display = "visible";
 }
 function hideOverlay(){
@@ -70,8 +98,8 @@ function parseData(ticker, data_array){
 		//stockColors[key] = lineColors[colorIndex];
 		colorIndex++;
 		colorIndex = colorIndex%lineColors.length;
-		
-		
+
+
 
 		//loop through stock data
 		for(i=data_array.length-1; i>0; i--){
@@ -89,7 +117,7 @@ function parseData(ticker, data_array){
 		dataSet.dataProvider = chartData;
 		chart.dataSets.push(dataSet); //add dataSet to stockchart's dataSets array
 	}
-	
+
 	chart.validateData();
 	chart.validateNow();
 	//chart.validateNow(validateData, skipEvents);
@@ -102,7 +130,7 @@ AmCharts.ready(function(){
 	chart = new AmCharts.AmStockChart();
 	//chart.pathToImages = "amcharts/images/";
 
-	//link to dataSets array	
+	//link to dataSets array
 	chart.dataSets = dataSets;
 	chart.dataDateFormat = "YYYY-MM-DD";
 
@@ -120,7 +148,7 @@ AmCharts.ready(function(){
 	graph.valueField = "closingPrice";
 	graph.type = "line";
 	//graph.fillAlphas = 1;
-	graph.title = "Stock Trends Graph"; 
+	graph.title = "Stock Trends Graph";
 	stockPanel.addStockGraph(graph);
 
     //set minimum period of time (to hours)
@@ -160,7 +188,7 @@ AmCharts.ready(function(){
 	var periodSelector = new AmCharts.PeriodSelector();
 	periodSelector.inputFieldsEnabled = false;
 	periodSelector.periods = [
-		{period:"DD", count:1, label:"1 day"}, 
+		{period:"DD", count:1, label:"1 day"},
 		{period:"DD", count:5, label:"5 days"},
 		{period:"MM", count:1, label:"1 month"},
 		{period: "MM", selected:true, count:6, label:"6 months" },
