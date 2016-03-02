@@ -50,7 +50,7 @@ if (!$currentUser) {
         echo "</div>";
         ?>
         <div class="inline">
-          <a href="downloadUserManual.php" id="manual">User Manual</a>
+          <a href="php/downloadUserManual.php" id="manual">User Manual</a>
         </div>
         <div class="inline" id="inline-logout">
           <a href="logout.php" id="logout">Logout</a>

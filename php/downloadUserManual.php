@@ -1,7 +1,6 @@
 <?php
-	$file = '/umanual/StockOverflowUserManual.docx';
+	$file = '../umanual/StockOverflowUserManual.docx';
 	if(file_exists($file)){
-		echo "test";
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
 		header('Content-Disposition: attachment; filename="'.basename($file).'"');
