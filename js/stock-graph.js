@@ -23,7 +23,7 @@ function myFunc(e) {
   var currentStatus = e.target.status;
 
   if(currentReadyState == 4 && currentStatus == 200) {
-    populateInfoBox(e.target.responseText);
+    showResult(e.target.responseText);
   }
 }
 
