@@ -159,28 +159,24 @@ $currentUser->save();
               // }
               // loadPortfolio();
                 ?>
-				<!--
 				<div class="button-wrapper">
-					<a href="#overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
+					<a href="#overlay-modal" id="overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
 				</div>
-				-->
 				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 				<script>
-					/*
 					function show_overlay(){
 						document.getElementById("overlay-modal").display = "inline";
 					}
 					function hide_overlay(){
 						document.getElementById("overlay-modal").display = "none";
 					}
-					*/
                     var graphData = [];
                     function updateGraph(tickerSymbol){
                         if(tickerSymbol in graphData){
                             delete graphData[tickerSymbol];
                         }
                         else{
-							//show_overlay();	
+							show_overlay();	
 							$.ajax({
 								url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
 								type:"POST",
@@ -189,7 +185,7 @@ $currentUser->save();
 							}).done(function(historicalData){
 								graphData[tickerSymbol] = historicalData;
 								parseData(graphData);
-								//hide_overlay();
+								hide_overlay();
 							});
                         }
                     }
