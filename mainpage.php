@@ -174,14 +174,12 @@ $currentUser->save();
 						document.getElementById("overlay-modal").display = "none";
                     }
                     */
-                    var tickerSymbols = [];
+					var tickerSymbols = [];
                     function updateGraph(tickerSymbol){
-                        if(tickerSymbol in tickerSymbols){
-                            var idx = tickerSymbols.indexOf(tickerSymbol);
-                            if(idx > -1){
-                                tickerSymbols.splice(idx, 1);
-                            }
-                            parseData(tickerSymbol, []);
+						var idx = tickerSymbols.indexOf(tickerSymbol);
+						if(idx > -1){
+							tickerSymbols.splice(idx, 1);
+							parseData(tickerSymbol, []);
                         }
                         else{
 							//show_overlay();	
