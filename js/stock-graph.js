@@ -10,10 +10,12 @@ var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 function parseData(ticker, data_array){
 
 	//remove from dataSets if data_array is empty
+	alert(data_array.length);
 	if(data_array.length == 0){
 		for(i=0; i<dataSets.length; i++){
-			if(dataSets.title == ticker){
+			if(dataSets[i].title == ticker){
 				dataSets.splice(i, 1); //remove dataset
+				alert("trying to remove");
 			}
 		}
 	}
@@ -32,7 +34,7 @@ function parseData(ticker, data_array){
 		//loop through stock data
 		for(i=data_array.length-1; i>0; i--){
 			//get pairs of data: [date, closingPrice]
-			var pairArray = stockData[i];
+			var pairArray = data_array[i];
 			var date = pairArray[0];
 			var closingPrice = pairArray[1];
 			var dataObject = {
