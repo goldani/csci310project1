@@ -160,7 +160,7 @@ $currentUser->save();
                 ?>
                 <script>
                     function updateGraph(tickerSymbol){
-						var historicalData = <?php 
+						var historicalData = <?php
 							$cols = array(0, 4);
 							$graphData = array();
 							if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
@@ -178,9 +178,13 @@ $currentUser->save();
 							echo json_encode($graphData);
 							?>;
 						// historicalData ready to go
+// <<<<<<< Updated upstream
 						console.log(historicalData);
 						parseData(historicalData);
                     }
+// =======
+//                     // }
+// >>>>>>> Stashed changes
                 </script>
               </tbody>
             </table>
@@ -351,10 +355,10 @@ $currentUser->save();
 	<!-- Load javascript here -->
     <script src="js/search-stocks-handler.js"></script>
     <script src="js/load-watchlist.js"></script>
-    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script> 
-	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script> 
+    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script>
+	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script>
 	<script src="js/amstockchart/amcharts/amstock.js" type="text/javascript"></script>
-	<script src="js/stock-graph.js"></script> 
+	<script src="js/stock-graph.js"></script>
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
