@@ -99,6 +99,7 @@ $currentUser->save();
             </form>
           </div>
           <div id="portfolio-section" class="widget-box">
+            <h3>Portfolio</h3>
             <table id="portfolio-content">
               <thead>
                 <tr>
@@ -159,33 +160,39 @@ $currentUser->save();
               // loadPortfolio();
                 ?>
                 <script>
+                    var graphData = [];
                     function updateGraph(tickerSymbol){
-						var historicalData = <?php 
-							$cols = array(0, 4);
-							$graphData = array();
-							if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
-								while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
-									$numCols = count($data);
-									$row = array();
-									for($c = 0; $c < $numCols; $c++)
-										if(in_array($c, $cols))
-											$row[] = $data[$c];
-									$graphData[] = $row;
-								}
-								fclose($csvFile);
-							}
-							array_shift($graphData);
-							echo json_encode($graphData);
-							?>;
-						// historicalData ready to go
-						console.log(historicalData);
-						parseData(historicalData);
+                        if(!(tickerSymbol in graphData)){
+                            graphData[tickerSymbol] = <?php 
+                                $cols = array(0, 4);
+                                $graphData = array();
+                                if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
+                                    while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
+                                        $numCols = count($data);
+                                        $row = array();
+                                        for($c = 0; $c < $numCols; $c++)
+                                            if(in_array($c, $cols))
+                                                $row[] = $data[$c];
+                                        $graphData[] = $row;
+                                    }
+                                    fclose($csvFile);
+                                }
+                                array_shift($graphData);
+                                echo json_encode($graphData);
+                            ?>;
+                        }
+                        else{
+                            delete graphData[tickerSymbol];
+                        }
+                        //console.log(graphData);
+                        parseData(graphData);
                     }
                 </script>
               </tbody>
             </table>
           </div>
           <div id="watchlist-section" class="widget-box">
+            <h3>Watchlist</h3>
             <table id="watchlist-content">
               <thead>
                 <tr>
@@ -351,10 +358,10 @@ $currentUser->save();
 	<!-- Load javascript here -->
     <script src="js/search-stocks-handler.js"></script>
     <script src="js/load-watchlist.js"></script>
-    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script> 
-	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script> 
+    <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script>
+	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script>
 	<script src="js/amstockchart/amcharts/amstock.js" type="text/javascript"></script>
-	<script src="js/stock-graph.js"></script> 
+	<script src="js/stock-graph.js"></script>
     <script>
 		var clockID;
 		var yourTimeZoneFrom = -5.00;
