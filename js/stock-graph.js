@@ -1,14 +1,24 @@
 
 /* Variables */
 var chart;
+var dataSets = []; //Array of dataset objects
+var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 
 /* data_array format: { [TICKER: [data]], [TICKER2: [data]], ...}
  * data: [date, closingPrice], [date, closingPrice], ...
  */
-function parseData(data_array){
+function parseData(ticker, data_array){
 
-	//Loop through associative array of stocks
-	for(var ticker in data_array){
+	//remove from dataSets if data_array is empty
+	if(data_array.length == 0){
+		for(i=0; i<dataSets.length; i++){
+			if(dataSets.title == ticker){
+				dataSets.splice(i, 1); //remove dataset
+			}
+		}
+	}
+	else{
+		//if data_array is populated, put into the graph
 
 		//create data structures
 		var chartData = [];
@@ -19,12 +29,10 @@ function parseData(data_array){
 		dataSet.title = ticker;
 		dataSets.push(dataSet); //add dataSet to stockchart's dataSets array
 
-		//Loop through data for particular stock
-		var stockData = data_array[i];
-		for(j=0; j<stockData.length; j++){
-
+		//loop through stock data
+		for(i=data_array.length-1; i>0; i--){
 			//get pairs of data: [date, closingPrice]
-			var pairArray = stockData[j];
+			var pairArray = stockData[i];
 			var date = pairArray[0];
 			var closingPrice = pairArray[1];
 			var dataObject = {
@@ -34,35 +42,11 @@ function parseData(data_array){
 			//add object to chartData array
 			chartData.push(dataObject);
 		}
-
-
 	}
 	chart.validateData();
-
-	// for(i=data_array.length-1; i > 0; i--){
-	// 	//get date, closing_price pair
-	// 	var pairArray = data_array[i];
-	// 	var date = pairArray[0];
-	// 	var closingPrice = pairArray[1];
-	// 	var dataObject = {
- //            date: date,
- //            cp: closingPrice
- //        };
- //        // add object to chartData array
- //        chartData.push(dataObject);
-	// }
-	// chart.validateData();
 }
 
-var chartData = [
-	{date: "2011-02-01", cp: 40},
-	{date: "2011-02-02", cp: 50}];
-var dataSet = new AmCharts.DataSet();
-dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
-		dataSet.categoryField = "date";
-		dataSet.dataProvider = chartData;
-var dataSets = [dataSet]; //Array of dataset objects
-var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
+
 
 /* Prepare the chart and write to the HTML */
 AmCharts.ready(function(){
