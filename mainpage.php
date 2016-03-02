@@ -159,25 +159,44 @@ $currentUser->save();
               // loadPortfolio();
                 ?>
                 <script>
+                    var stockList = []
+                    var historicalData = [];
+                    function stockInGraph(tickerSymbol, stockList){
+                        var stockListLength = stockList.length;
+                        while(stockListLength--){
+                            if(stockList[stockListLength] === tickerSymbol){
+                                return true; 
+                            }
+                        } 
+                        return false;
+                    }
                     function updateGraph(tickerSymbol){
-						var historicalData = <?php 
-							$cols = array(0, 4);
-							$graphData = array();
-							if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
-								while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
-									$numCols = count($data);
-									$row = array();
-									for($c = 0; $c < $numCols; $c++)
-										if(in_array($c, $cols))
-											$row[] = $data[$c];
-									$graphData[] = $row;
-								}
-								fclose($csvFile);
-							}
-							array_shift($graphData);
-							echo json_encode($graphData);
-							?>;
-						// historicalData ready to go
+                        if(!stockInGraph(tickerSymbol)){
+                            stockList += tickerSymbol;
+                            historicalData += <?php 
+                                $cols = array(0, 4);
+                                $graphData = array();
+                                if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
+                                    while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
+                                        $numCols = count($data);
+                                        $row = array();
+                                        for($c = 0; $c < $numCols; $c++)
+                                            if(in_array($c, $cols))
+                                                $row[] = $data[$c];
+                                        $graphData[] = $row;
+                                    }
+                                    fclose($csvFile);
+                                }
+                                array_shift($graphData);
+                                echo json_encode($graphData);
+                                ?>;
+                        }
+                        else{
+                            var idx = stockList.indexOf(tickerSymbol);
+                            if(idx > -1){
+                                stockList.splice(idx, 1);
+                            }
+                        }
                     }
                 </script>
               </tbody>
