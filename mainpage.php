@@ -50,7 +50,7 @@ if (!$currentUser) {
         echo "</div>";
         ?>
         <div class="inline">
-          <a href="" id="manual">User Manual</a>
+          <a href="downloadUserManual.php" id="manual">User Manual</a>
         </div>
         <div class="inline" id="inline-logout">
           <a href="logout.php" id="logout">Logout</a>
@@ -89,52 +89,15 @@ if (!$currentUser) {
 
         <div id="left-area">
           <div id="CSV-section" class="widget-box">
-            <form enctype="multipart/form-data">
+            <form id="CSVForm" enctype="multipart/form-data" method="post" action="upload.php">
               <input type="file" name="fileToUpload" id="fileToUpload" class="button-fileUpload">
               <label for="fileToUpload">
                 <span>Upload CSV File</span>
               </label>
               <br>
               <br>
-              <input type="submit" id="importCSV"  name="submit" onclick="uploadMyCSV()" alt="Import CSV" value="Import CSV File" class="button">
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-              <script>
-              function uploadMyCSV(){
-                //   alert("test");
-                var request = new XMLHttpRequest();
-                var url = "upload.php";
+              <input type="submit" id="importCSV"  name="submit" alt="Import CSV" value="Import CSV File" class="button">
 
-                request.open("POST", url, true);
-                request.setRequestHeader("Content-Type", "text/html");
-                request.addEventListener("readystatechange", processCSV, false);
-
-                request.send();
-                //   location.reload();
-              }
-              function processCSV(e) {
-                var currentReadyState = e.target.readyState;
-                var currentStatus = e.target.status;
-
-                if(currentReadyState == 4 && currentStatus == 200) {
-                  showResultCSV(e.target.responseText);
-                }
-              }
-              function showResultCSV(result) {
-                  alert(result);
-                  location.reload();
-                // if (result.substr(0, 5) == "Stock") {
-                //   document.getElementById("modalHeader").innerHTML = "Transaction succeeded";
-                // } else {
-                //   document.getElementById("modalHeader").innerHTML = "Transaction failed";
-                // }
-                // document.getElementById("confMsg").innerHTML = result;
-                //
-                // //hide confirm and cancel button, dispaly close button
-                // document.getElementById("clsBtn").style.visibility = "visible";
-                // document.getElementById("confBtn").style.visibility = "hidden";
-                // document.getElementById("cancelBtn").style.visibility = "hidden";
-              }
-              </script>
             </form>
           </div>
           <div id="portfolio-section" class="widget-box">
@@ -270,7 +233,44 @@ if (!$currentUser) {
             </table>
           </div>
             <script>
+<<<<<<< HEAD
+                function showOverlay(){
+                    document.getElementById("clsBtn").style.visibility = "hidden";
+                    document.getElementById("confBtn").style.visibility = "hidden";
+                    document.getElementById("cancelBtn").style.visibility = "hidden";
+                    document.getElementById("modalHeader").innerHTML = "Please Wait";
+                    document.getElementById("confMsg").innerHTML = "Graph loading";
+                    document.getElementById("modal-one").style.visibility = "visible";
+                }
+                function hideOverlay(){
+                    document.getElementById("modal-one").style.visibility = "hidden";
+                }
+                var tickerSymbols = [];
+                function updateGraph(tickerSymbol){
+                    var idx = tickerSymbols.indexOf(tickerSymbol);
+                    // if stock exists in graph
+                    if(idx > -1){
+                        tickerSymbols.splice(idx, 1);
+                        parseData(tickerSymbol, []);
+                    }
+                    // else stock does not exist in graph
+                    else{
+                        showOverlay();
+                        $.ajax({
+                            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
+                            type:"POST",
+                            async:true,
+                            dataType:'json',
+                        }).done(function(historicalData){
+                            parseData(tickerSymbol, historicalData);
+                            tickerSymbols.push(tickerSymbol);
+                            hideOverlay();
+                        });
+                    }
+                }
+=======
                 
+>>>>>>> github/master
             </script>
 
           <div id="buy-sell-section" class="widget-box">

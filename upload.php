@@ -15,22 +15,32 @@ if (session_status() == PHP_SESSION_NONE) {
 //get current user from Parse for further query
 $currentUser = ParseUser::getCurrentUser();
 if (!$currentUser) {
-    echo "error getting current user or not logged in!";
+    echo '<script language="javascript">';
+    echo 'alert("Error getting current user or not logged in!");';
+    echo 'window.location.assign("mainpage.php");';
+    echo '</script>';
     exit();
-
 }
-
 //get file from temporary direcory where it is stored
 $target_dir = sys_get_temp_dir();
 //complete file path
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+// $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+// echo $_GET['fileName'];
+// echo $target_file;
 $uploadOK = 1;
 $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 if($fileType != "csv"){
     $uploadOK = 0;
 }
 if($uploadOK == 0){
-	echo "NOT CSV";
+    echo '<script language="javascript">';
+    echo 'alert("You did not provide a CSV file");';
+    echo 'window.location.assign("mainpage.php");';
+    echo '</script>';
+// header("Location:mainpage.php");
+    // echo "You did not provide a CSV file, please go back";
+    exit();
 }
 else{
     //move file to the temporary directory to process
@@ -95,11 +105,16 @@ else{
         $results .= $ticker . "_" . $name . "_" . $stock . "_" . $price . "_" . $percent . "\n";
     }
     //echo the full results for the JS to collect
-    echo $results;
+    // echo $results;
     } else {
-		echo "Error";
+
+        echo '<script language="javascript">';
+        echo 'alert("Error");';
+        echo 'window.location.assign("mainpage.php");';
+        echo '</script>';
     }
 }
 //delete file from temporary directory to avoid conflicts with future uploads
 unlink($target_file);
+header("Location:mainpage.php");
 ?>
