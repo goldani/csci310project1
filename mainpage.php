@@ -170,10 +170,11 @@ $currentUser->save();
 					function hide_overlay(){
 						document.getElementById("overlay-modal").display = "none";
 					}
-                    var graphData = [];
+                    var tickerSymbols = [];
                     function updateGraph(tickerSymbol){
-                        if(tickerSymbol in graphData){
-                            delete graphData[tickerSymbol];
+                        if(tickerSymbol in tickerSymbols){
+                            delete tickerSymbols[tickerSymbol];
+                            parseData(tickerSymbol, []);
                         }
                         else{
 							show_overlay();	
@@ -182,9 +183,9 @@ $currentUser->save();
 								type:"POST",
 								async:true,
 								dataType:'json',
-							}).done(function(historicalData){
-								graphData[tickerSymbol] = historicalData;
-								parseData(graphData);
+                            }).done(function(historicalData){
+                                parseData(tickerSymbol, historicalData);
+                                tickerSymbols.push(tickerSymbol);
 								hide_overlay();
 							});
                         }
@@ -354,7 +355,7 @@ $currentUser->save();
 
     <footer>
       <p><small>This is the work of college students.</small></p>
-      <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
+      <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor William G.J. Halfond</a>.</small></p>
     </footer>
   </div>
 	<!-- Load javascript here -->
