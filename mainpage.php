@@ -78,7 +78,6 @@ $currentUser->save();
           <div id="graph-section" class="widget-box">
             <div id="chartdiv" style="width:100%; height:400px;"></div>
 
-
             <div class="button-wrapper">
               <button id="1d" class="button graph-button" onclick="updateTimeRange('1d')">1 day</button>
               <button id="5d" class="button graph-button">5 days</button>
@@ -113,15 +112,16 @@ $currentUser->save();
             <table id="portfolio-content">
               <thead>
                 <tr>
-                  <th align="left">Ticker</th>
-                  <th align="left">Company</th>
-                  <th align="left">Quantity</th>
-                  <th align="left">Current Price</th>
-                  <th align="left">Percent Change</th>
+                  <th>Ticker</th>
+                  <th>Company</th>
+                  <th>Quantity</th>
+                  <th>Current Price</th>
+                  <th>Percent Change</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
+                // function loadPortfolio() {
                 $stocks = $currentUser->get('stocks');
                 $stocksOwned = NULL;
                 $stocksWatching = NULL;
@@ -144,26 +144,52 @@ $currentUser->save();
                   foreach ($stocksOwned as $ticker => $quantity) {
                     $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
                     $data = explode(',', $quote);
+                    $tickerSymbol = substr($data[0], 1, -1);
                     if (count($data) == 5) {
-                      echo '<tr>
-                      <td>' . substr($data[0], 1, -1) . '</td>
-                      <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>$' . $data[3] . '</td>
-                      <td>' . substr($data[4], 1, -2) . '</td>
-                      </tr>';
+                        echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
+                        '<td>' . substr($data[0], 1, -1) . '</td>
+                        <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
+                        <td>' . $quantity . '</td>
+                        <td>$' . $data[3] . '</td>
+                        <td>' . substr($data[4], 1, -2) . '</td>
+                        </tr>';
                     } else {
-                      echo '<tr>
-                      <td>' . substr($data[0], 1, -1) . '</td>
-                      <td>' . substr($data[1], 1, -1) . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>$' . $data[2] . '</td>
-                      <td>' . substr($data[3], 1, -2) . '</td>
-                      </tr>';
+                        echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
+                        '<td>' . substr($data[0], 1, -1) . '</td>
+                        <td>' . substr($data[1], 1, -1) . '</td>
+                        <td>' . $quantity . '</td>
+                        <td>$' . $data[2] . '</td>
+                        <td>' . substr($data[3], 1, -2) . '</td>
+                        </tr>';
                     }
                   }
                 }
+
+              // }
+              // loadPortfolio();
                 ?>
+                <script>
+                    function updateGraph(tickerSymbol){
+						var historicalData = <?php 
+							$cols = array(0, 4);
+							$graphData = array();
+							if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
+								while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
+									$numCols = count($data);
+									$row = array();
+									for($c = 0; $c < $numCols; $c++)
+										if(in_array($c, $cols))
+											$row[] = $data[$c];
+									$graphData[] = $row;
+								}
+								fclose($csvFile);
+							}
+							array_shift($graphData);
+							echo json_encode($graphData);
+							?>;
+						// historicalData ready to go
+                    }
+                </script>
               </tbody>
             </table>
           </div>
@@ -171,11 +197,11 @@ $currentUser->save();
             <table id="watchlist-content">
               <thead>
                 <tr>
-                  <th align="left">Ticker</th>
-                  <th align="left">Company</th>
-                  <th align="left">Quantity</th>
-                  <th align="left">Current Price</th>
-                  <th align="left">Percent Change</th>
+                  <th>Ticker</th>
+                  <th>Company</th>
+                  <th>Quantity</th>
+                  <th>Current Price</th>
+                  <th>Percent Change</th>
                 </tr>
               </thead>
               <tbody>
@@ -227,18 +253,23 @@ $currentUser->save();
                 <!-- use the following script to setup message in the popup -->
                 <script>
                 function getInput(action) {
-                  document.getElementById("confMsg").innerHTML = "Do you want to "
-                  + action.toUpperCase() + " " +
-                  + document.getElementById("qty").value + " share(s) of "
-                  + document.getElementById("tickerInput").value.toUpperCase() + "?";
-                  document.getElementById('action').value = action;
+                    if(checkClock()){
+                        document.getElementById("modal-one").style.visibility = "visible";
+                        document.getElementById("confMsg").innerHTML = "Do you want to "
+                        + action.toUpperCase() + " " +
+                        + document.getElementById("qty").value + " share(s) of "
+                        + document.getElementById("tickerInput").value.toUpperCase() + "?";
+                        document.getElementById('action').value = action;
+                    }
+                    else{
 
+                    }
                 }
                 </script>
 
               </div>
 
-              <div class="modal" id="modal-one" aria-hidden="true">
+              <div class="modal" id="modal-one" aria-hidden="true" style="visibility: hidden">
                 <div class="modal-dialog">
                   <div class="modal-header">
                     <h2 id="modalHeader">Confirm?</h2>
@@ -259,8 +290,12 @@ $currentUser->save();
                       document.getElementById("clsBtn").style.visibility = "hidden";
                       document.getElementById("confBtn").style.visibility = "visible";
                       document.getElementById("cancelBtn").style.visibility = "visible";
+                      document.getElementById("modal-one").style.visibility = "hidden";
+                      location.reload();
                       //disabled for now
                       // loadWatchlist();
+                      // prepareToAddToWatchlist(document.getElementById("tickerInput"));
+                      // reloadAddToWatchlist();
                     }
 
                     //called after confirm button is pressed calls php to
@@ -318,7 +353,6 @@ $currentUser->save();
 
     <footer>
       <p><small>This is the work of college students.</small></p>
-      <br>
       <p><small>For more information, <a href="mailto:halfond@usc.edu" class="contact" target="_top">email</a> or <a href="tel:12137401239" class="contact">call</a> <a href="http://www-bcf.usc.edu/~halfond/" class="contact" target="_blank">Professor Halfond</a>.</small></p>
     </footer>
   </div>
@@ -335,46 +369,53 @@ $currentUser->save();
 		var d = new Date();
 		var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
 		var offset = tzDifference * 60 * 1000;
-		function UpdateClock() {
+		function updateClock() {
 			var estDate = new Date(new Date().getTime()+offset);
 			var hours = estDate.getHours()
 			var minutes = estDate.getMinutes();
 			var seconds = estDate.getSeconds();
+			var amPM = hours >= 12 ? 'PM' : 'AM';
+			if(hours >= 12){
+				hours-=12;
+			}
+			if(hours == 0){
+				hours = 12;
+			}
 			if(minutes < 10)
 				minutes = '0' + minutes;
 			if(seconds < 10)
 				seconds = '0' + seconds;
-			var amPM = hours >= 12 ? 'PM' : 'AM';
 			document.getElementById('clock').innerHTML = ""
 						   + hours + ":"
 						   + minutes + ":"
 						   + seconds + " "
 						   + amPM + " EST";
 		}
-		function StartClock() {
-			clockID = setInterval(UpdateClock, 500);
-		}
-		function KillClock() {
-			clearTimeout(clockID);
-		}
-		window.onload=function() {
-			StartClock();
+		function startClock() {
+			clockID = setInterval(updateClock, 500);
         }
-/*
-		$(document).ready(function () {
-			var HeightDiv = $("div").height();
-			var HeightTable = $("portfolio-section").height();
-			if(HeightTable > HeightDiv) {
-				var FontSizeTable = parseInt($("table").css("font-size"), 10);
-				while (HeightTable > HeightDiv && FontSizeTable > 5) {
-					FontSizeTable--;
-					$("table").css("font-size", FontSizeTable);
-					HeightTable = $("table").height();
-				}
+        function checkClock(){
+			var estDate = new Date(new Date().getTime()+offset);
+			var hours = estDate.getHours()
+			var minutes = estDate.getMinutes();
+			var amPM = hours >= 12 ? 'PM' : 'AM';
+			if(hours >= 12){
+				hours-=12;
 			}
-		});
-
-*/
+			if(hours == 0){
+				hours = 12;
+            }
+            if((hours >= 9 && minutes >= 30 && amPM == 'AM') || (hours <= 4 && amPM == 'PM')){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+		window.onload=function() {
+			startClock();
+			window.scrollTo(0,0);
+        }
 </script>
 </body>
 </html>
