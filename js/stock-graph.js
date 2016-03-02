@@ -6,6 +6,7 @@ var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 var stockColors = [];
 var colorIndex = 0;
 
+
 var tickerSymbols = [];
 function updateGraph(tickerSymbol){
 
