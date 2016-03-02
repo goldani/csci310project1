@@ -3,6 +3,7 @@
 var chart;
 var dataSets = []; //Array of dataset objects
 var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
+var stockColors = [];
 var colorIndex = 0;
 
 /* data_array format: { [TICKER: [data]], [TICKER2: [data]], ...}
@@ -15,6 +16,7 @@ function parseData(ticker, data_array){
 		for(i=0; i<chart.dataSets.length; i++){
 			if(dataSets[i].title == ticker){
 				chart.dataSets.splice(i, 1); //remove dataset
+				//delete stockColors[title];
 			}
 		}
 	}
@@ -27,9 +29,11 @@ function parseData(ticker, data_array){
 		dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
 		dataSet.categoryField = "date";
 		dataSet.title = ticker;
+		dataSet.color = lineColors[colorIndex];
+		//stockColors[key] = lineColors[colorIndex];
 		colorIndex++;
 		colorIndex = colorIndex%lineColors.length;
-		dataSet.color = lineColors[colorIndex];
+		
 		
 
 		//loop through stock data
