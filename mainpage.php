@@ -192,7 +192,7 @@ $currentUser->save();
 							parseData(tickerSymbol, []);
                         }
                         else{
-							//show_overlay();	
+							//show_overlay();
 							$.ajax({
 								url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
 								type:"POST",
