@@ -141,17 +141,27 @@ $currentUser->save();
                         '<td>' . substr($data[0], 1, -1) . '</td>
                         <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
                         <td>' . $quantity . '</td>
-                        <td>$' . $data[3] . '</td>
-                        <td>' . substr($data[4], 1, -2) . '</td>
-                        </tr>';
+                        <td>$' . $data[3] . '</td>';
+                        if (strcmp($data[4][1], '+') == 0) {
+                          echo '<td><font color="#32CD32">' . substr($data[4], 1, -2) . '</font></td>
+                                </tr>';
+                        } else {
+                          echo '<td><font color="#DC143C">' . substr($data[4], 1, -2) . '</font></td>
+                                </tr>';
+                        }
                     } else {
                         echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
                         '<td>' . substr($data[0], 1, -1) . '</td>
                         <td>' . substr($data[1], 1, -1) . '</td>
                         <td>' . $quantity . '</td>
-                        <td>$' . $data[2] . '</td>
-                        <td>' . substr($data[3], 1, -2) . '</td>
-                        </tr>';
+                        <td>$' . $data[2] . '</td>';
+                        if (strcmp($data[3][1], '+') == 0) {
+                          echo '<td><font color="#32CD32">' . substr($data[3], 1, -2) . '</font></td>
+                                </tr>';
+                        } else {
+                          echo '<td><font color="#DC143C">' . substr($data[3], 1, -2) . '</font></td>
+                                </tr>';
+                        }
                     }
                   }
                 }
@@ -230,17 +240,27 @@ $currentUser->save();
                       <td>' . substr($data[0], 1, -1) . '</td>
                       <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
                       <td>' . $quantity . '</td>
-                      <td>$' . $data[3] . '</td>
-                      <td>' . substr($data[4], 1, -2) . '</td>
-                      </tr>';
+                      <td>$' . $data[3] . '</td>';
+                      if (strcmp($data[4][1], '+') == 0) {
+                          echo '<td><font color="#32CD32">' . substr($data[4], 1, -2) . '</font></td>
+                                </tr>';
+                        } else {
+                          echo '<td><font color="#DC143C">' . substr($data[4], 1, -2) . '</font></td>
+                                </tr>';
+                        }
                     } else {
                       echo '<tr>
                       <td>' . substr($data[0], 1, -1) . '</td>
                       <td>' . substr($data[1], 1, -1) . '</td>
                       <td>' . $quantity . '</td>
-                      <td>$' . $data[2] . '</td>
-                      <td>' . substr($data[3], 1, -2) . '</td>
-                      </tr>';
+                      <td>$' . $data[2] . '</td>';
+                      if (strcmp($data[3][1], '+') == 0) {
+                          echo '<td><font color="#32CD32">' . substr($data[3], 1, -2) . '</font></td>
+                                </tr>';
+                        } else {
+                          echo '<td><font color="#DC143C">' . substr($data[3], 1, -2) . '</font></td>
+                                </tr>';
+                        }
                     }
                   }
                 }
