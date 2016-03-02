@@ -294,7 +294,6 @@ if (!$currentUser) {
 		    }
 		    // else stock does not exist in graph
 		    else{
-		        showOverlay();
 		        $.ajax({
 		            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
 		            type:"POST",
@@ -303,7 +302,6 @@ if (!$currentUser) {
 		        }).done(function(historicalData){
 		            parseData(tickerSymbol, historicalData);
 		            tickerSymbols.push(tickerSymbol);
-		            hideOverlay();
 		        });
 		    }
 		    requestStockDetails(tickerSymbol); //to populate the detailed information section
