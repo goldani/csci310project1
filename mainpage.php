@@ -159,33 +159,39 @@ $currentUser->save();
               // }
               // loadPortfolio();
                 ?>
-                <script>
+				<!--
+				<div class="button-wrapper">
+					<a href="#overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
+				</div>
+				-->
+				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+				<script>
+					/*
+					function show_overlay(){
+						document.getElementById("overlay-modal").display = "inline";
+					}
+					function hide_overlay(){
+						document.getElementById("overlay-modal").display = "none";
+					}
+					*/
                     var graphData = [];
                     function updateGraph(tickerSymbol){
-                        if(!(tickerSymbol in graphData)){
-                            graphData[tickerSymbol] = <?php 
-                                $cols = array(0, 4);
-                                $graphData = array();
-                                if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
-                                    while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
-                                        $numCols = count($data);
-                                        $row = array();
-                                        for($c = 0; $c < $numCols; $c++)
-                                            if(in_array($c, $cols))
-                                                $row[] = $data[$c];
-                                        $graphData[] = $row;
-                                    }
-                                    fclose($csvFile);
-                                }
-                                array_shift($graphData);
-                                echo json_encode($graphData);
-                            ?>;
-                        }
-                        else{
+                        if(tickerSymbol in graphData){
                             delete graphData[tickerSymbol];
                         }
-                        //console.log(graphData);
-                        parseData(graphData);
+                        else{
+							//show_overlay();	
+							$.ajax({
+								url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
+								type:"POST",
+								async:true,
+								dataType:'json',
+							}).done(function(historicalData){
+								graphData[tickerSymbol] = historicalData;
+								parseData(graphData);
+								//hide_overlay();
+							});
+                        }
                     }
                 </script>
               </tbody>
