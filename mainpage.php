@@ -173,7 +173,10 @@ $currentUser->save();
                     var tickerSymbols = [];
                     function updateGraph(tickerSymbol){
                         if(tickerSymbol in tickerSymbols){
-                            delete tickerSymbols[tickerSymbol];
+                            var idx = tickerSymbols.indexOf(tickerSymbol);
+                            if(idx > -1){
+                                tickerSymbols.splice(idx, 1);
+                            }
                             parseData(tickerSymbol, []);
                         }
                         else{
