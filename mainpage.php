@@ -159,6 +159,41 @@ $currentUser->save();
               // }
               // loadPortfolio();
                 ?>
+<<<<<<< HEAD
+                <script>
+                    var stockList = []
+                    var historicalData = [];
+                    function stockInGraph(tickerSymbol, stockList){
+                        var stockListLength = stockList.length;
+                        while(stockListLength--){
+                            if(stockList[stockListLength] === tickerSymbol){
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                    function updateGraph(tickerSymbol){
+                        if(!stockInGraph(tickerSymbol)){
+                            stockList += tickerSymbol;
+                            historicalData += <?php
+                                $cols = array(0, 4);
+                                $graphData = array();
+                                if(($csvFile = fopen("https://www.quandl.com/api/v3/datasets/WIKI/" . $tickerSymbol . ".csv", "r")) !== FALSE) {
+                                    while(($data = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
+                                        $numCols = count($data);
+                                        $row = array();
+                                        for($c = 0; $c < $numCols; $c++)
+                                            if(in_array($c, $cols))
+                                                $row[] = $data[$c];
+                                        $graphData[] = $row;
+                                    }
+                                    fclose($csvFile);
+                                }
+                                array_shift($graphData);
+                                echo json_encode($graphData);
+                                ?>;
+                            parseData(historicalData);
+=======
 				<div class="button-wrapper">
 					<a href="#overlay-modal" id="overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
 				</div>
@@ -175,6 +210,7 @@ $currentUser->save();
                         if(tickerSymbol in tickerSymbols){
                             delete tickerSymbols[tickerSymbol];
                             parseData(tickerSymbol, []);
+>>>>>>> github/master
                         }
                         else{
 							show_overlay();	
