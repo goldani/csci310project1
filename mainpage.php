@@ -224,21 +224,19 @@ if (!$currentUser) {
               </tbody>
             </table>
           </div>
-            <!--
-            <div class="button-wrapper">
-                <a href="#overlay-modal" id="overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
-            </div>
-            -->
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script>
-                /*
-                function show_overlay(){
-                    document.getElementById("overlay-modal").display = "inline";
+                function showOverlay(){
+                    document.getElementById("clsBtn").style.visibility = "hidden";
+                    document.getElementById("confBtn").style.visibility = "hidden";
+                    document.getElementById("cancelBtn").style.visibility = "hidden";
+                    document.getElementById("modalHeader").innerHTML = "Please Wait";
+                    document.getElementById("confMsg").innerHTML = "Graph loading"; 
+                    document.getElementById("modal-one").style.visibility = "visible";
                 }
-                function hide_overlay(){
-                    document.getElementById("overlay-modal").display = "none";
+                function hideOverlay(){
+                    document.getElementById("modal-one").style.visibility = "hidden";
                 }
-                */
                 var tickerSymbols = [];
                 function updateGraph(tickerSymbol){
                     var idx = tickerSymbols.indexOf(tickerSymbol);
@@ -249,7 +247,7 @@ if (!$currentUser) {
                     }
                     // else stock does not exist in graph
                     else{
-                        //show_overlay();
+                        showOverlay();
                         $.ajax({
                             url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
                             type:"POST",
@@ -258,7 +256,7 @@ if (!$currentUser) {
                         }).done(function(historicalData){
                             parseData(tickerSymbol, historicalData);
                             tickerSymbols.push(tickerSymbol);
-                            //hide_overlay();
+                            hideOverlay();
                         });
                     }
                 }
@@ -284,7 +282,6 @@ if (!$currentUser) {
                         document.getElementById('action').value = action;
                     }
                     else{
-
                     }
                 }
                 </script>
@@ -359,15 +356,11 @@ if (!$currentUser) {
                       document.getElementById("cancelBtn").style.visibility = "hidden";
                     }
                     </script>
-
                   </div>
                 </div>
               </div>
-
             </form>
           </div>
-
-
         </div>
       </div> <!--left float wrapper end -->
 

@@ -1,5 +1,4 @@
 <?php
-
 	$tickerSymbol = $_GET['tickerSymbol'];
     $cols = array(0, 4);
     $graphData = array();
