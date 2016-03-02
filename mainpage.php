@@ -232,46 +232,6 @@ if (!$currentUser) {
               </tbody>
             </table>
           </div>
-            <script>
-<<<<<<< HEAD
-                function showOverlay(){
-                    document.getElementById("clsBtn").style.visibility = "hidden";
-                    document.getElementById("confBtn").style.visibility = "hidden";
-                    document.getElementById("cancelBtn").style.visibility = "hidden";
-                    document.getElementById("modalHeader").innerHTML = "Please Wait";
-                    document.getElementById("confMsg").innerHTML = "Graph loading";
-                    document.getElementById("modal-one").style.visibility = "visible";
-                }
-                function hideOverlay(){
-                    document.getElementById("modal-one").style.visibility = "hidden";
-                }
-                var tickerSymbols = [];
-                function updateGraph(tickerSymbol){
-                    var idx = tickerSymbols.indexOf(tickerSymbol);
-                    // if stock exists in graph
-                    if(idx > -1){
-                        tickerSymbols.splice(idx, 1);
-                        parseData(tickerSymbol, []);
-                    }
-                    // else stock does not exist in graph
-                    else{
-                        showOverlay();
-                        $.ajax({
-                            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
-                            type:"POST",
-                            async:true,
-                            dataType:'json',
-                        }).done(function(historicalData){
-                            parseData(tickerSymbol, historicalData);
-                            tickerSymbols.push(tickerSymbol);
-                            hideOverlay();
-                        });
-                    }
-                }
-=======
-                
->>>>>>> github/master
-            </script>
 
           <div id="buy-sell-section" class="widget-box">
             <form method="post">
@@ -321,6 +281,32 @@ if (!$currentUser) {
 	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script>
 	<script src="js/amstockchart/amcharts/amstock.js" type="text/javascript"></script>
 	<script src="js/stock-graph.js"></script>
+	<script>
+		var tickerSymbols = [];
+		function updateGraph(tickerSymbol){
+		    var idx = tickerSymbols.indexOf(tickerSymbol);
+		    // if stock exists in graph
+		    if(idx > -1){
+		        tickerSymbols.splice(idx, 1);
+		        parseData(tickerSymbol, []);
+		    }
+		    // else stock does not exist in graph
+		    else{
+		        showOverlay();
+		        $.ajax({
+		            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
+		            type:"POST",
+		            async:true,
+		            dataType:'json',
+		        }).done(function(historicalData){
+		            parseData(tickerSymbol, historicalData);
+		            tickerSymbols.push(tickerSymbol);
+		            hideOverlay();
+		        });
+		    }
+		    requestStockDetails(tickerSymbol); //to populate the detailed information section
+		}
+	</script>
 
 </body>
 </html>

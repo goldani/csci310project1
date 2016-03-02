@@ -6,28 +6,10 @@ var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 var stockColors = [];
 var colorIndex = 0;
 
-var tickerSymbols = [];
-function updateGraph(tickerSymbol){
-    var idx = tickerSymbols.indexOf(tickerSymbol);
-    // if stock exists in graph
-    if(idx > -1){
-        tickerSymbols.splice(idx, 1);
-        parseData(tickerSymbol, []);
-    }
-    // else stock does not exist in graph
-    else{
-        showOverlay();
-        $.ajax({
-            url:"../updateGraph.php?tickerSymbol=" + tickerSymbol,
-            type:"POST",
-            async:true,
-            dataType:'json',
-        }).done(function(historicalData){
-            parseData(tickerSymbol, historicalData);
-            tickerSymbols.push(tickerSymbol);
-            hideOverlay();
-        });
-    }
+
+
+function requestStockDetails(tickerSymbol){
+	
 }
 
 //Hiding and showing loading box for graph
