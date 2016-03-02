@@ -56,7 +56,21 @@ function myFunc(e) {
 }
 
 function showResult(result) {
-    alert(result);
+    var stockData = result.split("_");
+    //ticker company
+    //opening and closing
+    //percentage
+    document.getElementById("stockinfo1").innerHTML = "<b>Ticker:</b> " + stockData[0] + "   <b>Company name: </b>" + stockData[1];
+    document.getElementById("stockinfo2").innerHTML = "<b>Opening price:</b> " + stockData[5] + "      <b>Closing price:</b> " + stockData[6];
+    if (stockData[4].substr(0,1) == "-") {
+        document.getElementById("stockinfo3").innerHTML = "<b>Percentage Change:</b> " + "<p style=\"color:#DC143C;display:inline;\">" + stockData[4] + "%</p>";
+        // document.getElementById("percentageChanged").innerHTML = "<b style="color:red">Percentage changed:</b> " + stockData[4]+"%";
+    } else if (stockData[4].substr(0,1) == "+") {
+        document.getElementById("stockinfo3").innerHTML = "<b>Percentage Change:</b> " + "<p style=\"color:#32CD32; display:inline;\">" + stockData[4] + "%</p>";
+        // document.getElementById("percentageChanged").innerHTML = "<b style="color:green">Percentage changed:</b> " + stockData[4]+"%";
+    }
+
+    // alert(result);
 }
 
 //Hiding and showing loading box for graph

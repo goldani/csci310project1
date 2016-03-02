@@ -76,7 +76,8 @@ if (!$currentUser) {
 
           <div id="information-section" class="widget-box">
             <div>
-            	<p>Stock Information</p>
+            	<h3>Stock Information</h3>
+                <br>
             	<div id="stock-information-box">
             		<p id="stockinfo1"></p>
             		<p id="stockinfo2"></p>
@@ -288,6 +289,7 @@ if (!$currentUser) {
 		function updateGraph(tickerSymbol){
 		    var idx = tickerSymbols.indexOf(tickerSymbol);
 		    // if stock exists in graph
+            updateInfoBox(tickerSymbol);
 		    if(idx > -1){
 		        tickerSymbols.splice(idx, 1);
 		        parseData(tickerSymbol, []);
@@ -304,7 +306,6 @@ if (!$currentUser) {
 		            tickerSymbols.push(tickerSymbol);
 		        });
 		    }
-		    requestStockDetails(tickerSymbol); //to populate the detailed information section
 		}
 	</script>
 
