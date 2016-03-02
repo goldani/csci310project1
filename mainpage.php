@@ -281,7 +281,8 @@ if (!$currentUser) {
     <script src="js/amstockchart/amcharts/amcharts.js" type="text/javascript"></script>
 	<script src="js/amstockchart/amcharts/serial.js" type="text/javascript"></script>
 	<script src="js/amstockchart/amcharts/amstock.js" type="text/javascript"></script>
-	<script src="js/stock-graph.js"></script>
+    <script src="js/stock-graph.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script>
 		var tickerSymbols = [];
 		function updateGraph(tickerSymbol){
