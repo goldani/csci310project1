@@ -188,6 +188,8 @@ $currentUser->save();
 							echo json_encode($graphData);
 							?>;
 						// historicalData ready to go
+						console.log(historicalData);
+						parseData(historicalData);
                     }
                 </script>
               </tbody>
