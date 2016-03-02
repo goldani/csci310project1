@@ -306,7 +306,7 @@ if (!$currentUser) {
 		            hideOverlay();
 		        });
 		    }
-		    requestStockDetails(tickerSymbol); //to populate the detailed information section
+		    updateInfoBox(tickerSymbol); //to populate the detailed information section
 		}
 	</script>
 

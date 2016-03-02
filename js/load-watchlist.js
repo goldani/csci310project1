@@ -61,6 +61,10 @@ function addToWatchlist(new_stock_list){
 				var value = document.createTextNode(stockData[j]);
 				tableData.appendChild(value);
 				tableRow.appendChild(tableData);
+				//assign action
+				var clickattr = document.createAttribute("onclick");
+				clickattr.value = "updateGraph("+stockData[0]+");";
+				tableRow.setAttributeNode(clickattr);
 
 			}
 			tBody.appendChild(tableRow)

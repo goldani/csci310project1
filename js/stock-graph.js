@@ -6,35 +6,7 @@ var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
 var stockColors = [];
 var colorIndex = 0;
 
-
-var tickerSymbols = [];
-function updateGraph(tickerSymbol){
-
-    var idx = tickerSymbols.indexOf(tickerSymbol);
-
-    updateInfoBox(tickerSymbol);
-    // if stock exists in graph
-    if(idx > -1){
-        tickerSymbols.splice(idx, 1);
-        parseData(tickerSymbol, []);
-    }
-    // else stock does not exist in graph
-    else{
-        showOverlay();
-        $.ajax({
-            url:"../updateGraph.php?tickerSymbol=" + tickerSymbol,
-            type:"POST",
-            async:true,
-            dataType:'json',
-        }).done(function(historicalData){
-            parseData(tickerSymbol, historicalData);
-            tickerSymbols.push(tickerSymbol);
-            hideOverlay();
-        });
-    }
-
-}
-
+// Request to update info box
 function updateInfoBox(tickerSymbol) {
     // alert(tickerSymbol);
   var request = new XMLHttpRequest();
@@ -51,12 +23,14 @@ function myFunc(e) {
   var currentStatus = e.target.status;
 
   if(currentReadyState == 4 && currentStatus == 200) {
-    showResult(e.target.responseText);
+    populateInfoBox(e.target.responseText);
   }
 }
 
-function showResult(result) {
-    alert(result);
+function populateInfoBox(result) {
+	alert(result);
+	var resultsArray = result.split("_");
+
 }
 
 //Hiding and showing loading box for graph
