@@ -6,28 +6,21 @@ use Parse\ParseException;
 use Parse\ParseQuery;
 date_default_timezone_set('America/New_York');
 if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-  ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');
+    session_start();
+    ParseClient::initialize('W78hSNsME23VkGSZOD0JXn2XoM5Nf6GO41BgMqxE', 'H3EgW9gCr6wyP8MfL3Eobz1mWJMwydyp6N2prcVF', 'mRppu4ciMuqhNsTXHoeh329Za4ShOOc1F1NN0skD');
 }
 $currentUser = ParseUser::getCurrentUser();
+// timeout functionality set to 5 minutes (300 seconds)
 if($currentUser && isset($_SESSION['timestamp']) && time() - $_SESSION['timestamp'] >= 300) {
-  include('logout.php');
-  die();
+    include('logout.php');
+    die();
 } else {
-  $_SESSION['timestamp'] = time();
+    $_SESSION['timestamp'] = time();
 }
+// redirect to login page if not logged in
 if (!$currentUser) {
-  header('Location: /');
+    header('Location: /');
 }
-/*
-// HOW TO ADD STOCKS TO USER ACCOUNTS
-$stocks['MSFT'] = 10;
-$stocks['GOOG'] = 24;
-$stocks['AAPL'] = 19;
-$stocks['AMZN'] = 95;
-$currentUser->setAssociativeArray('stocks', $stocks);
-$currentUser->save();
-*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +39,7 @@ $currentUser->save();
         <div id="clock" class="inline">
         </div>
         <?php
+        // display user info in header
         $currentUser = ParseUser::getCurrentUser();
         echo "<div class='inline'>";
         echo '<p id="username">' . $currentUser->get('username') . '</p>';
@@ -112,7 +106,8 @@ $currentUser->save();
               </thead>
               <tbody>
                 <?php
-                // function loadPortfolio() {
+                // loading currentUser's portfolio
+                // and populating table with stocks
                 $stocks = $currentUser->get('stocks');
                 $stocksOwned = NULL;
                 $stocksWatching = NULL;
@@ -136,7 +131,7 @@ $currentUser->save();
                     $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=SNAP2&e=.csv");
                     $data = explode(',', $quote);
                     $tickerSymbol = substr($data[0], 1, -1);
-                    if (count($data) == 5) {
+                    if (count($data) == 5) { // if company name has a comma need to parse differently
                         echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
                         '<td>' . substr($data[0], 1, -1) . '</td>
                         <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
@@ -155,47 +150,7 @@ $currentUser->save();
                     }
                   }
                 }
-
-              // }
-              // loadPortfolio();
                 ?>
-                <!--
-				<div class="button-wrapper">
-					<a href="#overlay-modal" id="overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
-                </div>
-                -->
-				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                <script>
-                    /*
-					function show_overlay(){
-						document.getElementById("overlay-modal").display = "inline";
-					}
-					function hide_overlay(){
-						document.getElementById("overlay-modal").display = "none";
-                    }
-                    */
-					var tickerSymbols = [];
-                    function updateGraph(tickerSymbol){
-						var idx = tickerSymbols.indexOf(tickerSymbol);
-						if(idx > -1){
-							tickerSymbols.splice(idx, 1);
-							parseData(tickerSymbol, []);
-                        }
-                        else{
-							//show_overlay();
-							$.ajax({
-								url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
-								type:"POST",
-								async:true,
-								dataType:'json',
-                            }).done(function(historicalData){
-                                parseData(tickerSymbol, historicalData);
-                                tickerSymbols.push(tickerSymbol);
-								//hide_overlay();
-							});
-                        }
-                    }
-                </script>
               </tbody>
             </table>
           </div>
@@ -225,17 +180,18 @@ $currentUser->save();
                   foreach ($stocksWatching as $ticker => $quantity) {
                     $quote = file_get_contents('http://finance.yahoo.com/d/quotes.csv?s=' . $ticker . '&f=SNAP2&e=.csv');
                     $data = explode(',', $quote);
+                    $tickerSymbol = substr($data[0], 1, -1);
                     if (count($data) == 5) {
-                      echo '<tr>
-                      <td>' . substr($data[0], 1, -1) . '</td>
+                      echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
+                      '<td>' . substr($data[0], 1, -1) . '</td>
                       <td>' . substr($data[1] . $data[2], 1, -1) . '</td>
                       <td>' . $quantity . '</td>
                       <td>$' . $data[3] . '</td>
                       <td>' . substr($data[4], 1, -2) . '</td>
                       </tr>';
                     } else {
-                      echo '<tr>
-                      <td>' . substr($data[0], 1, -1) . '</td>
+                      echo "<tr onclick='updateGraph(\"$tickerSymbol\")'>" .
+                      '<td>' . substr($data[0], 1, -1) . '</td>
                       <td>' . substr($data[1], 1, -1) . '</td>
                       <td>' . $quantity . '</td>
                       <td>$' . $data[2] . '</td>
@@ -248,6 +204,45 @@ $currentUser->save();
               </tbody>
             </table>
           </div>
+            <!--
+            <div class="button-wrapper">
+                <a href="#overlay-modal" id="overlay-modal" class="btn btn-big" display="none">Graph loading...</a>
+            </div>
+            -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script>
+                /*
+                function show_overlay(){
+                    document.getElementById("overlay-modal").display = "inline";
+                }
+                function hide_overlay(){
+                    document.getElementById("overlay-modal").display = "none";
+                }
+                */
+                var tickerSymbols = [];
+                function updateGraph(tickerSymbol){
+                    var idx = tickerSymbols.indexOf(tickerSymbol);
+                    // if stock exists in graph
+                    if(idx > -1){
+                        tickerSymbols.splice(idx, 1);
+                        parseData(tickerSymbol, []);
+                    }
+                    // else stock does not exist in graph
+                    else{
+                        //show_overlay();
+                        $.ajax({
+                            url:"updateGraph.php?tickerSymbol=" + tickerSymbol,
+                            type:"POST",
+                            async:true,
+                            dataType:'json',
+                        }).done(function(historicalData){
+                            parseData(tickerSymbol, historicalData);
+                            tickerSymbols.push(tickerSymbol);
+                            //hide_overlay();
+                        });
+                    }
+                }
+            </script>
 
           <div id="buy-sell-section" class="widget-box">
             <form method="post">

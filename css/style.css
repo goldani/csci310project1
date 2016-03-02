@@ -36,7 +36,7 @@ tbody{
     overflow-y:auto;
     overflow-x:hidden;
 }
-#portfolio-section tbody tr{
+tbody tr{
     cursor:pointer
 }
 #portfolio-section{
