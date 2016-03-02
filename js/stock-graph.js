@@ -3,7 +3,45 @@
 var chart;
 var dataSets = []; //Array of dataset objects
 var lineColors = ["#392759", "#8D0D30", "#4472CA", "#FFD972"]; //List of colors
+var stockColors = [];
 var colorIndex = 0;
+
+var tickerSymbols = [];
+function updateGraph(tickerSymbol){
+    var idx = tickerSymbols.indexOf(tickerSymbol);
+    // if stock exists in graph
+    if(idx > -1){
+        tickerSymbols.splice(idx, 1);
+        parseData(tickerSymbol, []);
+    }
+    // else stock does not exist in graph
+    else{
+        showOverlay();
+        $.ajax({
+            url:"../updateGraph.php?tickerSymbol=" + tickerSymbol,
+            type:"POST",
+            async:true,
+            dataType:'json',
+        }).done(function(historicalData){
+            parseData(tickerSymbol, historicalData);
+            tickerSymbols.push(tickerSymbol);
+            hideOverlay();
+        });
+    }
+}
+
+//Hiding and showing loading box for graph
+function showOverlay(){
+    document.getElementById("clsBtn").style.visibility = 'hidden';
+    document.getElementById("confBtn").style.visibility = 'hidden';
+    document.getElementById("cancelBtn").style.visibility = "hidden";
+    document.getElementById("modalHeader").innerHTML = "Please Wait";
+    document.getElementById("confMsg").innerHTML = "Graph loading"; 
+    document.getElementById("modal-one").style.display = "visible";
+}
+function hideOverlay(){
+    document.getElementById("modal-one").style.visibility = "hidden";
+}
 
 /* data_array format: { [TICKER: [data]], [TICKER2: [data]], ...}
  * data: [date, closingPrice], [date, closingPrice], ...
@@ -15,6 +53,7 @@ function parseData(ticker, data_array){
 		for(i=0; i<chart.dataSets.length; i++){
 			if(dataSets[i].title == ticker){
 				chart.dataSets.splice(i, 1); //remove dataset
+				//delete stockColors[title];
 			}
 		}
 	}
@@ -27,9 +66,11 @@ function parseData(ticker, data_array){
 		dataSet.fieldMappings = [{fromField: "cp", toField: "closingPrice"}];
 		dataSet.categoryField = "date";
 		dataSet.title = ticker;
+		dataSet.color = lineColors[colorIndex];
+		//stockColors[key] = lineColors[colorIndex];
 		colorIndex++;
 		colorIndex = colorIndex%lineColors.length;
-		dataSet.color = lineColors[colorIndex];
+		
 		
 
 		//loop through stock data

@@ -17,7 +17,6 @@ function requestStockNames(element){
 	if(input === ""){
 		var dropdown = document.getElementById('searchDropdown');
 		clearElementChildren(dropdown);
-		dropdown.hide();
 	}
 	else{
 		var request = new XMLHttpRequest();
@@ -70,9 +69,7 @@ function populateDropdown(response){
 	var input = searchBox.value;
 	if(input === ""){
 		clearElementChildren(dropdown);
-		dropdown.hide();
 	}
-	dropdown.show();
 
 }
 
