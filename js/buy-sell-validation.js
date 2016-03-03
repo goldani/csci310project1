@@ -4,7 +4,6 @@ function checkClock(){
 	var hours = estDate.getHours()
 	var minutes = estDate.getMinutes();
 	var amPM = hours >= 12 ? 'PM' : 'AM';
-  return true;
 	if(hours >= 12){
 		hours-=12;
 	}
