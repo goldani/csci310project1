@@ -20,19 +20,26 @@ function checkClock(){
 }
 function getInput(action) {
     if(checkClock()){
-        document.getElementById("modal-one").style.visibility = "visible";
+		document.getElementById("modalHeader").innerHTML = "Confirm?";
+		document.getElementById("modal-one").style.visibility = "visible";
         document.getElementById("confMsg").innerHTML = "Do you want to "
         + action.toUpperCase() + " " +
         + document.getElementById("qty").value + " share(s) of "
         + document.getElementById("tickerInput").value.toUpperCase() + "?";
         document.getElementById('action').value = action;
+		// document.getElementById("confBtn").style.visibility = "hidden";
+		// document.getElementById("cancelBtn").style.visibility = "hidden";
+		// document.getElementById("clsBtn").style.visibility = "visible";
     }
     else{
         document.getElementById("modal-one").style.visibility = "visible";
         document.getElementById("confMsg").innerHTML = "Sorry, stock market is closed!";
+		document.getElementById("modalHeader").innerHTML = "Market clsoed";
         document.getElementById("confBtn").style.visibility = "hidden";
+		document.getElementById("cancelBtn").style.visibility = "hidden";
+		document.getElementById("clsBtn").style.visibility = "visible";
     }
-    
+
 }
 
 //called after close button is pressed. change visibility
@@ -60,20 +67,20 @@ function buyOrSell() {
 
   request.open("GET", url, true);
   request.setRequestHeader("Content-Type", "text/html");
-  request.addEventListener("readystatechange", myFunc, false);
+  request.addEventListener("readystatechange", processTrans, false);
 
   request.send();
   document.getElementById("confMsg").innerHTML = "Processing";
 }
-function myFunc(e) {
+function processTrans(e) {
   var currentReadyState = e.target.readyState;
   var currentStatus = e.target.status;
 
   if(currentReadyState == 4 && currentStatus == 200) {
-    showResult(e.target.responseText);
+    showTransResult(e.target.responseText);
   }
 }
-function showResult(result) {
+function showTransResult(result) {
 
   if (result.substr(0, 5) == "Stock") {
     document.getElementById("modalHeader").innerHTML = "Transaction succeeded";
