@@ -42,7 +42,7 @@ function handleUserStockResult(e){
 
 /* Append item to end of watchlist */
 function addToWatchlist(new_stock_list){
-	alert(new_stock_list);
+
 	var stockList = new_stock_list;
 	if(stockList.length > 0){
 		clearElementChildren(watchlist);
@@ -61,6 +61,21 @@ function addToWatchlist(new_stock_list){
 				var value = document.createTextNode(stockData[j]);
 				tableData.appendChild(value);
 				tableRow.appendChild(tableData);
+				//assign action
+				var clickattr = document.createAttribute("onclick");
+				clickattr.value = "updateGraph(\""+stockData[0]+"\");";
+				tableRow.setAttributeNode(clickattr);
+				//add green style to last
+				if(j == stockData.length-1){
+					if(stockData[j].substr(0, 1) == "-"){
+						tableData.setAttribute("style", "color: #DC143C;");
+					}
+					else if(stockData[j].substr(0,1) == "+"){
+						tableData.setAttribute("style", "color: #32CD32;");
+					}
+					
+				}
+				
 
 			}
 			tBody.appendChild(tableRow)
