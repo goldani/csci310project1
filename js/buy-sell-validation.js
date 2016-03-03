@@ -10,7 +10,7 @@ function checkClock(){
 	if(hours == 0){
 		hours = 12;
     }
-    if((hours >= 9 && minutes >= 30 && amPM == 'AM') && (hours <= 4 && amPM == 'PM')){
+    if((hours >= 9 && minutes >= 30 && amPM == 'AM') || (hours <= 4 && amPM == 'PM') || (hours == 12 && amPM == 'PM')){
         return true;
     }
     else{
