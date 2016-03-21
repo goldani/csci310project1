@@ -7,6 +7,7 @@
 //-----------------------------------------------------
 
 #initialize databse connection
+include 'buyAndSellFunctions.php';
 include '../vendor/autoload.php';
 use Parse\ParseClient;
 use Parse\ParseQuery;
@@ -31,74 +32,50 @@ $ticker = strtoupper($ticker);
 $quantity = $_GET['quantity'];
 
 $action = $_GET['action'];
-// 
-// echo $ticker + "\n";
-// echo $quantity + "\n";
-// echo $action + "\n";
-
-#try to load the buy button is !isset() then it mean user clicked sell
-// $action = $_POST['sell'];
-#in order to buy a stock, we need to know current price. compant name tag is used in comformation
-$format = na;
+$format = "na";
 
 #get quotes from Yahoo API
 $quote = file_get_contents("http://finance.yahoo.com/d/quotes.csv?s=" . $ticker . "&f=" . $format . "&e=.csv");
 $data = explode( ',', $quote);
 
-#make sure the stock exists
-if ($data[0] != "N/A" && $quantity > 0) {
 
   #calculate remainning balance to determine wheather user can buy
   # little trick here to skip pos in array until element is numeric in case company has , in its name
   $currPrice = $data[count($data) - 1];
   $balance = $currentUser->get("balance");
 
-  // $actionConstant = ($action == "buy") ? -1 : 1;
-  // $actionConstant = (isset($_POST['sell'])) ? 1 : -1;
-  $actionConstant = 0;
-  // if (isset($_POST['sell'])) {
-  //   $actionConstant = 1;
-  // } else {
-  //   $actionConstant = -1;
-  // }
+  $stocks = $currentUser->get("stocks");
+
+//////////////////////////// all info retreaved from database and API \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
   if ($action == "sell") {
-    $actionConstant = 1;
-  } else {
-    $actionConstant = -1;
-  }
-  $remainingBalance = $balance + $currPrice*$quantity*$actionConstant;
 
-  if( ($remainingBalance) > 0 ) {
-    $stocks = $currentUser->get("stocks");
+    if(sell($ticker, $stocks, $quantity, $balance, $currPrice) == true){
 
+      $currentUser->setAssociativeArray("stocks", $stocks);
+      $currentUser->set("balance", $balance);
+      $currentUser->save();
 
+      echo "Stock sold";
 
-    if ($actionConstant == -1) {
-      if(isset($stocks) && array_key_exists($ticker, $stocks) ) {
-        $stocks[$ticker] += $quantity;
-      } else {
-        $stocks[$ticker] = $quantity;
-      }
-      echo "Stock bought";
     } else {
-      #if sell, check can sell or not then echo result and exit
-      if ($stocks[$ticker]-$quantity >= 0 && array_key_exists($ticker, $stocks)) {
-        $stocks[$ticker] -= $quantity;
-        echo "Stock sold";
-      } else {
-        echo " Cannot sell more than user have or sell stocks user do not own";
-        exit();
-      }
+      echo "Fail";
     }
 
-    #updateing database and save
-    $currentUser->setAssociativeArray("stocks", $stocks);
-    $currentUser->set("balance", $remainingBalance);
-    $currentUser->save();
-
   } else {
-    echo "Insufficient balance";
+    $actionConstant = -1;
+
+    if(buy($ticker, $stocks, $quantity, $balance, $currPrice) == true){
+
+      $currentUser->setAssociativeArray("stocks", $stocks);
+      $currentUser->set("balance", $balance);
+      $currentUser->save();
+
+      echo "Stock bought";
+    } else {
+      echo "Fail";
+    }
+
   }
-} else {
-  echo "Wrong ticker name or non-positive quantiry";
-}
+
+?>
