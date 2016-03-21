@@ -74,7 +74,3 @@ Then(/^balance and stock quantity should update$/) do
 		expect(@newBalance).not_to eq(@initialBalance)
 	end
 end
-
-Then(/^close window/) do
-	
-end

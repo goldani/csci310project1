@@ -10,5 +10,3 @@ Feature: Sell stock
 		And the time in EST is between 9am and 4pm
 		And the user hits sell
 		Then balance and stock quantity should update
-
-		Then close window
