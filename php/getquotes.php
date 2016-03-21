@@ -29,7 +29,7 @@ if (count($data) == 7) {
 
 }
 str_replace('"', "", $percent);
-$results .= $ticker . "_" . $name . "_" . $stock . "_" . $price . "_" . $percent
+$results = $ticker . "_" . $name . "_" . " " . "_" . $price . "_" . $percent
  	. "_" . $openingPrice . "_" . $prevClosingPrice . "\n";
 echo $results;
 ?>
