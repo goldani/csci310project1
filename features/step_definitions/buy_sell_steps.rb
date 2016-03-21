@@ -76,5 +76,5 @@ Then(/^balance and stock quantity should update$/) do
 end
 
 Then(/^close window/) do
-	driver.close
+	
 end
