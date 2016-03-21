@@ -113,7 +113,7 @@ if (!$currentUser) {
                   <th>Percent Change</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="portfolio-body">
                 <?php
                 // loading currentUser's portfolio
                 // and populating table with stocks

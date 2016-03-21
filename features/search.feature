@@ -19,3 +19,4 @@ Feature: Search stock
 		When the following stock is searched:
 			|Stock|AAPLE|
 		Then drop down should be empty:
+		Then close window

@@ -1,5 +1,3 @@
-
-
 driver = Selenium::WebDriver.for :firefox
 @marketClosed = false
 
@@ -38,7 +36,7 @@ When(/^the time in EST is between (\d+)am and (\d+)pm$/) do |startTime, endTime|
 
 	if (timeArray[0].to_i >= startTime.to_i && timeArray[0].to_i != 12 && timeArray[3] == "AM") || (timeArray[0].to_i <= endTime.to_i && timeArray[3] == "PM") || (timeArray[0].to_i == 12 && timeArray[3] == "PM")
 		puts "Market open"
-		
+
 	else
 		puts "Market closed"
 		@marketClosed = true

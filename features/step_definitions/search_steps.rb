@@ -3,13 +3,13 @@ driver = Selenium::WebDriver.for :firefox
 @marketClosed = false
 
 Given(/^user is logged in:$/) do |table|
-  driver.navigate.to("http://stockoverflow.com")
+  driver.navigate.to("http://localhost")
   @userCredentials = table.rows_hash
   driver.find_element(:id, "login-username").send_keys(@userCredentials['username'])
   driver.find_element(:id, "login-password").send_keys(@userCredentials['password'])
   driver.find_element(:id, "login-submit").click
   currentURL = driver.current_url
-  expect(currentURL).to eq("http://stockoverflow.com/mainpage.php")
+  expect(currentURL).to eq("http://localhost/mainpage.php")
 end
 
 When(/^the following stock is searched:$/) do |table|
