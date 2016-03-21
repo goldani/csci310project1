@@ -240,8 +240,8 @@ if (!$currentUser) {
               <input id="tickerInput" name="ticker" class="buySell-field" type="text" placeholder="Stock Ticker" maxlength="5" required autofocus><br>
               <input id="qty" name="quantity" class="buySell-field" type="number" min="1" placeholder="Quantity" required><br>
               <div class="button-wrapper">
-                <a href="#modal-one" class="btn btn-big" onclick="getInput('buy')">Buy</a>
-                <a href="#modal-one" class="btn btn-big" onclick="getInput('sell')">Sell</a>
+                <a href="#modal-one" id="buy-button" class="btn btn-big" onclick="getInput('buy')">Buy</a>
+                <a href="#modal-one" id="sell-button" class="btn btn-big" onclick="getInput('sell')">Sell</a>
                 <input type="hidden" id="action" value="">
               </div>
 
