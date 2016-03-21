@@ -1,6 +1,6 @@
 Feature: Buy stock
 
-	Scenario: Stock successfully bought
+	Scenario: Stock successfully bought when stock market open
 		Given user is logged in on the dashboard:
 			|username|renachen@usc.edu|
 			|password|rc|

@@ -50,7 +50,7 @@ function populateDropdown(response){
 	var resultString = response;
 	var resultsArray = resultString.split("\n");
 	clearElementChildren(dropdown);
-	for(i=0; i<resultsArray.length; i++){
+	for(i=0; i<resultsArray.length-1; i++){
 		//put together the menu item
 		var menuitem = document.createElement("DIV");
 		var content = document.createTextNode(resultsArray[i]);
@@ -62,6 +62,11 @@ function populateDropdown(response){
 		menuitem.setAttributeNode(action);
 		//add to overall dropdown
 		dropdown.appendChild(menuitem);
+		// if(i==resultsArray.length-1){
+		// 	var lengthinfo = document.createTextNode(resultsArray.length);
+		// 	menuitem.appendChild(lengthinfo);
+
+		// }
 
 	}
 
