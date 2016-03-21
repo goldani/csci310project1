@@ -12,15 +12,22 @@ Given(/^user is logged in:$/) do |table|
   expect(currentURL).to eq("http://stockoverflow.com/mainpage.php")
 end
 
-When(/^the following ticker symbol is searched:$/) do |table|
-  @stockTicker = table.rows_hash
-  driver.find_element(:id, "search-box").send_keys(@stockTicker['Ticker'])
+When(/^the following stock is searched:$/) do |table|
+  @stock = table.rows_hash
+  driver.find_element(:id, "search-box").clear()
+  driver.find_element(:id, "search-box").send_keys(@stock['Stock'])
 end
 
-Then(/^searched stock should be in the drop down$/) do
-    driver.manage.timeouts.implicit_wait = 20 # seconds
+Then(/^searched stock should be in the drop down:$/) do |table|
+    # driver.manage.timeouts.implicit_wait = 20 # seconds
+    sleep(5.0)
+    @stockInfo = table.rows_hash
+    resultStock = driver.find_element(:class, 'menu-item').text
+    expect(resultStock).to eq(@stockInfo['FullName'])
+    # true
+end
 
-
-    resultStock = driver.find_elements(:class, 'menu-item')
-    expect(resultStock).to eq("SEED - Origin Agritech Limited")
+Then(/^drop down should be empty:$/) do
+    driver.manage.timeouts.implicit_wait = 5 # seconds
+    resultStock = driver.find_element(:class, 'menu-item').text
 end
