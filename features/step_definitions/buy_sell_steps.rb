@@ -20,9 +20,19 @@ When(/^the following stock information is input:$/) do |table|
 end
 
 When(/^the time in EST is between (\d+)am and (\d+)pm$/) do |startTime, endTime|
-  pending
+	
+
+
+	
+  	begin
+  		element = driver.find_element(:id, "confBtn").click
+  	
+	rescue NoSuchElementException, NameError
+		element = driver.find_element(:id, "clsBtn").click
+		puts "Stock market is closed, cannot buy"
+		@marketClosed = true
+	end
 end
 
 Then(/^balance and stock quantity should update$/) do
-  pending # Write code here that turns the phrase above into concrete actions
 end
